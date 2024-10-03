@@ -10,7 +10,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
 
 import java.util.ArrayList;
 
-public class gestionAffichageSpriteDropAuSol implements ListChangeListener<DropAuSol> {
+public class GestionAffichageSpriteDropAuSol implements ListChangeListener<DropAuSol> {
     private Pane pane;
     private ArrayList<SpriteDropAuSol> animationDropsAuSol;
 
@@ -20,7 +20,7 @@ public class gestionAffichageSpriteDropAuSol implements ListChangeListener<DropA
         }
     }));
 
-    public gestionAffichageSpriteDropAuSol(Pane pane){
+    public GestionAffichageSpriteDropAuSol(Pane pane){
         this.pane = pane;
         this.animationDropsAuSol = new ArrayList<>();
         timeline.setCycleCount(Animation.INDEFINITE);

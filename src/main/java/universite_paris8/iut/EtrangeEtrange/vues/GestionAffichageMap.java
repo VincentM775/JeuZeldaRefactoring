@@ -1,6 +1,5 @@
 package universite_paris8.iut.EtrangeEtrange.vues;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
@@ -10,10 +9,10 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 import java.io.*;
 import java.util.ArrayList;
 
-public class gestionAffichageMap {
+public class GestionAffichageMap {
     private ArrayList<TilePane> TilePaneCouchesMonde;
     private Monde monde;
-    public gestionAffichageMap(Monde monde, TilePane sol, TilePane traversable, TilePane nontraversable){
+    public GestionAffichageMap(Monde monde, TilePane sol, TilePane traversable, TilePane nontraversable){
         this.TilePaneCouchesMonde = new ArrayList<>();
         this.TilePaneCouchesMonde.add(sol);
         this.TilePaneCouchesMonde.add(traversable);
@@ -32,6 +31,7 @@ public class gestionAffichageMap {
             tilePaneCouchesMonde.getChildren().clear();
 
         for(int i = 0 ; i < 3 ; i++){
+            System.out.println(i);
             // Lecture du fichier JSON
             StringBuilder json = new StringBuilder();
             try {
@@ -53,7 +53,6 @@ public class gestionAffichageMap {
             // On récupère les id de tuiles avec les images associées.
             JSONArray jsonArray = new JSONArray(jsonObject.getJSONArray("tiles"));
             TilePane tilePane = TilePaneCouchesMonde.get(i);
-            Position joueur = monde.getJoueur().getPosition();
 
             for(int h = 0 ; h < Monde.getSizeMondeHauteur() ; h++){
                 for(int l = 0 ; l < Monde.getSizeMondeLargeur() ; l++){
@@ -64,6 +63,7 @@ public class gestionAffichageMap {
                     else{
                         tilePane.getChildren().add(new ImageView());
                     }
+                    System.out.println("h : "+h+", l : "+l);
                 }
             }
         }

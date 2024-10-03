@@ -17,7 +17,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
-import universite_paris8.iut.EtrangeEtrange.vues.Sprite.DropAuSol.gestionAffichageSpriteDropAuSol;
+import universite_paris8.iut.EtrangeEtrange.vues.Sprite.DropAuSol.GestionAffichageSpriteDropAuSol;
 import universite_paris8.iut.EtrangeEtrange.vues.Sprite.Entite.GestionAffichageSpriteEntite;
 import universite_paris8.iut.EtrangeEtrange.controller.GestionActeur;
 
@@ -26,8 +26,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Objects;
 
 public class Monde {
     /**
@@ -403,7 +401,7 @@ public class Monde {
     }
 
 
-    public void setListenerListeDropsAuSol(gestionAffichageSpriteDropAuSol gestionAffichageDropAuSol) {
+    public void setListenerListeDropsAuSol(GestionAffichageSpriteDropAuSol gestionAffichageDropAuSol) {
         this.dropsAuSol.addListener(gestionAffichageDropAuSol);
     }
 

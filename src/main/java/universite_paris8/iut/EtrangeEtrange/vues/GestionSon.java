@@ -17,10 +17,10 @@ public class GestionSon
 
     public GestionSon()
     {
-        musiqueFond = new AudioClip(new File("src/main/resources/universite_paris8/iut/EtrangeEtrange/sons/musiqueGame.mp3").toURI().toString());
-        musiqueGameOver = new AudioClip(new File("src/main/resources/universite_paris8/iut/EtrangeEtrange/sons/musiqueGameOver.mp3").toURI().toString());
-        musiqueFond.setCycleCount(AudioClip.INDEFINITE);
-        musiqueFond.play(0.1);
+        //musiqueFond = new AudioClip(new File("src/main/resources/universite_paris8/iut/EtrangeEtrange/sons/musiqueGame.mp3").toURI().toString());
+        //musiqueGameOver = new AudioClip(new File("src/main/resources/universite_paris8/iut/EtrangeEtrange/sons/musiqueGameOver.mp3").toURI().toString());
+        //musiqueFond.setCycleCount(AudioClip.INDEFINITE);
+        //musiqueFond.play(0.1);
     }
 
     public void gameOver(){

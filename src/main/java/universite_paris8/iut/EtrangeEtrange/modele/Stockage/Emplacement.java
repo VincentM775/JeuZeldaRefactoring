@@ -62,7 +62,9 @@ public class Emplacement <T extends Objet>
 
     public boolean estDeMemeClass(Objet objet)
     {
-        return this.objets.get(0).getClass().equals(objet.getClass());
+        if(!this.objets.isEmpty())
+            return this.objets.get(0).getClass().equals(objet.getClass());
+        return false;
     }
 
     public boolean peuEncoreStacker()
