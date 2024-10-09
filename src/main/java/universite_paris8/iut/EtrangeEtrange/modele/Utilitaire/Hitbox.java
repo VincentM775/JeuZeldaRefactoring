@@ -58,24 +58,4 @@ public class Hitbox {
         double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
         return distance <= rayon;
     }
-
-    // Méthode pour vérifier si les bords de la hitbox sont dans le cercle
-    public boolean estDansCercle(Position centre, double rayon) {
-        Position centreHitbox = new Position(centre.getX(), centre.getY());
-        double rayonEffectif = rayon + Math.max(largeur, hauteur) / 2.0;
-        return estDansCercle(centre, rayonEffectif, centreHitbox);
-    }
-
-
-
-    public Position[] points(Position position)
-    {
-        Position[] point = new Position[2];
-
-        point[0] = new Position(getPointLePlusADroite(position.getX()),getPointLePlusEnHaut(position.getY()));
-        point[1] = new Position(getPointLePlusAGauche(position.getX()),getPointLePlusEnBas(position.getY()));
-
-        return point;
-
-    }
 }

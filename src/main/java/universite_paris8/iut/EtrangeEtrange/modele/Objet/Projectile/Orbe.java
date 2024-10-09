@@ -6,7 +6,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Jou
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Rechargeable;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Utilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
-import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.BFS;
+import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Algos.BFS;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;

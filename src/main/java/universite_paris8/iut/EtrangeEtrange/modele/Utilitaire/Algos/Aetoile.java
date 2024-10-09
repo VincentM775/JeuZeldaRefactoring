@@ -1,55 +1,19 @@
-package universite_paris8.iut.EtrangeEtrange.modele.Utilitaire;
+package universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Algos;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
+import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
+import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Sommet;
 
 import java.util.*;
 
-public class Aetoile {
-    private Monde monde;
-    private Sommet[][] graphe;
+public class Aetoile extends AlgoChemin {
+
     private ArrayList<Position> chemin;
 
     public Aetoile(Monde monde) {
         this.monde = monde;
         this.chemin = new ArrayList<>();
         construireGraphe(); // Construire le graphe lors de l'initialisation
-    }
-
-    // Construire le graphe en initialisant les sommets et leurs voisins
-    private void construireGraphe() {
-        int hauteur = Monde.getSizeMondeHauteur();
-        int largeur = Monde.getSizeMondeLargeur();
-        graphe = new Sommet[hauteur][largeur];
-
-        // Initialiser les sommets
-        for (int y = 0; y < hauteur; y++) {
-            for (int x = 0; x < largeur; x++) {
-                boolean traversable = monde.getNontraversable()[y][x] == -1;
-                graphe[y][x] = new Sommet(new Position(x, y), traversable);
-            }
-        }
-
-        // Ajouter les voisins pour chaque sommet traversable
-        for (int y = 0; y < hauteur; y++) {
-            for (int x = 0; x < largeur; x++) {
-                if (graphe[y][x].isTraversable()) {
-                    ajouterVoisins(graphe[y][x], x, y);
-                }
-            }
-        }
-    }
-
-    // Ajouter les voisins pour un sommet donné
-    private void ajouterVoisins(Sommet sommet, int x, int y) {
-        int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-        for (int[] dir : directions) {
-            int nx = x + dir[0];
-            int ny = y + dir[1];
-            if (nx >= 0 && ny >= 0 && nx < graphe[0].length && ny < graphe.length && graphe[ny][nx].isTraversable()) {
-                sommet.addVoisin(graphe[ny][nx]);
-            }
-        }
     }
 
     // Mettre à jour le graphe pour refléter les changements dans le monde
@@ -88,7 +52,7 @@ public class Aetoile {
 
             // Si le sommet actuel est le sommet de destination, reconstruire le chemin
             if (currentNode.getSommet().equals(sommetArrivee)) {
-                return reconstruireChemin(currentNode);
+                return construireChemin(currentNode);
             }
 
             // Explorer les voisins du sommet actuel
@@ -111,7 +75,7 @@ public class Aetoile {
     }
 
     // Reconstruire le chemin en partant du nœud de destination
-    private ArrayList<Position> reconstruireChemin(Noeud noeud) {
+    private ArrayList<Position> construireChemin(Noeud noeud) {
         ArrayList<Position> chemin = new ArrayList<>();
         while (noeud != null) {
             chemin.add(getCentreSommet(noeud.getSommet()));
@@ -142,57 +106,5 @@ public class Aetoile {
     // Obtenir le chemin trouvé
     public List<Position> getChemin() {
         return chemin;
-    }
-
-    // Classe interne représentant un nœud dans l'algorithme A*
-    private static class Noeud {
-        private Sommet sommet;
-        private Noeud parent;
-        private double g; // Coût du chemin depuis le début
-        private double h; // Heuristique (estimation du coût restant)
-
-        public Noeud(Sommet sommet) {
-            this.sommet = sommet;
-            this.g = Double.MAX_VALUE;
-        }
-
-        public Noeud(Sommet sommet, Noeud parent, double g, double h) {
-            this.sommet = sommet;
-            this.parent = parent;
-            this.g = g;
-            this.h = h;
-        }
-
-        public Sommet getSommet() {
-            return sommet;
-        }
-
-        public Noeud getParent() {
-            return parent;
-        }
-
-        public void setParent(Noeud parent) {
-            this.parent = parent;
-        }
-
-        public double getG() {
-            return g;
-        }
-
-        public void setG(double g) {
-            this.g = g;
-        }
-
-        public double getH() {
-            return h;
-        }
-
-        public void setH(double h) {
-            this.h = h;
-        }
-
-        public double getF() {
-            return g + h; // f = g + h, utilisé pour la priorité dans la file
-        }
     }
 }

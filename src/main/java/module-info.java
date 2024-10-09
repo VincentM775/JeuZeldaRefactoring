@@ -20,5 +20,7 @@ module com.example.essaie {
     exports universite_paris8.iut.EtrangeEtrange.TestJunit;
     exports universite_paris8.iut.EtrangeEtrange.modele.Utilitaire;
     opens universite_paris8.iut.EtrangeEtrange.modele.Utilitaire to javafx.fxml;
-    
+    exports universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Algos;
+    opens universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Algos to javafx.fxml;
+
 }
