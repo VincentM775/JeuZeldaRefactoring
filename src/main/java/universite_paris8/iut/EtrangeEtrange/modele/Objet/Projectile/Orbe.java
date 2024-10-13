@@ -39,29 +39,17 @@ public class Orbe extends Projectile implements Utilisable, Rechargeable
         this.bfs = new BFS();
     }
 
-    public Orbe(Joueur joueur)
-    {
-        super(PV,VITESSE,HITBOX);
-        this.positionAsuivre = null;
-        this.nombreUtilisationRestant = NOMBRE_UTILISATION;
-        this.derniereApelle = 0;
-        this.bfs = new BFS();
-        acteurAsuivre = joueur;
-    }
-
     @Override
     public void utilise(Entite entite)
     {
-        if (nombreUtilisationRestant > 0)
-        {
+        if (nombreUtilisationRestant > 0) {
             setMonde(entite.getMonde());
             setNewPosition(entite.getPosition().getX(), entite.getPosition().getY());
 
             if (acteurAsuivre == null)
                 this.acteurAsuivre =  monde.chercheEnemie();
 
-            if (acteurAsuivre != null)
-            {
+            if (acteurAsuivre != null) {
                 setUtilisateur(entite);
                 this.bfs.chercherChemin(monde, getPosition(),acteurAsuivre.getPosition());
 
@@ -78,12 +66,8 @@ public class Orbe extends Projectile implements Utilisable, Rechargeable
     {
         long apelle = System.currentTimeMillis();
 
-
         if (apelle - derniereApelle >= delaie())
             cooldown();
-
-
-
 
         if (positionAsuivre != null)
         {
@@ -105,9 +89,7 @@ public class Orbe extends Projectile implements Utilisable, Rechargeable
 
             if (positionAtteinte(positionAsuivre))
                 this.positionAsuivre = this.bfs.prochainePosition();
-
         }
-
     }
 
     private boolean positionAtteinte(Position position)

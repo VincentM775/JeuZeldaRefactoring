@@ -19,38 +19,30 @@ public abstract class ObjetConteneur<T extends Objet> extends Inventaire<T> impl
     public void echangerEmplacement(Joueur joueur, int caseVerouille, int caseSurvole)
     {
         int tailleInventaire = joueur.getSac().getTailleMax();
-        Objet o1;
-        Objet o2;
 
-        if(caseSurvole==tailleInventaire)
-            o1 = joueur.retournerObjetMainDroite();
-        else if (caseSurvole==tailleInventaire+1)
-            o1 = joueur.retournerObjetMainGauche();
+        Objet o1 = getObjet(joueur, caseSurvole, tailleInventaire);
+        Objet o2 = getObjet(joueur, caseVerouille, tailleInventaire);
+
+        if(o2!=null)
+            ajoutObjet(o2, joueur, caseSurvole, tailleInventaire);
+        if(o1!=null)
+            ajoutObjet(o1, joueur, caseVerouille, tailleInventaire);
+    }
+
+    public Objet getObjet(Joueur joueur, int emplacement, int tailleInventaire){
+        if(emplacement==tailleInventaire)
+            return joueur.retournerObjetMainDroite();
+        else if (emplacement==tailleInventaire+1)
+            return joueur.retournerObjetMainGauche();
+        return retourneObjet(emplacement);
+    }
+
+    public void ajoutObjet(Objet ob, Joueur joueur, int emplacement, int tailleInventaire){
+        if (emplacement == tailleInventaire)
+            joueur.setObjetMainDroite(ob);
+        else if (emplacement == tailleInventaire + 1)
+            joueur.setObjetMainGauche(ob);
         else
-            o1 = retourneObjet(caseSurvole);
-        if(caseVerouille==tailleInventaire)
-            o2 = joueur.retournerObjetMainDroite();
-        else if (caseVerouille==tailleInventaire+1)
-            o2 = joueur.retournerObjetMainGauche();
-        else
-            o2 = retourneObjet(caseVerouille);
-
-        if(o2!=null) {
-            if (caseSurvole == tailleInventaire)
-                joueur.setObjetMainDroite(o2);
-            else if (caseSurvole == tailleInventaire + 1)
-                joueur.setObjetMainGauche(o2);
-            else
-                getEmplacement(caseSurvole).ajoutObjet((T) o2);
-        }
-        if(o1!=null){
-            if(caseVerouille==tailleInventaire)
-                joueur.setObjetMainDroite(o1);
-            else if(caseVerouille==tailleInventaire+1)
-                joueur.setObjetMainGauche(o1);
-            else
-                getEmplacement(caseVerouille).ajoutObjet((T)o1);
-        }
-
+            getEmplacement(emplacement).ajoutObjet((T) ob);
     }
 }

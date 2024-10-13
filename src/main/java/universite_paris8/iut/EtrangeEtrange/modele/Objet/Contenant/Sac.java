@@ -14,7 +14,6 @@ public class Sac extends ObjetConteneur<Objet>
     public Sac() {
         super(TAILLE);
     }
-
     @Override
     public int stackMax() { return STACK_MAX; }
     @Override

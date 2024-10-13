@@ -33,20 +33,22 @@ public class Arc implements Arme,Rechargeable
     {
         if (peutTirer && fleche != null)
         {
-            this.durabilitee--;
+            // Définition des paramètres pour la flèche
             this.fleche.setMonde(entite.getMonde());
             this.fleche.setNewPosition(entite.getPosition().getX(),entite.getPosition().getY());
             this.fleche.setDirection(entite.getDirection());
             this.fleche.setUtilisateur(entite);
+
+            // Ajout de la flèche et l'arc dans l'environnement
             entite.getMonde().ajoutActeur(fleche);
             this.derniereApelle = System.currentTimeMillis();
             entite.getMonde().ajoutRechargeable(this);
 
             this.peutTirer = false;
             this.fleche = null;
+            this.durabilitee--;
         }
     }
-
 
     public void setFleche(Fleche fleche){ this.fleche = fleche; }
     @Override

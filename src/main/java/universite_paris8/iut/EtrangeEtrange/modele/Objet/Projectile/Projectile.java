@@ -42,7 +42,9 @@ public abstract class Projectile extends Acteur implements Dommageable,Objet
     }
 
     @Override
-    public boolean peutSeDeplacer() {return !monde.estHorsMap(this) && !monde.collisionMap(this);}
+    public boolean peutSeDeplacer() {
+        return !monde.estHorsMap(this) && !monde.collisionMap(this);
+    }
     public void setUtilisateur(Entite entite){this.utilisateur = entite;}
     @Override
     public void seFaitPousser(Acteur acteur) {}

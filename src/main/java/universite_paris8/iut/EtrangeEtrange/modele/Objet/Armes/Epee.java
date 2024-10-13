@@ -22,7 +22,6 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
     private final int PRIX_ACHAT = ConstanteObjet.PRIX_ACHAT_EPEE;
     private final int STACK_MAX = ConstanteObjet.STACK_MAX_EPEE;
 
-
     private boolean peutTaper;
     private short cycle;
     private long derniereApelle;
@@ -36,7 +35,6 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
         this.cycle = 0;
         this.derniereApelle = 0;
     }
-
 
     @Override
     public void utilise(Entite entite)
@@ -58,7 +56,6 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
         }
     }
 
-
     @Override
     public void unTour()
     {
@@ -76,54 +73,48 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
 
     private void setPositionAttaque()
     {
-        double x = position.getX();
-        double y = position.getY();
+        double posXJoueur = position.getX();
+        double posYJoueur = position.getY();
 
-        double posX = 0;
-        double posY = 0;
+        double decalageX = 0;
+        double decalageY = 0;
 
         switch (direction)
         {
             case HAUT:
-                x = hitbox.getPointLePlusADroite(x);
-                y = hitbox.getPointLePlusEnHaut(y);
-                posX = 0;
-                posY = -hitbox.getHauteur();
+                posXJoueur = hitbox.getPointLePlusADroite(posXJoueur);
+                posYJoueur = hitbox.getPointLePlusEnHaut(posYJoueur);
+                decalageY = -hitbox.getHauteur();
                 break;
             case BAS:
-                x = hitbox.getPointLePlusADroite(x);
-                y = hitbox.getPointLePlusEnBas(y);
-                posX = 0;
-                posY = hitbox.getHauteur();
+                posXJoueur = hitbox.getPointLePlusADroite(posXJoueur);
+                posYJoueur = hitbox.getPointLePlusEnBas(posYJoueur);
+                decalageY = hitbox.getHauteur();
                 break;
             case DROITE:
-                x = hitbox.getPointLePlusEnBas(x);
-                y = hitbox.getPointLePlusADroite(y);
-                posX = hitbox.getLargeur();
-                posY = 0;
+                posXJoueur = hitbox.getPointLePlusEnBas(posXJoueur);
+                posYJoueur = hitbox.getPointLePlusADroite(posYJoueur);
+                decalageX = hitbox.getLargeur();
                 break;
             case GAUCHE:
-                posX = -hitbox.getLargeur();
-                posY = 0;
+                posXJoueur = hitbox.getPointLePlusEnBas(posXJoueur);
+                posYJoueur = hitbox.getPointLePlusAGauche(posYJoueur);
+                decalageX = -hitbox.getLargeur();
                 break;
         }
 
-        this.position = new Position(x+posX,y+posY);
+        this.position = new Position(posXJoueur+decalageX,posYJoueur+decalageY);
     }
-
 
     @Override
-    public void seDeplace(double coeff)
+    public void seDeplace(double multiplicateur)
     {
-        double x = this.direction.getX() ;
-        double y = this.direction.getY() ;
+        double x = this.direction.getX();
+        double y = this.direction.getY();
 
-
-        position.setX(position.getX() + x * VITESSE * coeff);
-        position.setY(position.getY() + y * VITESSE * coeff);
-
+        position.setX(position.getX() + x * VITESSE * multiplicateur);
+        position.setY(position.getY() + y * VITESSE * multiplicateur);
     }
-
 
     @Override
     public void causeCollision(Acteur acteur)
@@ -131,9 +122,6 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
         acteur.subitAttaque(this,(EntiteOffensif) utilisateur);
         monde.ajoutActeurAsupprimer(this);
     }
-
-    @Override
-    public void subitAttaque(Dommageable causeDegat, EntiteOffensif entiteOffensif) {  /*  NE FAIT RIEN */ }
 
     @Override
     public int prixAchat() {
@@ -145,11 +133,6 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
     @Override
     public String typeActeur() {
         return "epee";
-    }
-
-    @Override
-    public void dropApresMort() {
-        
     }
 
     @Override
@@ -173,7 +156,6 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
         return actionFait;
     }
 
-
     @Override
     public String getNom() {
         return "epee";
@@ -189,7 +171,6 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
         return getPv();
     }
 
-
     @Override
     public double degatPhysique() {
         return DEGAT_PHYSIQUE;
@@ -201,14 +182,18 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
     }
 
     @Override
-    public void seFaitPousser(Acteur acteur) {/*NE FAIT RIEN*/}
-
-    @Override
     public boolean estUnEnemie() {
         return false;
     }
 
+
+    @Override
+    public void subitAttaque(Dommageable causeDegat, EntiteOffensif entiteOffensif) {  /*  NE FAIT RIEN */ }
     @Override
     public void subitCollision(Acteur acteur) {/*NE FAIT RIEN*/}
+    @Override
+    public void seFaitPousser(Acteur acteur) {/*NE FAIT RIEN*/}
+    @Override
+    public void dropApresMort() {/*NE FAIT RIEN*/}
 
 }
