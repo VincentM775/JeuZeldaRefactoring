@@ -1,18 +1,15 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Boss;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Monstre.Squelette;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.TypeCompetence;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Arme;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.LivreMagique;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Attaque.SortilegePluitDeFleche;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Sortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Orbe;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ParametreMonstre;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Aetoile;
@@ -34,7 +31,7 @@ public class RoiSquelette extends EntiteOffensif
     private LivreMagique livreMagique;
     private Epee epee;
 
-    public RoiSquelette(Monde monde, double x, double y, Direction direction) {
+    public RoiSquelette(Environnement monde, double x, double y, Direction direction) {
         super(monde, x, y, direction,
                 ParametreMonstre.PV_ROI_SQUELETTE,
                 ParametreMonstre.ATTAQUE_ROI_SQUELETTE,
@@ -78,7 +75,7 @@ public class RoiSquelette extends EntiteOffensif
                 return;
             }
         }
-        if (monde.estDansRayon(getPosition(), 2)){
+        if (environnement.estDansRayon(getPosition(), 2)){
             attaque();
         }
 
@@ -116,7 +113,7 @@ public class RoiSquelette extends EntiteOffensif
 
     // Détecte si le joueur est dans un certain rayon autour du Roi Squelette
     private boolean detecteJoueurDansRayon(double rayon) {
-        Position positionJoueur = getMonde().getJoueur().getPosition();
+        Position positionJoueur = getEnvironnement().getJoueur().getPosition();
         double distance = Math.sqrt(Math.pow(positionJoueur.getX() - getPosition().getX(), 2) +
                 Math.pow(positionJoueur.getY() - getPosition().getY(), 2));
         return distance <= rayon;
@@ -129,10 +126,10 @@ public class RoiSquelette extends EntiteOffensif
 
         Position positionHaut = new Position(getPosition().getX(), getPosition().getY()-2);
         Position positionBas = new Position(getPosition().getX(), getPosition().getY()+2);
-        Squelette squeletteGauche = new Squelette( getMonde(), positionHaut.getX(), positionHaut.getY(), Direction.BAS, new Hitbox(0.5, 0.5), getMonde().getJoueur(), new Aetoile(getMonde()));
-        Squelette squeletteDroite = new Squelette( getMonde(), positionBas.getX(), positionBas.getY(), Direction.BAS, new Hitbox(0.5, 0.5), getMonde().getJoueur(), new Aetoile(getMonde()));
-        getMonde().ajoutActeur(squeletteGauche);
-        getMonde().ajoutActeur(squeletteDroite);
+        Squelette squeletteGauche = new Squelette( getEnvironnement(), positionHaut.getX(), positionHaut.getY(), Direction.BAS, new Hitbox(0.5, 0.5), getEnvironnement().getJoueur(), new Aetoile(getEnvironnement()));
+        Squelette squeletteDroite = new Squelette( getEnvironnement(), positionBas.getX(), positionBas.getY(), Direction.BAS, new Hitbox(0.5, 0.5), getEnvironnement().getJoueur(), new Aetoile(getEnvironnement()));
+        getEnvironnement().ajoutActeur(squeletteGauche);
+        getEnvironnement().ajoutActeur(squeletteDroite);
         new Potion().utilise(this);
         new Potion().utilise(this);
         new Potion().utilise(this);
@@ -162,7 +159,7 @@ public class RoiSquelette extends EntiteOffensif
     }
 
     @Override
-    public void dropApresMort() {TypeCompetence.COURIR.getCompetence().monterDeNiveau(monde.getJoueur());}
+    public void dropApresMort() {TypeCompetence.COURIR.getCompetence().monterDeNiveau(environnement.getJoueur());}
 
     @Override
     public boolean estUnEnemie() {

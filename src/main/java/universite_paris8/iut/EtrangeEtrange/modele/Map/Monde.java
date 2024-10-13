@@ -1,26 +1,10 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Map;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Bloc.Bloc;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Boss.RoiSquelette;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Interagisable.Marchand;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Monstre.Slime;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Monstre.Squelette;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Rechargeable;
-import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
-import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Aetoile;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
-
-import universite_paris8.iut.EtrangeEtrange.vues.Sprite.DropAuSol.GestionAffichageSpriteDropAuSol;
-import universite_paris8.iut.EtrangeEtrange.vues.Sprite.Entite.GestionAffichageSpriteEntite;
-import universite_paris8.iut.EtrangeEtrange.controller.GestionActeur;
-
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -28,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Monde {
+
     /**
      * Taille du monde (généré aléatoirement)
      * Ces valeurs ne servent que pour tester le fonctionnement de la scrolling map, elles seront supprimées lorsque les tests seront finis.
@@ -43,38 +28,15 @@ public class Monde {
      * Ici sont stocké les informations des éléments du monde traversables (ex : buissons, fleurs, hautes herbes, etc.)
      */
 
-    private ArrayList<Rechargeable> rechargeables = new ArrayList<>();
-
-
-    private Joueur joueur;
-
-    private ObservableList<DropAuSol> dropsAuSol;
-
-
-    private ObservableList<Acteur> acteurs = FXCollections.observableArrayList();
-    private ArrayList<Acteur> acteursAsupprimer = new ArrayList<>();
-
-
-
-
-
-
-    /**
-     * Méthode création de monde à partir d'une TiledMap
-     * @param chemin
-     * @param nommap
-     */
-    public Monde(String chemin, String nommap, int hauteur, int largeur)
-    {
+    public Monde(String chemin, String nommap, int hauteur, int largeur){
         this.sol = new int[hauteur][largeur];
         this.traversable = new int[hauteur][largeur];
         this.nontraversable = new int[hauteur][largeur];
-        this.dropsAuSol = FXCollections.observableArrayList();
+
         ArrayList<int[][]> coucheMap = new ArrayList<>();
         coucheMap.add(this.sol);
         coucheMap.add(this.traversable);
         coucheMap.add(this.nontraversable);
-
 
         String[] fichiers = {"sol", "traversable", "nontraversable"};
 
@@ -99,107 +61,7 @@ public class Monde {
                 System.err.println("Erreur de format dans le fichier : " + e.getMessage());
             }
         }
-
     }
-
-    public static void setSizeMondeLargeur(int largeurMonde) {
-    }
-
-    public static void setSizeMondeHauteur(int hauteurMonde) {
-    }
-
-    public void creationMonstre(String chemin, String nommap, int hauteur){
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(chemin+"/"+nommap+"_monstres.csv"));
-            String ligne;
-            int ligneIndex = 0;
-
-            while ((ligne = reader.readLine()) != null && ligneIndex < hauteur) {
-                String[] block = ligne.split(",");
-
-                for (int j = 0; j < hauteur && j < block.length; j++) {
-                    int monstre = Integer.parseInt(block[j]);
-                    Acteur acteur = null;
-                    if (monstre != -1) {
-                        if (monstre == 4)
-                            acteur = new Marchand(this, j+0.5 ,ligneIndex+0.5, Direction.BAS);
-                        else if(monstre == 2)
-                            acteur = new Slime(this, j+0.5, ligneIndex+0.5, Direction.BAS, new Hitbox(0.25, 0.5));
-                        else if(monstre == 3)
-                            acteur = new Squelette(this, j+0.5, ligneIndex+0.5,  Direction.BAS, new Hitbox(0.5, 0.5),joueur , new Aetoile(this));
-                        else if(monstre == 1)
-                            acteur = new RoiSquelette(this, j+0.5 , ligneIndex+0.5, Direction.BAS);
-                        else if(monstre == 0)
-                            acteur = new Bloc(this, j+0.5, ligneIndex+0.5, Direction.BAS, 1, 1, new Hitbox(1,1 ));
-                        ajoutActeur(acteur);
-                    }
-                }
-
-                ligneIndex++;
-            }
-
-        } catch (IOException e) {
-            System.err.println("Erreur lors de la lecture du fichier : " + e.getMessage());
-        } catch (NumberFormatException e) {
-            System.err.println("Erreur de format dans le fichier : " + e.getMessage());
-        }
-    }
-
-    public int[][] getSol() {
-        return sol;
-    }
-    public int[][] getNontraversable(){
-        return nontraversable;
-    }
-    public int[][] getTraversable(){
-        return this.traversable;
-    }
-    /**
-     * Génération totalement aléatoire d'un monde (pour les tests).
-     */
-
-
-    public void verifCollision(Acteur acteur)
-    {
-        for (Acteur acteur2 : acteurs)
-        {
-            if (collisionAvecActeur(acteur,acteur2) && acteur != acteur2)
-            {
-                acteur2.subitCollision(acteur);
-            }
-        }
-
-        if (collisionAvecActeur(acteur,joueur) && acteur != joueur)
-        {
-            joueur.subitCollision(acteur);
-        }
-    }
-
-    public Acteur chercheEnemie()
-    {
-        Acteur acteur = null;
-
-        for (Acteur act : acteurs)
-        {
-            if (act.estUnEnemie())
-                acteur = act;
-        }
-
-        return acteur;
-    }
-
-    public void ajoutActeurAsupprimer(Acteur acteur)
-    {
-        this.acteursAsupprimer.add(acteur);
-    }
-
-    public void ajouterDropAuSol(DropAuSol dropAuSol){
-        this.dropsAuSol.add(dropAuSol);
-        System.out.println("passage2");
-    }
-
-
-
     public static double getxPointDeDepart(){
         return xPointDeDepart;
     }
@@ -212,13 +74,6 @@ public class Monde {
     public static int getSizeMondeLargeur() {
         return sizeMondeLargeur;
     }
-    public ArrayList<DropAuSol> getDropAuSol() {return new ArrayList<>(this.dropsAuSol);}
-    public void enleverDropAuSol(DropAuSol dropAuSol){
-        this.dropsAuSol.remove(dropAuSol);
-    }
-    public void setJoueur(Joueur joueur){this.joueur = joueur;}
-    public Joueur getJoueur(){return this.joueur;}
-
 
     public ArrayList<int[][]> getToutesLesCouches()
     {
@@ -235,44 +90,7 @@ public class Monde {
         } else {
             return -1;
         }
-        
     }
-
-
-
-
-    public void ajoutActeur(Acteur acteur) {this.acteurs.add(acteur);}
-
-
-
-    public void unTour()
-    {
-        this.joueur.unTour();
-
-        for(int i = acteurs.size()-1 ; i>=0 ; i--)
-            acteurs.get(i).unTour();
-
-        for(int i = 0 ; i < acteursAsupprimer.size(); i++){
-            enleveActeur(acteursAsupprimer.get(i));
-        }
-
-        this.acteursAsupprimer.clear();
-
-
-        for(int i = rechargeables.size()-1 ; i>=0 ; i--)
-        {
-            Rechargeable rechargeable = rechargeables.get(i);
-
-            if (rechargeable.cooldown())
-                this.rechargeables.remove(rechargeable);
-        }
-    }
-
-    public void ajoutRechargeable(Rechargeable rechargeable)
-    {
-        this.rechargeables.add(rechargeable);
-    }
-
 
     public boolean positionHorsMap(int x,int y)
     {
@@ -288,14 +106,12 @@ public class Monde {
         Hitbox hitbox = acteur.getHitbox();
         double vitesse = acteur.getVitesse();
 
-
-
         if (direction == Direction.BAS) {
-            collision = hitbox.getPointLePlusEnBas(position.getY()) + vitesse >= Monde.getSizeMondeHauteur();
+            collision = hitbox.getPointLePlusEnBas(position.getY()) + vitesse >= sizeMondeHauteur;
         } else if (direction == Direction.HAUT) {
             collision = hitbox.getPointLePlusEnHaut(position.getY()) - vitesse < 0;
         } else if (direction == Direction.DROITE) {
-            collision = hitbox.getPointLePlusADroite(position.getX()) + vitesse >= Monde.getSizeMondeLargeur();
+            collision = hitbox.getPointLePlusADroite(position.getX()) + vitesse >= sizeMondeLargeur;
         } else if (direction == Direction.GAUCHE) {
             collision = hitbox.getPointLePlusAGauche(position.getX()) - vitesse < 0;
         }
@@ -304,11 +120,8 @@ public class Monde {
             collision = false;
         }
 
-
         return collision;
     }
-
-
 
     public boolean collisionMap(Acteur acteur) {
         Position position = acteur.getPosition();
@@ -349,186 +162,7 @@ public class Monde {
         return collision;
     }
 
-    public boolean collisionAvecActeur(Acteur acteur1,Acteur acteur2)
-    {
-        double vitesse = acteur1.getVitesse();
-        Position pos1 = new Position(acteur1.getPosition().getX(), acteur1.getPosition().getY());
-
-        Hitbox hitbox1 = acteur1.getHitbox();
-
-        Position pos2 = acteur2.getPosition();
-        Hitbox hitbox2 = acteur2.getHitbox();
-
-        double x1Min = hitbox1.getPointLePlusAGauche(pos1.getX()+acteur1.getDirection().getX()*vitesse);
-        double y1Min = hitbox1.getPointLePlusEnHaut(pos1.getY()+acteur1.getDirection().getY()*vitesse);
-        double x1Max = hitbox1.getPointLePlusADroite(pos1.getX()+acteur1.getDirection().getX()*vitesse);
-        double y1Max = hitbox1.getPointLePlusEnBas(pos1.getY()+acteur1.getDirection().getY()*vitesse);
-
-        double x2Min = hitbox2.getPointLePlusAGauche(pos2.getX());
-        double y2Min = hitbox2.getPointLePlusEnHaut(pos2.getY());
-        double x2Max = hitbox2.getPointLePlusADroite(pos2.getX());
-        double y2Max = hitbox2.getPointLePlusEnBas(pos2.getY());
-
-        boolean collisionX = x1Min < x2Max && x1Max > x2Min;
-        boolean collisionY = y1Min < y2Max && y1Max > y2Min;
-
-        return collisionX && collisionY;
-    }
-
-
-    public boolean collision(Acteur acteur) { return collisionMap(acteur) || collisionAvecActeurs(acteur); }
-
-    private boolean collisionAvecActeurs(Acteur acteur1)
-    {
-        boolean aCollision = false;
-
-        for (int i = 0;i<acteurs.size() && !aCollision;i++)
-        {
-            Acteur acteur2 = acteurs.get(i);
-
-            if (collisionAvecActeur(acteur1,acteur2) && acteur2 != acteur1)
-                aCollision = true;
-        }
-        if(collisionAvecActeur(acteur1,joueur) && joueur != acteur1)
-            aCollision = true;
-
-        return aCollision;
-    }
-
-    public void setListenerActeur(GestionActeur listenerActeur)
-    {
-        this.acteurs.addListener(listenerActeur);
-    }
-
-
-    public void setListenerListeDropsAuSol(GestionAffichageSpriteDropAuSol gestionAffichageDropAuSol) {
-        this.dropsAuSol.addListener(gestionAffichageDropAuSol);
-    }
-
-    public boolean estDansRayon(Position positionCentre, double rayon){
-        Position positionJoueur = getJoueur().getPosition();
-
-        double distance = Math.sqrt(Math.pow(positionJoueur.getX() - positionCentre.getX(), 2) +
-        Math.pow(positionJoueur.getY() - positionCentre.getY(), 2));
-
-        return distance <= rayon;
-    }
-
-
-    public void setListenerListeEntites(GestionAffichageSpriteEntite gestionAffichageSprite) {
-        this.acteurs.addListener(gestionAffichageSprite);
-    }
-
-    public void enleveActeur(Acteur acteur) {
-        acteur.dropApresMort();
-        this.acteurs.remove(acteur);
-    }
-
-
-
-
-
-
-
-    public Acteur interactionAvecActeur()
-    {
-        Acteur act = null;
-        double distance = -1;
-
-
-        for (Acteur acteur : acteurs)
-        {
-            double distancePretendant = estEnFace(acteur);
-
-             if (distancePretendant > distance)
-             {
-                 act = acteur;
-                 distance = distancePretendant;
-             }
-        }
-
-        return act;
-    }
-
-    private double estEnFace(Acteur acteur)
-    {
-        final double yDistanceMax = 2;
-        final double xDistanceMax = 2;
-
-        double dX;
-        double dY;
-        Direction directionJoueur = joueur.getDirection();
-
-
-        if (directionJoueur == Direction.BAS ||directionJoueur == Direction.HAUT) {
-            dX = Math.abs(acteur.getPosition().getX() - joueur.getPosition().getX());
-            dY = Math.abs(acteur.getPosition().getY() - joueur.getPosition().getY());
-        }
-        else {
-            dY = Math.abs(acteur.getPosition().getX() - joueur.getPosition().getX());
-            dX = Math.abs(acteur.getPosition().getY() - joueur.getPosition().getY());
-        }
-
-        return dX <= xDistanceMax && dY <= yDistanceMax ?  dX+dY : -1;
-    }
-
-
-    public ArrayList<Acteur> getEntites() {
-        ArrayList<Acteur> toutesLesEntites = new ArrayList<>();
-
-        // Ajouter tous les acteurs qui sont des entités
-        for (Acteur acteur : this.acteurs) {
-            if (acteur instanceof Acteur) {
-                toutesLesEntites.add((Acteur) acteur);
-            }
-        }
-        return toutesLesEntites;
+    public int[][] getNontraversable() {
+        return nontraversable;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

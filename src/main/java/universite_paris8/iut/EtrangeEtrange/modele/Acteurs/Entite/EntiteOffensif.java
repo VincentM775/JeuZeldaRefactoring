@@ -1,7 +1,6 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Arme;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Attaque;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.AttaqueSpecial;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -31,7 +30,7 @@ public abstract class EntiteOffensif extends Entite
      * @param vitesse         La vitesse de déplacement de l'entité.
      * @param hitbox          La hitbox de l'entité.
      */
-    public EntiteOffensif(Monde monde, double x, double y, Direction direction, double pv, double attaque, double defense, double attaqueSpecial , double defenseSpecial, double vitesse,Hitbox hitbox)
+    public EntiteOffensif(Environnement monde, double x, double y, Direction direction, double pv, double attaque, double defense, double attaqueSpecial , double defenseSpecial, double vitesse, Hitbox hitbox)
     {
         super(monde,x,y,direction,pv,defense,defenseSpecial,vitesse,hitbox);
         this.statsAttaque = new Attaque(attaque);

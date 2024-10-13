@@ -43,7 +43,7 @@ public  class LivreMagique implements Arme, Rechargeable
             Sortilege sortilege = this.sortileges.get(0);
             sortilege.utilise(entite);
             this.derniereApelle = System.currentTimeMillis();
-            entite.getMonde().ajoutRechargeable(this);
+            entite.getEnvironnement().ajoutRechargeable(this);
             peutTirer = false;
         }
     }

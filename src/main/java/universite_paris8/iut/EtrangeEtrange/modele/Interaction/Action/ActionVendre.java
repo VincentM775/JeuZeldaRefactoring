@@ -27,7 +27,7 @@ public class ActionVendre extends Action
 
             for (Objet objet : obs)
             {
-                racine.ajoutPrompt(new Prompt("Ta fais une bonne affaire !",new ActionAchat(marchand,objet,marchand.getMonde().getJoueur(),this)),objet.getNom() +"     ["+objet.prixAchat()+"]");
+                racine.ajoutPrompt(new Prompt("Ta fais une bonne affaire !",new ActionAchat(marchand,objet,marchand.getEnvironnement().getJoueur(),this)),objet.getNom() +"     ["+objet.prixAchat()+"]");
                 System.out.println("nv objet");
             }
         }

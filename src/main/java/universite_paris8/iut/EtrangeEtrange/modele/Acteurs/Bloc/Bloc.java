@@ -4,7 +4,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dropable;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Arc;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Monnaie.PieceOr;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
@@ -14,7 +14,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
 
 public class Bloc extends Acteur implements Dropable {
-    public Bloc(Monde monde, double x, double y, Direction direction, double pv, double vitesse, Hitbox hitbox) { super(monde, x, y, direction, pv, vitesse, hitbox);}
+    public Bloc(Environnement monde, double x, double y, Direction direction, double pv, double vitesse, Hitbox hitbox) { super(monde, x, y, direction, pv, vitesse, hitbox);}
 
     @Override
     public void seFaitPousser(Acteur acteur)
@@ -36,13 +36,13 @@ public class Bloc extends Acteur implements Dropable {
     public void dropApresMort() {
         double x = getPosition().getX();
         double y = getPosition().getY();
-        getMonde().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
+        getEnvironnement().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
     }
 
     @Override
     public boolean estUnEnemie() { return false; }
     @Override
-    public void drop() { monde.ajouterDropAuSol(new DropAuSol(new Arc(), 1, new Position(position.getX(), position.getY()))); }
+    public void drop() { environnement.ajouterDropAuSol(new DropAuSol(new Arc(), 1, new Position(position.getX(), position.getY()))); }
     @Override
     public void unTour() {/*NE FAIT RIEN*/}
     @Override

@@ -4,18 +4,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Aetoile;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
 public class AetoileTest {
-    private Monde monde;
+    private Environnement environnement;
     private Aetoile aetoile;
 
     @BeforeEach
     public void setUp() {
         // Initialiser un monde avec des obstacles stratégiques pour tester plusieurs chemins
-        monde = new Monde("", "", 10, 10); // suppose une adaptation pour tester
+        environnement = new Environnement("", "", 10, 10); // suppose une adaptation pour tester
+        Monde monde = environnement.getMonde();
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 monde.getNontraversable()[i][j] = -1; // Tout est traversable
@@ -29,7 +31,7 @@ public class AetoileTest {
         monde.getNontraversable()[5][6] = 1;
         monde.getNontraversable()[5][7] = 1;
 
-        aetoile = new Aetoile(monde);
+        aetoile = new Aetoile(environnement);
     }
 
 

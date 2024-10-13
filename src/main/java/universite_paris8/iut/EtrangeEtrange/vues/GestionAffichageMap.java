@@ -2,22 +2,22 @@ package universite_paris8.iut.EtrangeEtrange.vues;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import org.json.*;
-import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 
 import java.io.*;
 import java.util.ArrayList;
 
 public class GestionAffichageMap {
     private ArrayList<TilePane> TilePaneCouchesMonde;
-    private Monde monde;
-    public GestionAffichageMap(Monde monde, TilePane sol, TilePane traversable, TilePane nontraversable){
+    private Environnement environnement;
+    public GestionAffichageMap(Environnement monde, TilePane sol, TilePane traversable, TilePane nontraversable){
         this.TilePaneCouchesMonde = new ArrayList<>();
         this.TilePaneCouchesMonde.add(sol);
         this.TilePaneCouchesMonde.add(traversable);
         this.TilePaneCouchesMonde.add(nontraversable);
-        this.monde = monde;
+        this.environnement = monde;
     }
 
 
@@ -26,7 +26,7 @@ public class GestionAffichageMap {
      */
     public void afficherMondeJSON(){
         String[] fichiers = {"sol", "traversable", "nontraversable"};
-        ArrayList<int[][]> couchesMap = monde.getToutesLesCouches();
+        ArrayList<int[][]> couchesMap = environnement.getMonde().getToutesLesCouches();
         for(TilePane tilePaneCouchesMonde : TilePaneCouchesMonde)
             tilePaneCouchesMonde.getChildren().clear();
 
@@ -54,8 +54,8 @@ public class GestionAffichageMap {
             JSONArray jsonArray = new JSONArray(jsonObject.getJSONArray("tiles"));
             TilePane tilePane = TilePaneCouchesMonde.get(i);
 
-            for(int h = 0 ; h < Monde.getSizeMondeHauteur() ; h++){
-                for(int l = 0 ; l < Monde.getSizeMondeLargeur() ; l++){
+            for(int h = 0; h < Monde.getSizeMondeHauteur() ; h++){
+                for(int l = 0; l < Monde.getSizeMondeLargeur() ; l++){
                     if(couchesMap.get(i)[h][l]!=-1) {
                         String chemin = jsonArray.getJSONObject(couchesMap.get(i)[h][l]).getString("image");
                         tilePane.getChildren().add(new ImageView("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/" + fichiers[i] + "/" + chemin));

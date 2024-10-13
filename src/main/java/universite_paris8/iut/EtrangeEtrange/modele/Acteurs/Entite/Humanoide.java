@@ -1,6 +1,6 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
@@ -42,7 +42,7 @@ public abstract class Humanoide extends EntiteOffensif
      * @param objetMainGauche  L'objet tenu dans la main gauche de l'humanoïde.
      * @param objetMainDroite L'objet tenu dans la main droite de l'humanoïde.
      */
-    public Humanoide(Monde monde, double x, double y, Direction direction,double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse,Hitbox hitbox,Sac sac, Objet objetMainGauche, Objet objetMainDroite)
+    public Humanoide(Environnement monde, double x, double y, Direction direction, double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, Hitbox hitbox, Sac sac, Objet objetMainGauche, Objet objetMainDroite)
     {
         super(monde, x, y, direction, pv, attaque, defense, attaqueSpecial, defenseSpecial, vitesse, hitbox);
         this.sac = sac;
@@ -84,14 +84,14 @@ public abstract class Humanoide extends EntiteOffensif
         this.objetMainDroite = objet;
     }
     public void ramasserObjet() {
-        ArrayList<DropAuSol> dropAuSols = getMonde().getDropAuSol();
+        ArrayList<DropAuSol> dropAuSols = getEnvironnement().getDropAuSol();
 
         for(int i = 0 ; i < dropAuSols.size() ; i++){
             Position position1 = dropAuSols.get(i).getPosition();
             if(Math.abs(getPosition().getX()+getDirection().getX()-position1.getX())<1)
                 if(Math.abs(getPosition().getY()+getDirection().getY()-position1.getY())<1) {
                     if (sac.ajoutItem(dropAuSols.get(i).getObjet())) {
-                        getMonde().enleverDropAuSol(dropAuSols.get(i));
+                        getEnvironnement().enleverDropAuSol(dropAuSols.get(i));
                         i++;
                     }
                 }

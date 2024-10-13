@@ -5,8 +5,8 @@ import org.junit.Test;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Guerrier;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
-import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Aetoile;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 
 import static org.junit.Assert.assertEquals;
@@ -15,13 +15,13 @@ import static org.junit.Assert.assertEquals;
 public class EntiteTest
 {
 
-    private Monde monde = new Monde("src/main/resources/universite_paris8/iut/EtrangeEtrange/TiledMap/", "maptest", Monde.getSizeMondeHauteur(), Monde.getSizeMondeLargeur());
+    private Environnement environnement = new Environnement("src/main/resources/universite_paris8/iut/EtrangeEtrange/TiledMap/", "maptest", Monde.getSizeMondeHauteur(), Monde.getSizeMondeLargeur());
 
 
     @Test
     public void testDeplacement()
     {
-        Entite entite = new Guerrier(monde,10,10, Direction.GAUCHE);
+        Entite entite = new Guerrier(environnement,10,10, Direction.GAUCHE);
 
         entite.seDeplace(1);
 

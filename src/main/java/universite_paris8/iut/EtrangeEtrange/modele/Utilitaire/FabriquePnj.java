@@ -1,19 +1,18 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Utilitaire;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class FabriquePnj
 {
-    public static void fabriquePnj(Class<? extends Acteur> typePnj, int nombre, Monde monde, Position position)
+    public static void fabriquePnj(Class<? extends Acteur> typePnj, int nombre, Environnement monde, Position position)
     {
         try
         {
-            Constructor<? extends Acteur> constructor = typePnj.getDeclaredConstructor(Monde.class,double.class,double.class,Direction.class);
+            Constructor<? extends Acteur> constructor = typePnj.getDeclaredConstructor(Environnement.class,double.class,double.class,Direction.class);
 
             for (int i = 0; i < nombre; i++)
             {

@@ -3,7 +3,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Acteurs;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Pv;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Vitesse;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -16,7 +16,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
  */
 public abstract class Acteur
 {
-    protected Monde monde;
+    protected Environnement environnement;
     protected Position position;
     protected Direction direction;
 
@@ -36,7 +36,7 @@ public abstract class Acteur
     /**
      * Constructeur avec paramètres pour initialiser un Acteur.
      *
-     * @param monde     Le monde dans lequel l'acteur se situe.
+     * @param environnement     Le monde dans lequel l'acteur se situe.
      * @param x         La coordonnée en x de la position initiale.
      * @param y         La coordonnée en y de la position initiale.
      * @param direction La direction initiale de l'acteur.
@@ -44,9 +44,9 @@ public abstract class Acteur
      * @param vitesse   La vitesse initiale de l'acteur.
      * @param hitbox    La hitbox de l'acteur.
      */
-    public Acteur(Monde monde,double x,double y,Direction direction,double pv,double vitesse, Hitbox hitbox)
+    public Acteur(Environnement environnement, double x, double y, Direction direction, double pv, double vitesse, Hitbox hitbox)
     {
-        this.monde = monde;
+        this.environnement = environnement;
         this.position = new Position(x,y);
         this.direction = direction;
         this.statsPv = new Pv(pv);
@@ -65,7 +65,7 @@ public abstract class Acteur
      */
     public Acteur(double pv,double vitesse,Hitbox hitbox)
     {
-        this.monde = null;
+        this.environnement = null;
         this.position = null;
         this.direction = null;
         this.statsPv = new Pv(pv);
@@ -79,7 +79,7 @@ public abstract class Acteur
      * @return true si l'acteur peut se déplacer, false sinon.
      */
     public boolean peutSeDeplacer(){
-        return !monde.estHorsMap(this) && !monde.collision(this);}
+        return !environnement.getMonde().estHorsMap(this) && !environnement.collision(this);}
 
 
     /**
@@ -126,7 +126,7 @@ public abstract class Acteur
     public abstract String typeActeur();
 
     public void setSeDeplace(boolean seDeplace){ this.seDeplace = seDeplace;}
-    public void setMonde(Monde monde) {this.monde = monde;}
+    public void setEnvironnement(Environnement environnement) {this.environnement = environnement;}
     public void setDirection(Direction direction) {this.direction = direction;}
     public void setPosition(double x,double y){
         this.position.setX(x);
@@ -148,7 +148,7 @@ public abstract class Acteur
     public Direction getDirection() {return this.direction;}
     public boolean getSeDeplace(){return this.seDeplace;}
     public Hitbox getHitbox() {return this.hitbox;}
-    public Monde getMonde() {return this.monde;}
+    public Environnement getEnvironnement() {return this.environnement;}
     public Position getPosition() {return this.position;}
     public Pv getStatsPv() {return this.statsPv;}
     public double getPv(){return this.statsPv.getPv();}

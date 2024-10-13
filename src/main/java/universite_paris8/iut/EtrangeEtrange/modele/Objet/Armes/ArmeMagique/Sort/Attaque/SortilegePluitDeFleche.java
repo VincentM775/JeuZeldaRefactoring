@@ -1,7 +1,6 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Attaque;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Rechargeable;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Sortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Fleche;
@@ -46,9 +45,9 @@ public class SortilegePluitDeFleche extends Sortilege {
                             Fleche flecheSimple = new Fleche();
                             flecheSimple.setDirection(direction);
                             flecheSimple.setPosition(positionAleaAutourDe(x,y, direction));
-                            flecheSimple.setMonde(utilisateur.getMonde());
+                            flecheSimple.setEnvironnement(utilisateur.getEnvironnement());
                             flecheSimple.setUtilisateur(utilisateur);
-                            utilisateur.getMonde().ajoutActeur(flecheSimple);
+                            utilisateur.getEnvironnement().ajoutActeur(flecheSimple);
                             actionFait = true;
                         }
                         return actionFait;
@@ -56,10 +55,10 @@ public class SortilegePluitDeFleche extends Sortilege {
 
                 };
 
-                utilisateur.getMonde().ajoutRechargeable(rechargeable);
+                utilisateur.getEnvironnement().ajoutRechargeable(rechargeable);
                 this.peutLancerSort = false;
                 this.derniereApelle = System.currentTimeMillis();
-                utilisateur.getMonde().ajoutRechargeable(this);
+                utilisateur.getEnvironnement().ajoutRechargeable(this);
             }
         }
     }

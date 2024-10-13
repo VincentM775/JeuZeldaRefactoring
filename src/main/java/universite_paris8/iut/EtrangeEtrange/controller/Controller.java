@@ -18,13 +18,14 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.GestionPrompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Archer;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Guerrier;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -56,7 +57,7 @@ public class Controller implements Initializable {
 
     @FXML
     private Pane paneInteraction;
-    private Monde monde;
+    private Environnement monde;
     private Joueur joueur;
     private Timeline gameLoop;
     private GestionSon gestionSon;
@@ -172,13 +173,13 @@ public class Controller implements Initializable {
      */
     public double scrollMap(double position, int longueurAxe, double positionInitiale){
         if (-position * ConstantesAffichage.tailleTile + longueurAxe / 2.0 < 0)
-            if (-position * ConstantesAffichage.tailleTile + longueurAxe / 2.0 > -Monde.getSizeMondeLargeur()* ConstantesAffichage.tailleTile+longueurAxe )
+            if (-position * ConstantesAffichage.tailleTile + longueurAxe / 2.0 > - Monde.getSizeMondeLargeur()* ConstantesAffichage.tailleTile+longueurAxe )
                 return -position * ConstantesAffichage.tailleTile + longueurAxe / 2.0;
         return positionInitiale;
     }
     public void initMonde()
     {
-        monde = new Monde("src/main/resources/universite_paris8/iut/EtrangeEtrange/TiledMap/", "mapfinal", Monde.getSizeMondeHauteur(), Monde.getSizeMondeLargeur());
+        monde = new Environnement("src/main/resources/universite_paris8/iut/EtrangeEtrange/TiledMap/", "mapfinal", Monde.getSizeMondeHauteur(), Monde.getSizeMondeLargeur());
     }
 
     public void initJoueur() {

@@ -8,7 +8,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Action.ActionVend
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Action.Soigner;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.*;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Arc;
@@ -33,7 +33,7 @@ public class Marchand extends Humanoide implements Dropable
 
     private Prompt prompt;
 
-    public Marchand(Monde monde, double x, double y, Direction direction) {
+    public Marchand(Environnement monde, double x, double y, Direction direction) {
         super(monde, x, y, direction, 10, 10, 10, 10, 10, 0.5, new Hitbox(0.5,0.5), null, null, null);
         this.cycle = 0;
         this.sac = new Sac();
@@ -92,7 +92,7 @@ public class Marchand extends Humanoide implements Dropable
         racine.ajoutPrompt(reponseRacine1,"J'aimerais marchander un peu avec avec vous");
         racine.ajoutPrompt(reponseRacine2,"J'aimerais parler un peu..");
 
-        Prompt reponseReponceRacine2 = new Prompt("Faite attention...   D'ailleur, attendez je vais vous soigner !",new Soigner(monde.getJoueur()));
+        Prompt reponseReponceRacine2 = new Prompt("Faite attention...   D'ailleur, attendez je vais vous soigner !",new Soigner(environnement.getJoueur()));
         reponseRacine2.ajoutPrompt(reponseReponceRacine2,"");
 
         prompt = racine;
@@ -144,7 +144,7 @@ public class Marchand extends Humanoide implements Dropable
 
             for (Objet objet : obs)
             {
-                monde.ajouterDropAuSol(new DropAuSol(objet, obs.size(), new Position(position.getX(), position.getY())));
+                environnement.ajouterDropAuSol(new DropAuSol(objet, obs.size(), new Position(position.getX(), position.getY())));
             }
         }
 

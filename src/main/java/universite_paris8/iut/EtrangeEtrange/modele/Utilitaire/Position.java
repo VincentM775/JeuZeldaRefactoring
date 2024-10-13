@@ -3,6 +3,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Utilitaire;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import universite_paris8.iut.EtrangeEtrange.modele.Exeptions.PositionInvalideExeption;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 
 public class Position {
@@ -60,5 +61,9 @@ public class Position {
     public String toString()
     {
         return x.get() + " - "+y.get();
+    }
+
+    public Position copy() {
+        return new Position(this.x.get(), this.y.get());
     }
 }

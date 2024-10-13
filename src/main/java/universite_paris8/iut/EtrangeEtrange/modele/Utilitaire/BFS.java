@@ -1,7 +1,7 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Utilitaire;
 
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
-import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class BFS {
-    private Monde monde;
+    private Environnement monde;
     private ArrayList<Sommet> chemins;
     private Sommet[][] graphe;
     private int xArrive, yArrive;
@@ -19,7 +19,7 @@ public class BFS {
         chemins = new ArrayList<>();
     }
 
-    public void chercherChemin(Monde monde, Position positionDepart, Position positionArrive) {
+    public void chercherChemin(Environnement monde, Position positionDepart, Position positionArrive) {
         this.monde = monde;
         this.xArrive = (int) positionArrive.getX();
         this.yArrive = (int) positionArrive.getY();
@@ -34,7 +34,7 @@ public class BFS {
 
         for (int y = 0; y < hauteur; y++)
             for (int x = 0; x < largeur; x++)
-                this.graphe[y][x] = new Sommet(new Position(x, y), monde.getNontraversable()[y][x] == -1);
+                this.graphe[y][x] = new Sommet(new Position(x, y), monde.getMonde().getNontraversable()[y][x] == -1);
 
 
         for (int y = 0; y < hauteur; y++)

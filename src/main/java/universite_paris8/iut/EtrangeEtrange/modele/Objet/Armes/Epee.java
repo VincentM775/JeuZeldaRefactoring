@@ -45,14 +45,14 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
         {
             utilisateur = entite;
             setPosition(entite.getPosition());
-            setMonde(entite.getMonde());
+            setEnvironnement(entite.getEnvironnement());
             setDirection(entite.getDirection());
 
             setPositionAttaque();
-            entite.getMonde().ajoutActeur(this);
+            entite.getEnvironnement().ajoutActeur(this);
 
             this.derniereApelle = System.currentTimeMillis();
-            entite.getMonde().ajoutRechargeable(this);
+            entite.getEnvironnement().ajoutRechargeable(this);
 
             this.peutTaper = false;
         }
@@ -69,7 +69,7 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
         }
         else
         {
-            this.getMonde().enleveActeur(this);
+            this.getEnvironnement().enleveActeur(this);
             cycle = 0;
         }
     }
@@ -129,7 +129,7 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
     public void causeCollision(Acteur acteur)
     {
         acteur.subitAttaque(this,(EntiteOffensif) utilisateur);
-        monde.ajoutActeurAsupprimer(this);
+        environnement.ajoutActeurAsupprimer(this);
     }
 
     @Override

@@ -1,14 +1,8 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Monstre;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Arme;
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Arc;
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Attaque.SortilegePluitDeFleche;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ParametreMonstre;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Monnaie.PieceOr;
@@ -25,7 +19,7 @@ public class Squelette extends EntiteOffensif {
     private long lastPathCalculationTime;
     private Epee epee ;
 
-    public Squelette(Monde monde, double x, double y, Direction direction, Hitbox hitbox, Joueur joueur, Aetoile aetoile) {
+    public Squelette(Environnement monde, double x, double y, Direction direction, Hitbox hitbox, Joueur joueur, Aetoile aetoile) {
         super(monde, x, y, direction,
                 ParametreMonstre.PV_SQUELETTE,
                 ParametreMonstre.ATTAQUE_SQUELETTE,
@@ -105,9 +99,9 @@ public class Squelette extends EntiteOffensif {
 
     @Override
     public void unTour() {
-        if (monde.estDansRayon(getPosition(), 6)){
+        if (environnement.estDansRayon(getPosition(), 6)){
             seDeplacerVers(joueur.getPosition());
-            if (monde.estDansRayon(getPosition(), 2)){
+            if (environnement.estDansRayon(getPosition(), 2)){
                 attaque();
             }
         }
@@ -143,7 +137,7 @@ public class Squelette extends EntiteOffensif {
     public void dropApresMort() {
         double x = getPosition().getX();
         double y = getPosition().getY();
-        getMonde().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
+        getEnvironnement().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
         System.out.println("passage");
     }
 

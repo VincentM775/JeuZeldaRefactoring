@@ -2,7 +2,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Defense;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.DefenseSpecial;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -29,7 +29,7 @@ public abstract class Entite extends Acteur
      * @param vitesse          La vitesse de déplacement de l'entité.
      * @param hitbox           La hitbox de l'entité.
      */
-    public Entite(Monde monde,double x,double y,Direction direction,double pv,double defense,double defenseSpecial,double vitesse, Hitbox hitbox)
+    public Entite(Environnement monde, double x, double y, Direction direction, double pv, double defense, double defenseSpecial, double vitesse, Hitbox hitbox)
     {
         super(monde,x,y,direction,pv,vitesse,hitbox);
         this.statsDefense = new Defense(defense);

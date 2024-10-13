@@ -1,7 +1,6 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Support;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Guerrisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Sortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesSortilege;
@@ -17,7 +16,7 @@ public class SortilegeDeSoins extends Sortilege implements Guerrisable
             this.peutLancerSort = false;
             entite.soigner(restoration());
             this.derniereApelle = System.currentTimeMillis();
-            entite.getMonde().ajoutRechargeable(this);
+            entite.getEnvironnement().ajoutRechargeable(this);
         }
     }
 
