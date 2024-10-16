@@ -239,11 +239,14 @@ public class Monde {
     }
 
     public void ajoutActeur(Acteur acteur) {this.acteurs.add(acteur);}
-    public void unTour() {
-        this.joueur.unTour();
 
-        for (int i = acteurs.size() - 1; i >= 0; i--)
-            acteurs.get(i).unTour();
+
+
+    public void unTour() {
+        this.joueur.agir();
+
+        for(int i = acteurs.size()-1 ; i>=0 ; i--)
+            acteurs.get(i).agir();
 
         for (int i = 0; i < acteursAsupprimer.size(); i++) {
             enleveActeur(acteursAsupprimer.get(i));
@@ -259,6 +262,7 @@ public class Monde {
                 this.elementsIterable.remove(elementsIterable);
         }
     }
+
 
     public boolean positionHorsMap(int x,int y)
     {
@@ -406,14 +410,9 @@ public class Monde {
     }
 
     public void enleveActeur(Acteur acteur) {
-        acteur.dropApresMort();
+        acteur.derniereAction();
         this.acteurs.remove(acteur);
     }
-
-
-
-
-
 
 
     public Acteur interactionAvecActeur()

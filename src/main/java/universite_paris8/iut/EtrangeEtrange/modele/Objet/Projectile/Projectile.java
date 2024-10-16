@@ -27,6 +27,15 @@ public abstract class Projectile extends Acteur implements ElementDommageable, E
         }
     }
 
+//    @Override
+//    public void agir()
+//    {
+//        if(peutSeDeplacer())
+//            seDeplace(1);
+//        else
+//            enleveToutPv();
+//    }
+
     @Override
     public void subitCollision(Acteur acteur) {
         if (acteur != utilisateur)

@@ -11,8 +11,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
  * Représente un être vivant dans le monde du jeu.
  * Cette classe étend la classe abstraite Acteur
  */
-public abstract class Entite extends Acteur
-{
+public abstract class Entite extends Acteur {
     protected Defense statsDefense;
     protected DefenseSpecial statsDefenseSpecial;
 
@@ -72,16 +71,6 @@ public abstract class Entite extends Acteur
     {
         return Math.abs(attaqueSpecialEntite+degatArme - statsDefenseSpecial.getDefenseSpecial());
     }
-    public void setDefenseMaximum(double statsDefense){this.statsDefense.setDefenseMaximum(statsDefense);}
-    public void setDefense(double defense){this.statsDefense.setDefense(defense);}
-    public void setDefenseSpecialMaximum(double statsDefenseSpecial) {this.statsDefenseSpecial.setDefenseSpecialMaximum(statsDefenseSpecial);}
-    public void setDefenseSpecial(double defenseSpecial) {this.statsDefenseSpecial.setDefenseSpecial(defenseSpecial);}
-    public double getDefense(){ return this.statsDefense.getDefense();}
-    public double getDefenseSpecial(){ return this.statsDefenseSpecial.getDefenseSpecial();}
-    public Defense getStatsDefense(){return this.statsDefense;}
-    public DefenseSpecial getStatsDefenseSpecial(){return this.statsDefenseSpecial;}
-
-
 
 
 }

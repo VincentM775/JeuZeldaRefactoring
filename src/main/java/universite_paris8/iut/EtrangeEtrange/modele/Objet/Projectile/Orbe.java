@@ -31,7 +31,7 @@ public class Orbe extends Projectile
     }
 
     @Override
-    public void unTour()
+    public void agir()
     {
         chercheChemin();
 
@@ -76,7 +76,7 @@ public class Orbe extends Projectile
     @Override
     public String typeActeur() { return "orbe"; }
     @Override
-    public void dropApresMort() {
+    public void derniereAction() {
 
     }
     @Override

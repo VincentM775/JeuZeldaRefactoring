@@ -31,7 +31,7 @@ public class Bloc extends Acteur {
     public String typeActeur() { return "bloc";}
 
     @Override
-    public void dropApresMort() {
+    public void derniereAction() {
         double x = getPosition().getX();
         double y = getPosition().getY();
         getMonde().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
@@ -41,9 +41,9 @@ public class Bloc extends Acteur {
     public boolean estUnEnemie() { return false; }
 
     @Override
-    public void unTour() {/*NE FAIT RIEN*/}
+    public void agir() {/*N'agit pas*/}
     @Override
-    public void causeCollision(Acteur acteur) {/*NE FAIT RIEN*/}
+    public void causeCollision(Acteur acteur) {/*ne réagit pas à la cause de la collision*/}
 
     @Override
     public void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif) {enleveToutPv();}

@@ -52,8 +52,9 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
         return false;
     }
 
+
     @Override
-    public void unTour()
+    public void agir()
     {
         if (cycle <= 2)
         {
@@ -102,6 +103,7 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
         this.position = new Position(posXJoueur+decalageX,posYJoueur+decalageY);
     }
 
+
     @Override
     public void seDeplace(double multiplicateur)
     {
@@ -111,6 +113,7 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
         position.setX(position.getX() + x * VITESSE * multiplicateur);
         position.setY(position.getY() + y * VITESSE * multiplicateur);
     }
+
 
     @Override
     public void causeCollision(Acteur acteur)
@@ -130,6 +133,34 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
     public String typeActeur() {
         return "epee";
     }
+
+    @Override
+    public void derniereAction() {
+        
+    }
+
+    @Override
+    public long delaie() {
+        return DELAIE_UTILISATION;
+    }
+
+    @Override
+    public boolean cooldown()
+    {
+        boolean actionFait = false;
+        long apelle = System.currentTimeMillis();
+
+        if (apelle - derniereApelle >= delaie())
+        {
+            this.derniereApelle = -1;
+            this.peutTaper = true;
+            actionFait = true;
+        }
+
+        return actionFait;
+    }
+
+
     @Override
     public String getNom() {
         return "epee";
@@ -145,6 +176,7 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
         return getPv();
     }
 
+
     @Override
     public double degatPhysique() {
         return DEGAT_PHYSIQUE;
@@ -156,18 +188,14 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
     }
 
     @Override
+    public void seFaitPousser(Acteur acteur) {/*NE FAIT RIEN*/}
+
+    @Override
     public boolean estUnEnemie() {
         return false;
     }
 
-
-    @Override
-    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif) {  /*  NE FAIT RIEN */ }
     @Override
     public void subitCollision(Acteur acteur) {/*NE FAIT RIEN*/}
-    @Override
-    public void seFaitPousser(Acteur acteur) {/*NE FAIT RIEN*/}
-    @Override
-    public void dropApresMort() {/*NE FAIT RIEN*/}
 
 }

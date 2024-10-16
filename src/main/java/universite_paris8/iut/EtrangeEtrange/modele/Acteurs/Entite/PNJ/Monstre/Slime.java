@@ -32,7 +32,7 @@ public class Slime extends Entite {
     }
 
     @Override
-    public void unTour()
+    public void agir()
     {
         deplacementAleatoire();
     }
@@ -61,7 +61,7 @@ public class Slime extends Entite {
     }
 
     @Override
-    public void dropApresMort() {
+    public void derniereAction() {
         double x = getPosition().getX();
         double y = getPosition().getY();
         getMonde().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));

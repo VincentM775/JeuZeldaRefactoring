@@ -45,7 +45,7 @@ public class Fleche extends Projectile
     }
 
     @Override
-    public void dropApresMort() {
+    public void derniereAction() {
 
     }
     @Override
