@@ -103,7 +103,7 @@ public abstract class Acteur
     /**
      * Méthode abstraite pour effectuer les actions de l'acteur lors de l'apelle dans la gameloop.
      */
-    public abstract void unTour();
+    public abstract void agir();
 
     /**
      * Méthode abstraite pour gérer les réactions de l'acteur lors d'une collision avec un autre acteur.
@@ -132,21 +132,18 @@ public abstract class Acteur
         this.position.setX(x);
         this.position.setY(y);
     }
-    public abstract void dropApresMort();
+    public abstract void derniereAction();
     public void setPosition(Position pos){ this.position = new Position(pos.getX(),pos.getY());}
     public void setNewPosition(double x, double y){
         this.position = new Position(x,y);
     }
-    public void setVitesseMaximum(double statsVitesse) {this.statsVitesse.setVitesseMaximum(statsVitesse);}
     public void soigner(double pv)
     {
         this.statsPv.ajoutPv(pv);
     }
     public void setVitesse(double vitesse) {this.statsVitesse.setVitesse(vitesse);}
     public Vitesse getStatsVitesse() {return statsVitesse;}
-    public void seDeplace(boolean seDeplace) {this.seDeplace = seDeplace;}
     public Direction getDirection() {return this.direction;}
-    public boolean getSeDeplace(){return this.seDeplace;}
     public Hitbox getHitbox() {return this.hitbox;}
     public Monde getMonde() {return this.monde;}
     public Position getPosition() {return this.position;}

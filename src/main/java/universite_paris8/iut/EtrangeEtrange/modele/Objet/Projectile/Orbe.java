@@ -74,7 +74,7 @@ public class Orbe extends Projectile implements Utilisable, Rechargeable
     }
 
     @Override
-    public void unTour()
+    public void agir()
     {
         long apelle = System.currentTimeMillis();
 
@@ -121,7 +121,7 @@ public class Orbe extends Projectile implements Utilisable, Rechargeable
     public String typeActeur() { return "orbe"; }
 
     @Override
-    public void dropApresMort() {
+    public void derniereAction() {
 
     }
 

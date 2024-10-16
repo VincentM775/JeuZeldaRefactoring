@@ -64,15 +64,17 @@ public abstract class Humanoide extends EntiteOffensif
         this.objetMainDroite = null;
         return objet;
     }
+    public Objet retournerObjetMainGauche(){
+    Objet objet = this.objetMainGauche;
+    this.objetMainGauche=null;
+    return objet;
+    }
+
     public void setObjetMainGauche(Objet objet){
         this.objetMainGauche = objet;
     }
 
-    public Objet retournerObjetMainGauche(){
-        Objet objet = this.objetMainGauche;
-        this.objetMainGauche=null;
-        return objet;
-    }
+
     public Objet getObjetMainDroite(){
         return this.objetMainDroite;
     }
@@ -88,13 +90,13 @@ public abstract class Humanoide extends EntiteOffensif
 
         for(int i = 0 ; i < dropAuSols.size() ; i++){
             Position position1 = dropAuSols.get(i).getPosition();
-            if(Math.abs(getPosition().getX()+getDirection().getX()-position1.getX())<1)
-                if(Math.abs(getPosition().getY()+getDirection().getY()-position1.getY())<1) {
-                    if (sac.ajoutItem(dropAuSols.get(i).getObjet())) {
-                        getMonde().enleverDropAuSol(dropAuSols.get(i));
-                        i++;
-                    }
-                }
+            if((Math.abs(getPosition().getX()+getDirection().getX()-position1.getX())<1)
+                &&(Math.abs(getPosition().getY()+getDirection().getY()-position1.getY())<1)
+                &&(sac.ajoutItem(dropAuSols.get(i).getObjet()))) {
+                    getMonde().enleverDropAuSol(dropAuSols.get(i));
+                    i++;
+            }
         }
     }
 }
+

@@ -67,7 +67,7 @@ public class RoiSquelette extends EntiteOffensif
     }
 
     @Override
-    public void unTour() {
+    public void agir() {
         // Vérifie si le joueur a été détecté
         if (!joueurDetecte) {
 
@@ -162,7 +162,7 @@ public class RoiSquelette extends EntiteOffensif
     }
 
     @Override
-    public void dropApresMort() {TypeCompetence.COURIR.getCompetence().monterDeNiveau(monde.getJoueur());}
+    public void derniereAction() {TypeCompetence.COURIR.getCompetence().monterDeNiveau(monde.getJoueur());}
 
     @Override
     public boolean estUnEnemie() {

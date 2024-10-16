@@ -104,7 +104,7 @@ public class Squelette extends EntiteOffensif {
     }
 
     @Override
-    public void unTour() {
+    public void agir() {
         if (monde.estDansRayon(getPosition(), 6)){
             seDeplacerVers(joueur.getPosition());
             if (monde.estDansRayon(getPosition(), 2)){
@@ -140,7 +140,7 @@ public class Squelette extends EntiteOffensif {
     }
 
     @Override
-    public void dropApresMort() {
+    public void derniereAction() {
         double x = getPosition().getX();
         double y = getPosition().getY();
         getMonde().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));

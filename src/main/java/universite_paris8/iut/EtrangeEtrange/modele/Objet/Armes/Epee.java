@@ -60,7 +60,7 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
 
 
     @Override
-    public void unTour()
+    public void agir()
     {
         if (cycle <= 2)
         {
@@ -148,7 +148,7 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
     }
 
     @Override
-    public void dropApresMort() {
+    public void derniereAction() {
         
     }
 

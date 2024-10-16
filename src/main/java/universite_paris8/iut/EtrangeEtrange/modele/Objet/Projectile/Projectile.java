@@ -17,7 +17,7 @@ public abstract class Projectile extends Acteur implements Dommageable,Objet
     }
 
     @Override
-    public void unTour()
+    public void agir()
     {
         if(peutSeDeplacer())
             seDeplace(1);

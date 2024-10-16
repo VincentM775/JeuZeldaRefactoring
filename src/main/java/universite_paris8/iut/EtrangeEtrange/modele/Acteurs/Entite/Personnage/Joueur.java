@@ -62,13 +62,18 @@ public abstract class Joueur extends Humanoide
      * @param hitbox         La hitbox du joueur.
      */
     public Joueur(double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, Sac sac, Objet objetMainGauche, Objet objetMainDroite, Monde monde, double x, double y, Direction direction, Hitbox hitbox) {
-        super(monde, x, y, direction, pv,attaque,defense,attaqueSpecial,defenseSpecial,vitesse,hitbox,sac,objetMainGauche,new Epee());
+        super(monde, x, y, direction, pv,attaque,defense,attaqueSpecial,defenseSpecial,vitesse,hitbox,sac,objetMainGauche,objetMainDroite);
         this.competences = CreationArbre.arbres();
         this.estEntrainDeCourir = false;
         this.directions = new HashSet<>();
-
+        this.carquois = new Carquois();
+        creerCarquois();
     }
-
+    public void creerCarquois(){
+        for(int i = 0 ; i < 100 ; i++){
+            carquois.ajoutItem(new Fleche());
+        }
+    }
 
     public void actionMainDroite()
     {
@@ -90,7 +95,7 @@ public abstract class Joueur extends Humanoide
     }
 
     @Override
-    public void unTour()
+    public void agir()
     {
         double coeff = 1;
         for (Direction direction1 : directions)
@@ -154,16 +159,10 @@ public abstract class Joueur extends Humanoide
     public int getPiece(){
         int totalPiece = 0;
         for(int i = 0 ; i < sac.getTailleMax() ; i++){
-            if(sac.getEmplacement(i).nomObjet()=="pieceor")
+            if(sac.getEmplacement(i).nomObjet().equals("pieceor"))
                 totalPiece+= sac.getEmplacement(i).quantiteObjet();
         }
 
         return totalPiece;
     }
-
-
-
-    @Override
-    public void dropApresMort() {}
-
 }

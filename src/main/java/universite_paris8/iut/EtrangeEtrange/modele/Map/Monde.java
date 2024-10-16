@@ -247,10 +247,10 @@ public class Monde {
 
     public void unTour()
     {
-        this.joueur.unTour();
+        this.joueur.agir();
 
         for(int i = acteurs.size()-1 ; i>=0 ; i--)
-            acteurs.get(i).unTour();
+            acteurs.get(i).agir();
 
         for(int i = 0 ; i < acteursAsupprimer.size(); i++){
             enleveActeur(acteursAsupprimer.get(i));
@@ -420,14 +420,9 @@ public class Monde {
     }
 
     public void enleveActeur(Acteur acteur) {
-        acteur.dropApresMort();
+        acteur.derniereAction();
         this.acteurs.remove(acteur);
     }
-
-
-
-
-
 
 
     public Acteur interactionAvecActeur()

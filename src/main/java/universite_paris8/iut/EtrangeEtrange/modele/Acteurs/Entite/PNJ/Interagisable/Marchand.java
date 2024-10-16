@@ -43,7 +43,7 @@ public class Marchand extends Humanoide implements Dropable
     }
 
     @Override
-    public void unTour()
+    public void agir()
     {
         cycle++;
 
@@ -68,7 +68,7 @@ public class Marchand extends Humanoide implements Dropable
     }
 
     @Override
-    public void dropApresMort() {
+    public void derniereAction() {
 
     }
 
@@ -115,20 +115,19 @@ public class Marchand extends Humanoide implements Dropable
 
 
 
-    private void remplieAleatoirementMarchandise()
-    {
+    private void remplieAleatoirementMarchandise() {
         Random rdm = new Random();
         TypeObjet[] typeObjets = TypeObjet.values();
+        TypeObjet typeObjet;
+        Objet objet;
 
-        for (int i = 0;i<5;i++)
-        {
-            TypeObjet typeObjet = typeObjets[rdm.nextInt(typeObjets.length)];
-            Objet objet = TypeObjet.nouvelleInstance(typeObjet);
+        for (int i = 0;i<5;i++) {
+            typeObjet = typeObjets[rdm.nextInt(typeObjets.length)];
+            objet = TypeObjet.nouvelleInstance(typeObjet);
 
             this.sac.ajoutItem(objet);
 
-            if(objet.stackMax() > 3)
-            {
+            if(objet.stackMax() > 3) {
                 for (int j = 0; j < rdm.nextInt(objet.stackMax()/2);j++)
                     this.sac.ajoutItem(TypeObjet.nouvelleInstance(typeObjet));
             }
@@ -138,12 +137,10 @@ public class Marchand extends Humanoide implements Dropable
 
     @Override
     public void drop() {
-        for (Emplacement<Objet> objets : sac.getInventaire())
-        {
+        for (Emplacement<Objet> objets : sac.getInventaire()) {
             ArrayList<Objet> obs = objets.enleverToutLesObjets();
 
-            for (Objet objet : obs)
-            {
+            for (Objet objet : obs) {
                 monde.ajouterDropAuSol(new DropAuSol(objet, obs.size(), new Position(position.getX(), position.getY())));
             }
         }
