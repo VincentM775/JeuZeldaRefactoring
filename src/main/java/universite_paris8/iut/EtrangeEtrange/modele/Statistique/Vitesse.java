@@ -38,7 +38,4 @@ public class Vitesse
         return this.vitesse.get();
     }
 
-    public double getVitesseMaximum() {
-        return this.vitesseMaximum.get();
-    }
 }

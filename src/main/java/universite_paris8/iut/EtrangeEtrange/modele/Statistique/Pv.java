@@ -54,10 +54,6 @@ public class Pv
         return this.pv.get() == 0;
     }
 
-    public void remettreMaxPv()
-    {
-        this.pv.set(this.pvMaximum.get());
-    }
     public double getPv() {
         return this.pv.get();
     }
@@ -66,14 +62,4 @@ public class Pv
     }
 
     public DoubleProperty getPvActuelleProperty(){return this.pv;}
-
-    public int nbCoeurs() {
-        return (int) Math.ceil(getPv() / 20);
-    }
-
-    public int nbCoeursMax() {
-        return (int) Math.ceil(getPvMaximum() / 20);
-    }
-
-
 }
