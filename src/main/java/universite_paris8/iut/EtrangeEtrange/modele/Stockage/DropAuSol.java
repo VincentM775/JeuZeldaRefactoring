@@ -1,7 +1,6 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Stockage;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
 public class DropAuSol {
@@ -9,11 +8,11 @@ public class DropAuSol {
 
     private static int idStatic = 0;
     private Position position;
-    private Objet objet;
+    private ElementStockable objet;
     private int quantite;
     private int id;
 
-    public DropAuSol(Objet objet, int quantite, Position position){
+    public DropAuSol(ElementStockable objet, int quantite, Position position){
         this.objet = objet;
         this.quantite = quantite;
         this.position = position;
@@ -30,7 +29,7 @@ public class DropAuSol {
         this.position.setX(x);
         this.position.setY(y);
     }
-    public Objet getObjet() {
+    public ElementStockable getObjet() {
         return objet;
     }
     public int getQuantite() {

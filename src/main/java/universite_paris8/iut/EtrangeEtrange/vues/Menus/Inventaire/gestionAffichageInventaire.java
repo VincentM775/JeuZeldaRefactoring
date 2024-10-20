@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 
 public class gestionAffichageInventaire {
 
@@ -252,7 +252,7 @@ public class gestionAffichageInventaire {
      * @param objet
      * @return
      */
-    public Image getImageObjet(Objet objet)
+    public Image getImageObjet(ElementStockable objet)
     {
         String typeObjet = objet.getNom();
 

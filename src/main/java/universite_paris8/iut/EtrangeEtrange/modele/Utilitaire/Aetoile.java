@@ -6,6 +6,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import java.util.*;
 
 public class Aetoile {
+    public static final int DELAIE_RECHERCHE = 1000;
     private Monde monde;
     private Sommet[][] graphe;
     private ArrayList<Position> chemin;

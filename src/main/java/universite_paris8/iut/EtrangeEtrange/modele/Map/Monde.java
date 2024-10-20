@@ -10,7 +10,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Interagisa
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Monstre.Slime;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Monstre.Squelette;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Rechargeable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementIterable;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Aetoile;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -43,7 +43,7 @@ public class Monde {
      * Ici sont stocké les informations des éléments du monde traversables (ex : buissons, fleurs, hautes herbes, etc.)
      */
 
-    private ArrayList<Rechargeable> rechargeables = new ArrayList<>();
+    private ArrayList<ElementIterable> elementsIterable = new ArrayList<>();
 
 
     private Joueur joueur;
@@ -238,41 +238,27 @@ public class Monde {
         
     }
 
-
-
-
     public void ajoutActeur(Acteur acteur) {this.acteurs.add(acteur);}
-
-
-
-    public void unTour()
-    {
+    public void unTour() {
         this.joueur.unTour();
 
-        for(int i = acteurs.size()-1 ; i>=0 ; i--)
+        for (int i = acteurs.size() - 1; i >= 0; i--)
             acteurs.get(i).unTour();
 
-        for(int i = 0 ; i < acteursAsupprimer.size(); i++){
+        for (int i = 0; i < acteursAsupprimer.size(); i++) {
             enleveActeur(acteursAsupprimer.get(i));
         }
 
         this.acteursAsupprimer.clear();
 
 
-        for(int i = rechargeables.size()-1 ; i>=0 ; i--)
-        {
-            Rechargeable rechargeable = rechargeables.get(i);
+        for (int i = elementsIterable.size() - 1; i >= 0; i--) {
+            ElementIterable elementsIterable = this.elementsIterable.get(i);
 
-            if (rechargeable.cooldown())
-                this.rechargeables.remove(rechargeable);
+            if (elementsIterable.iterationsFinie())
+                this.elementsIterable.remove(elementsIterable);
         }
     }
-
-    public void ajoutRechargeable(Rechargeable rechargeable)
-    {
-        this.rechargeables.add(rechargeable);
-    }
-
 
     public boolean positionHorsMap(int x,int y)
     {
@@ -483,6 +469,10 @@ public class Monde {
             }
         }
         return toutesLesEntites;
+    }
+
+    public void ajoutIterable(ElementIterable elementIterables) {
+        this.elementsIterable.add(elementIterables);
     }
 }
 

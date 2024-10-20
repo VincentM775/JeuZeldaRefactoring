@@ -1,6 +1,6 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.LivreMagique;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Arc;
@@ -21,9 +21,9 @@ public enum TypeObjet
 
 
 
-    public static Objet nouvelleInstance(TypeObjet typeObjet)
+    public static ElementStockable nouvelleInstance(TypeObjet typeObjet)
     {
-        Objet objet = null;
+        ElementStockable objet = null;
 
         switch (typeObjet)
         {

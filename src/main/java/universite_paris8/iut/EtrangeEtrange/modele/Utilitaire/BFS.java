@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class BFS {
+    public static final int DELAIE_RECHERCHE = 300;
     private Monde monde;
     private ArrayList<Sommet> chemins;
     private Sommet[][] graphe;

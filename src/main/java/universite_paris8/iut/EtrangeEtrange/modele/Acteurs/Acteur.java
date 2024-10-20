@@ -2,7 +2,8 @@ package universite_paris8.iut.EtrangeEtrange.modele.Acteurs;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementIterable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Pv;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Vitesse;
@@ -19,7 +20,6 @@ public abstract class Acteur
     protected Monde monde;
     protected Position position;
     protected Direction direction;
-
     protected Pv statsPv;
     protected Vitesse statsVitesse;
     protected Hitbox hitbox;
@@ -101,11 +101,6 @@ public abstract class Acteur
     }
 
     /**
-     * Méthode abstraite pour effectuer les actions de l'acteur lors de l'apelle dans la gameloop.
-     */
-    public abstract void unTour();
-
-    /**
      * Méthode abstraite pour gérer les réactions de l'acteur lors d'une collision avec un autre acteur.
      *
      * @param acteur L'acteur avec lequel la collision s'est produite.
@@ -113,13 +108,17 @@ public abstract class Acteur
     public abstract void subitCollision(Acteur acteur);
     public abstract void causeCollision(Acteur acteur);
 
+    /**
+     * Méthode abstraite pour effectuer les actions de l'acteur lors de l'apelle dans la gameloop.
+     */
+    public abstract void unTour();
 
 
     /**
      * Subit des dégâts infligés par une source dommageable.
      * @param causeDegat La source de dégâts.
      */
-    public abstract void subitAttaque(Dommageable causeDegat, EntiteOffensif entiteOffensif);
+    public abstract void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif);
 
 
 

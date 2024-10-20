@@ -2,7 +2,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
 
 
@@ -19,8 +19,8 @@ import java.util.ArrayList;
  */
 public abstract class Humanoide extends EntiteOffensif
 {
-    protected Objet objetMainGauche;
-    protected Objet objetMainDroite;
+    protected ElementStockable objetMainGauche;
+    protected ElementStockable objetMainDroite;
     protected Sac sac;
 
 
@@ -42,7 +42,7 @@ public abstract class Humanoide extends EntiteOffensif
      * @param objetMainGauche  L'objet tenu dans la main gauche de l'humanoïde.
      * @param objetMainDroite L'objet tenu dans la main droite de l'humanoïde.
      */
-    public Humanoide(Monde monde, double x, double y, Direction direction,double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse,Hitbox hitbox,Sac sac, Objet objetMainGauche, Objet objetMainDroite)
+    public Humanoide(Monde monde, double x, double y, Direction direction, double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, Hitbox hitbox, Sac sac, ElementStockable objetMainGauche, ElementStockable objetMainDroite)
     {
         super(monde, x, y, direction, pv, attaque, defense, attaqueSpecial, defenseSpecial, vitesse, hitbox);
         this.sac = sac;
@@ -58,29 +58,29 @@ public abstract class Humanoide extends EntiteOffensif
     }
 
 
-    public Objet retournerObjetMainDroite()
+    public ElementStockable retournerObjetMainDroite()
     {
-        Objet objet = this.objetMainDroite;
+        ElementStockable objet = this.objetMainDroite;
         this.objetMainDroite = null;
         return objet;
     }
-    public void setObjetMainGauche(Objet objet){
+    public void setObjetMainGauche(ElementStockable objet){
         this.objetMainGauche = objet;
     }
 
-    public Objet retournerObjetMainGauche(){
-        Objet objet = this.objetMainGauche;
+    public ElementStockable retournerObjetMainGauche(){
+        ElementStockable objet = this.objetMainGauche;
         this.objetMainGauche=null;
         return objet;
     }
-    public Objet getObjetMainDroite(){
+    public ElementStockable getObjetMainDroite(){
         return this.objetMainDroite;
     }
-    public Objet getObjetMainGauche(){
+    public ElementStockable getObjetMainGauche(){
         return this.objetMainGauche;
     }
 
-    public void setObjetMainDroite(Objet objet){
+    public void setObjetMainDroite(ElementStockable objet){
         this.objetMainDroite = objet;
     }
     public void ramasserObjet() {

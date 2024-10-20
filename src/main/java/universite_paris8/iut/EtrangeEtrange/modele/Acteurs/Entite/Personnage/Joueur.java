@@ -1,34 +1,25 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.Competences;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.CreationArbre;
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.TypeCompetence;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Utilisable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementUtilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.LivreMagique;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Sortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Monnaie.Piece;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Fleche;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Carquois;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Orbe;
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Humanoide;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Arme;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Arc;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -61,7 +52,7 @@ public abstract class Joueur extends Humanoide
      * @param direction      La direction vers laquelle le joueur est orienté.
      * @param hitbox         La hitbox du joueur.
      */
-    public Joueur(double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, Sac sac, Objet objetMainGauche, Objet objetMainDroite, Monde monde, double x, double y, Direction direction, Hitbox hitbox) {
+    public Joueur(double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, Sac sac, ElementStockable objetMainGauche, ElementStockable objetMainDroite, Monde monde, double x, double y, Direction direction, Hitbox hitbox) {
         super(monde, x, y, direction, pv,attaque,defense,attaqueSpecial,defenseSpecial,vitesse,hitbox,sac,objetMainGauche,new Epee());
         this.competences = CreationArbre.arbres();
         this.estEntrainDeCourir = false;
@@ -70,23 +61,23 @@ public abstract class Joueur extends Humanoide
     }
 
 
-    public void actionMainDroite()
+    public boolean actionMainDroite()
     {
+        boolean utilisation = false;
         if (objetMainDroite != null)
         {
-            if (objetMainDroite instanceof Utilisable utilisable)
+            if (objetMainDroite instanceof ElementUtilisable utilisable)
             {
-                if (objetMainDroite instanceof Arme )
+                if (objetMainDroite instanceof ObjetUtilisable)
                     attaque();
 
-
-                utilisable.utilise(this);
+                utilisation =  utilisable.utilise(this);
 
                 if (objetMainDroite.durabilitee() == 0)
                     objetMainDroite = null;
-
             }
         }
+        return utilisation;
     }
 
     @Override
@@ -123,8 +114,10 @@ public abstract class Joueur extends Humanoide
         if (objetMainDroite instanceof LivreMagique livreMagique)
         {
             Sortilege sortilege = livreMagique.getSortilege(numSort);
-            if (sortilege != null)
-                sortilege.utilise(this);
+            if (sortilege != null) {
+                livreMagique.setSortilege(sortilege);
+                livreMagique.utilise(this);
+            }
         }
     }
     @Override

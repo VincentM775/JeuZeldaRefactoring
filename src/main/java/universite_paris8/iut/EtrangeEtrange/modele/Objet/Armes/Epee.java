@@ -3,14 +3,14 @@ package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Rechargeable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
+import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Cooldown;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Arme;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
-public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
+public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
 {
 
     private static final int DURABILITE = ConstanteObjet.DURABILITE_EPEE;
@@ -18,28 +18,25 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
     private static final double DEGAT_SPECIAL = ConstanteObjet.DEGAT_SPECIAL_EPEE;
     private static final double VITESSE = ConstanteObjet.VITESSE_EPEE;
     private static final Hitbox HITBOX = ConstanteObjet.HITBOX_EPEE;
-    private static final long DELAIE_UTILISATION = ConstanteObjet.DELAIE_UTILISATION_EPEE;
     private final int PRIX_ACHAT = ConstanteObjet.PRIX_ACHAT_EPEE;
     private final int STACK_MAX = ConstanteObjet.STACK_MAX_EPEE;
 
-    private boolean peutTaper;
     private short cycle;
-    private long derniereApelle;
     private Entite utilisateur;
+    private Cooldown cooldown;
 
 
     public Epee()
     {
         super(DURABILITE, VITESSE, HITBOX);
-        this.peutTaper = true;
+        this.cooldown = new Cooldown(ConstanteObjet.DELAIE_UTILISATION_EPEE);
         this.cycle = 0;
-        this.derniereApelle = 0;
     }
 
     @Override
-    public void utilise(Entite entite)
+    public boolean utilise(Entite entite)
     {
-        if (peutTaper)
+        if (this.cooldown.delaieEcoule())
         {
             utilisateur = entite;
             setPosition(entite.getPosition());
@@ -49,11 +46,10 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
             setPositionAttaque();
             entite.getMonde().ajoutActeur(this);
 
-            this.derniereApelle = System.currentTimeMillis();
-            entite.getMonde().ajoutRechargeable(this);
-
-            this.peutTaper = false;
+            this.cooldown.reset();
+            return true;
         }
+        return false;
     }
 
     @Override
@@ -134,28 +130,6 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
     public String typeActeur() {
         return "epee";
     }
-
-    @Override
-    public long delaie() {
-        return DELAIE_UTILISATION;
-    }
-
-    @Override
-    public boolean cooldown()
-    {
-        boolean actionFait = false;
-        long apelle = System.currentTimeMillis();
-
-        if (apelle - derniereApelle >= delaie())
-        {
-            this.derniereApelle = -1;
-            this.peutTaper = true;
-            actionFait = true;
-        }
-
-        return actionFait;
-    }
-
     @Override
     public String getNom() {
         return "epee";
@@ -188,7 +162,7 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
 
 
     @Override
-    public void subitAttaque(Dommageable causeDegat, EntiteOffensif entiteOffensif) {  /*  NE FAIT RIEN */ }
+    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif) {  /*  NE FAIT RIEN */ }
     @Override
     public void subitCollision(Acteur acteur) {/*NE FAIT RIEN*/}
     @Override

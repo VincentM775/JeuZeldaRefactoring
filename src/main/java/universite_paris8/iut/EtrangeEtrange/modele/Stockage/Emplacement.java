@@ -1,10 +1,10 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Stockage;
 
 
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 
 import java.util.ArrayList;
-public class Emplacement <T extends Objet>
+public class Emplacement <T extends ElementStockable>
 {
     private int stackPossible;
     private ArrayList<T> objets;
@@ -60,7 +60,7 @@ public class Emplacement <T extends Objet>
         return this.objets.isEmpty();
     }
 
-    public boolean estDeMemeClass(Objet objet)
+    public boolean estDeMemeClass(ElementStockable objet)
     {
         if(!this.objets.isEmpty())
             return this.objets.get(0).getClass().equals(objet.getClass());
@@ -74,7 +74,7 @@ public class Emplacement <T extends Objet>
 
 
 
-    public <U extends Objet> boolean estDuMemeType(Class<U> typeObjet) {
+    public <U extends ElementStockable> boolean estDuMemeType(Class<U> typeObjet) {
         boolean estDuMemeType = false;
 
         if (!objets.isEmpty())

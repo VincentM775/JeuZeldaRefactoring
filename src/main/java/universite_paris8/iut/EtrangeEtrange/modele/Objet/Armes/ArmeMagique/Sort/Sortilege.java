@@ -1,34 +1,20 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Rechargeable;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Utilisable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementUtilisable;
+import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Cooldown;
 
-public abstract class Sortilege implements Utilisable, Rechargeable
+public abstract class Sortilege implements ElementUtilisable
 {
-    protected long derniereApelle;
-    protected boolean peutLancerSort;
+    private Cooldown cooldown;
 
-    public Sortilege()
+    public Sortilege(long delaiUtilisation)
     {
-        this.derniereApelle = 0;
-        this.peutLancerSort = true;
+        this.cooldown = new Cooldown(delaiUtilisation);
     }
 
-    @Override
-    public boolean cooldown()
-    {
-        boolean actionFait = false;
-        long apelle = System.currentTimeMillis();
-
-        if (apelle - derniereApelle >= delaie())
-        {
-            this.derniereApelle = -1;
-            this.peutLancerSort = true;
-            actionFait = true;
-        }
-
-        return actionFait;
+    public Cooldown getCooldown(){
+        return this.cooldown;
     }
+
+
 }

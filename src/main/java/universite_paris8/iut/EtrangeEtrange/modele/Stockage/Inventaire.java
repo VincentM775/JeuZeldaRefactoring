@@ -2,12 +2,12 @@ package universite_paris8.iut.EtrangeEtrange.modele.Stockage;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Conteneur;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.StockeurElement;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 
 import java.util.ArrayList;
 
-public class Inventaire<T extends Objet> implements Conteneur<T>
+public class Inventaire<T extends ElementStockable> implements StockeurElement<T>
 {
     private IntegerProperty taille;
     private Emplacement<T>[] inventaire;
@@ -157,7 +157,7 @@ public class Inventaire<T extends Objet> implements Conteneur<T>
     }
 
 
-    public <U extends Objet> U trouveObjet(Class<U> typeObjet)
+    public <U extends ElementStockable> U trouveObjet(Class<U> typeObjet)
     {
         U objet = null;
 

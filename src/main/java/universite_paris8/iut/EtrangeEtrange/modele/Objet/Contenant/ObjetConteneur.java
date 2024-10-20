@@ -1,14 +1,10 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant;
 
-import javafx.beans.property.IntegerProperty;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Conteneur;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.Inventaire;
 
-import java.util.ArrayList;
-
-public abstract class ObjetConteneur<T extends Objet> extends Inventaire<T> implements Objet
+public abstract class ObjetConteneur<T extends ElementStockable> extends Inventaire<T> implements ElementStockable
 {
     public ObjetConteneur(int taille)
     {
@@ -20,8 +16,8 @@ public abstract class ObjetConteneur<T extends Objet> extends Inventaire<T> impl
     {
         int tailleInventaire = joueur.getSac().getTailleMax();
 
-        Objet o1 = getObjet(joueur, caseSurvole, tailleInventaire);
-        Objet o2 = getObjet(joueur, caseVerouille, tailleInventaire);
+        ElementStockable o1 = getObjet(joueur, caseSurvole, tailleInventaire);
+        ElementStockable o2 = getObjet(joueur, caseVerouille, tailleInventaire);
 
         if(o2!=null)
             ajoutObjet(o2, joueur, caseSurvole, tailleInventaire);
@@ -29,7 +25,7 @@ public abstract class ObjetConteneur<T extends Objet> extends Inventaire<T> impl
             ajoutObjet(o1, joueur, caseVerouille, tailleInventaire);
     }
 
-    public Objet getObjet(Joueur joueur, int emplacement, int tailleInventaire){
+    public ElementStockable getObjet(Joueur joueur, int emplacement, int tailleInventaire){
         if(emplacement==tailleInventaire)
             return joueur.retournerObjetMainDroite();
         else if (emplacement==tailleInventaire+1)
@@ -37,7 +33,7 @@ public abstract class ObjetConteneur<T extends Objet> extends Inventaire<T> impl
         return retourneObjet(emplacement);
     }
 
-    public void ajoutObjet(Objet ob, Joueur joueur, int emplacement, int tailleInventaire){
+    public void ajoutObjet(ElementStockable ob, Joueur joueur, int emplacement, int tailleInventaire){
         if (emplacement == tailleInventaire)
             joueur.setObjetMainDroite(ob);
         else if (emplacement == tailleInventaire + 1)

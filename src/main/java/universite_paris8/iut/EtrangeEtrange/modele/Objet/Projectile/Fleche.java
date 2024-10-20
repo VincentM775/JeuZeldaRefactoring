@@ -1,11 +1,7 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Projectile;
 
 public class Fleche extends Projectile
 {
@@ -16,14 +12,19 @@ public class Fleche extends Projectile
     public static final int PV = ConstanteObjet.DURABILITE_FLECHE;
     public static final int PRIX_ACHAT = ConstanteObjet.PRIX_ACHAT_FLECHE;
     public static final int STACK_MAX = ConstanteObjet.STACK_MAX_FLECHE;
-    private static final int NOMBRE_UTILISATION = ConstanteObjet.NOMBRE_UTLISATION_FLECHE;
-    private int nombreUtilisationRestant;
 
     public Fleche()
     {
-        super(PV,VITESSE,HITBOX);
-        this.nombreUtilisationRestant = NOMBRE_UTILISATION;
+        super(null, PV,VITESSE,HITBOX);
+    }
 
+    @Override
+    public void unTour()
+    {
+        if(peutSeDeplacer())
+            seDeplace(1);
+        else
+            enleveToutPv();
     }
 
     @Override
@@ -38,9 +39,6 @@ public class Fleche extends Projectile
     public String getNom() {
         return "fleche";
     }
-
-
-
     @Override
     public String typeActeur(){
         return "fleche";
@@ -50,7 +48,6 @@ public class Fleche extends Projectile
     public void dropApresMort() {
 
     }
-
     @Override
     public boolean estUnEnemie() {
         return false;

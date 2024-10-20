@@ -16,16 +16,12 @@ import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.TypeObjet;
-import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
-import universite_paris8.iut.EtrangeEtrange.modele.Stockage.Emplacement;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
-import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
-import java.util.ArrayList;
 import java.util.Random;
 
-public class Marchand extends Humanoide implements Dropable
+public class Marchand extends Humanoide
 {
 
     private int cycle;
@@ -76,7 +72,7 @@ public class Marchand extends Humanoide implements Dropable
     public boolean estUnEnemie() {return false;}
 
     @Override
-    public  void subitAttaque(Dommageable causeDegat, EntiteOffensif entiteOffensif){}
+    public  void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif){}
 
     private void initPrompt()
     {
@@ -123,7 +119,7 @@ public class Marchand extends Humanoide implements Dropable
         for (int i = 0;i<5;i++)
         {
             TypeObjet typeObjet = typeObjets[rdm.nextInt(typeObjets.length)];
-            Objet objet = TypeObjet.nouvelleInstance(typeObjet);
+            ElementStockable objet = TypeObjet.nouvelleInstance(typeObjet);
 
             this.sac.ajoutItem(objet);
 
@@ -134,22 +130,6 @@ public class Marchand extends Humanoide implements Dropable
             }
 
         }
-    }
-
-    @Override
-    public void drop() {
-        for (Emplacement<Objet> objets : sac.getInventaire())
-        {
-            ArrayList<Objet> obs = objets.enleverToutLesObjets();
-
-            for (Objet objet : obs)
-            {
-                monde.ajouterDropAuSol(new DropAuSol(objet, obs.size(), new Position(position.getX(), position.getY())));
-            }
-        }
-
-
-
     }
 
     public Sac getMarchandise()

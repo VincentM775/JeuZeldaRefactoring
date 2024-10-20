@@ -18,6 +18,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.GestionPrompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Archer;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
 
@@ -227,8 +228,10 @@ public class Controller implements Initializable {
                 joueur.enlevePv(10);
             else if(keyCode == ConstantesClavier.attaquer)
             {
-                joueur.actionMainDroite();
-                gestionSon.lanceSong(joueur.getObjetMainDroite());
+                ElementStockable o = joueur.getObjetMainDroite();
+                boolean actionExecute = joueur.actionMainDroite();
+                if(actionExecute)
+                    gestionSon.lanceSong(o);
             }
             else if(keyCode == ConstantesClavier.sort2){
                 joueur.lanceUnSort(1);
