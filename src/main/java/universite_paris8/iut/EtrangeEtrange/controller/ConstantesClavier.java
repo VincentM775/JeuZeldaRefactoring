@@ -14,7 +14,7 @@ public class ConstantesClavier {
     public static KeyCode recupererObjetSol = KeyCode.E;
     public static KeyCode attaquer = KeyCode.M;
 
-    public static KeyCode inventaire = KeyCode.I;
+    public static KeyCode inventaire = KeyCode.A;
     public static KeyCode courrir = KeyCode.L;
 
     public static KeyCode sort1 = KeyCode.C;
