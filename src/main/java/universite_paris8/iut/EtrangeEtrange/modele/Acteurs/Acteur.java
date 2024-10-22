@@ -110,10 +110,8 @@ public abstract class Acteur
      *
      * @param acteur L'acteur avec lequel la collision s'est produite.
      */
-    public abstract void subitCollision(Acteur acteur);
-    public abstract void causeCollision(Acteur acteur);
-
-
+    public void subitCollision(Acteur acteur) {acteur.causeCollision(this);}
+    public void causeCollision(Acteur acteur) {acteur.seFaitPousser(this);}
 
     /**
      * Subit des dégâts infligés par une source dommageable.

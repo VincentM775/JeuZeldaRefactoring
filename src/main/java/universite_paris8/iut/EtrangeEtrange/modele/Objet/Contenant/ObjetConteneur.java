@@ -2,6 +2,8 @@ package universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.Inventaire;
 
 public abstract class ObjetConteneur<T extends ElementStockable> extends Inventaire<T> implements ElementStockable
@@ -14,7 +16,7 @@ public abstract class ObjetConteneur<T extends ElementStockable> extends Inventa
 
     public void echangerEmplacement(Joueur joueur, int caseVerouille, int caseSurvole)
     {
-        int tailleInventaire = joueur.getSac().getTailleMax();
+        int tailleInventaire = joueur.getGestionnaireInventaire().getSac().getTailleMax();
 
         ElementStockable o1 = getObjet(joueur, caseSurvole, tailleInventaire);
         ElementStockable o2 = getObjet(joueur, caseVerouille, tailleInventaire);
@@ -27,17 +29,17 @@ public abstract class ObjetConteneur<T extends ElementStockable> extends Inventa
 
     public ElementStockable getObjet(Joueur joueur, int emplacement, int tailleInventaire){
         if(emplacement==tailleInventaire)
-            return joueur.retournerObjetMainDroite();
+            return joueur.getGestionnaireInventaire().retournerObjetMainDroite();
         else if (emplacement==tailleInventaire+1)
-            return joueur.retournerObjetMainGauche();
+            return joueur.getGestionnaireInventaire().retournerObjetMainGauche();
         return retourneObjet(emplacement);
     }
 
     public void ajoutObjet(ElementStockable ob, Joueur joueur, int emplacement, int tailleInventaire){
         if (emplacement == tailleInventaire)
-            joueur.setObjetMainDroite(ob);
+            joueur.getGestionnaireInventaire().setObjetMainDroite(ob);
         else if (emplacement == tailleInventaire + 1)
-            joueur.setObjetMainGauche(ob);
+            joueur.getGestionnaireInventaire().setObjetMainGauche(ob);
         else
             getEmplacement(emplacement).ajoutObjet((T) ob);
     }

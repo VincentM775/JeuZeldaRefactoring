@@ -7,7 +7,7 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 
@@ -74,7 +74,7 @@ public class gestionAffichageInventaire {
         this.caseVerouilleInventaire = -1; // Négatif = pas de case sélectionné dans l'inventaire
         listenerTailleSac();
         initialisationInventaire();
-        affichageInventaire(joueur.getSac());
+        affichageInventaire(joueur.getGestionnaireInventaire().getSac());
     }
 
     /**
@@ -123,8 +123,8 @@ public class gestionAffichageInventaire {
      * Actualise l'affichage de l'inventaire dès que celui-ci change de taille
      */
     public void listenerTailleSac(){
-        joueur.getSac().getTailleMaxProperty().addListener((obs, old ,nouv)->{
-            affichageInventaire(joueur.getSac());
+        joueur.getGestionnaireInventaire().getSac().getTailleMaxProperty().addListener((obs, old ,nouv)->{
+            affichageInventaire(joueur.getGestionnaireInventaire().getSac());
         });
     }
 
@@ -147,15 +147,15 @@ public class gestionAffichageInventaire {
             caseStockageInventaire.getChildren().add(new ImageView(image));
             ImageView imageView = null;
             // Si l'emplacement de l'inventaire n'est pas vide, on ajoute l'objet qui y est présent à l'écran
-            if (joueur.getSac().objetALemplacement(i) != null) {
-                imageView = new ImageView(getImageObjet(joueur.getSac().objetALemplacement(i)));
+            if (joueur.getGestionnaireInventaire().getSac().objetALemplacement(i) != null) {
+                imageView = new ImageView(getImageObjet(joueur.getGestionnaireInventaire().getSac().objetALemplacement(i)));
                 // Aggrandisement de l'icône de l'objet
                 setParamatresImageViewObjetInventaire(imageView, false);
             }
 
             // S'il y a un objet, on ajoute son image sinon une case vide
             if (imageView != null) {
-                TextField textField = ajouterQuantite(joueur.getSac().getEmplacement(i).quantiteObjet());
+                TextField textField = ajouterQuantite(joueur.getGestionnaireInventaire().getSac().getEmplacement(i).quantiteObjet());
                 // Ajout de l'image de l'objet et de sa quantité dans la case
                 objetsInventaire.getChildren().add(imageView);
                 quantiteObjetInventaire.getChildren().add(textField);
@@ -165,10 +165,10 @@ public class gestionAffichageInventaire {
                 quantiteObjetInventaire.getChildren().add(new ImageView());
             }
         }
-        if(joueur.getObjetMainDroite()!=null)
-            objetMainDroite.setImage(getImageObjet(joueur.getObjetMainDroite()));
-        if(joueur.getObjetMainGauche()!=null)
-            objetMainGauche.setImage(getImageObjet(joueur.getObjetMainGauche()));
+        if(joueur.getGestionnaireInventaire().getObjetMainDroite()!=null)
+            objetMainDroite.setImage(getImageObjet(joueur.getGestionnaireInventaire().getObjetMainDroite()));
+        if(joueur.getGestionnaireInventaire().getObjetMainGauche()!=null)
+            objetMainGauche.setImage(getImageObjet(joueur.getGestionnaireInventaire().getObjetMainGauche()));
 
     }
 

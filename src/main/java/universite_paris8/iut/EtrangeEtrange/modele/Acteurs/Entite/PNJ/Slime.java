@@ -1,4 +1,4 @@
-package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Monstre;
+package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;

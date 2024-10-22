@@ -47,5 +47,7 @@ public class Bloc extends Acteur {
 
     @Override
     public void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif) {enleveToutPv();}
+//    @Override
+//    public void drop() {monde.ajouterDropAuSol(new DropAuSol(new Arc(), 1, new Position(position.getX(), position.getY()))); }
 
 }

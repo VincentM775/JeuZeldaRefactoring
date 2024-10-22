@@ -44,8 +44,6 @@ public abstract class Entite extends Acteur {
         enlevePv((subitDegatPhysique(entiteOffensif.getAttaque(),causeDegat.degatPhysique()) + subitDegatSpecial(causeDegat.degatSpecial(), entiteOffensif.getAttaqueSpecial()))/2);
     }
 
-    public void subitCollision(Acteur acteur) {acteur.causeCollision(this);}
-    public void causeCollision(Acteur acteur) {acteur.seFaitPousser(this);}
 
     @Override
     public void seFaitPousser(Acteur acteur) {}
