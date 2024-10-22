@@ -42,7 +42,7 @@ public class Bloc extends Acteur implements Dropable {
     @Override
     public boolean estUnEnemie() { return false; }
     @Override
-    public void drop() { monde.ajouterDropAuSol(new DropAuSol(new Arc(), 1, new Position(position.getX(), position.getY()))); }
+    public void drop() {monde.ajouterDropAuSol(new DropAuSol(new Arc(), 1, new Position(position.getX(), position.getY()))); }
     @Override
     public void agir() {/*N'agit pas*/}
     @Override

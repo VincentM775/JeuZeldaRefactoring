@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
 import universite_paris8.iut.EtrangeEtrange.vues.Menus.Inventaire.gestionAffichageInventaire;
 
 import java.net.URL;
@@ -102,7 +102,7 @@ public class ControlleurInventaire implements Initializable {
 
     public void keyBoardInventaire(KeyEvent keyEvent) {
         KeyCode keyCode = keyEvent.getCode();
-        int tailleInventaire = joueur.getSac().getTailleMax();
+        int tailleInventaire = joueur.getGestionnaireInventaire().getSac().getTailleMax();
 
         if(keyCode==ConstantesClavier.menuDeplacementGauche)
             if (caseSurvole.get() == 0)
@@ -126,9 +126,9 @@ public class ControlleurInventaire implements Initializable {
                 caseSurvole.set(0);
         else if(keyCode==ConstantesClavier.menuSelectionner) {
             if(caseVerouille!=-1)
-                joueur.getSac().echangerEmplacement(joueur, caseVerouille, caseSurvole.get());
+                joueur.getGestionnaireInventaire().getSac().echangerEmplacement(joueur, caseVerouille, caseSurvole.get());
             if(caseVerouille!=caseSurvole.get())
-                gestionAffichageInventaire.affichageInventaire(joueur.getSac());
+                gestionAffichageInventaire.affichageInventaire(joueur.getGestionnaireInventaire().getSac());
             caseVerouille=caseSurvole.get();
             gestionAffichageInventaire.caseVerouille(caseSurvole.get());
         }

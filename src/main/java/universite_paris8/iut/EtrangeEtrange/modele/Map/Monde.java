@@ -5,11 +5,11 @@ import javafx.collections.ObservableList;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Bloc.Bloc;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Boss.RoiSquelette;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Interagisable.Marchand;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Monstre.Slime;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Monstre.Squelette;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.RoiSquelette;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Marchand;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Slime;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Squelette;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Rechargeable;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Aetoile;

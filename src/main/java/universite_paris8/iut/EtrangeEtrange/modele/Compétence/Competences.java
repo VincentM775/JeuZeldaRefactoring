@@ -1,7 +1,5 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Compétence;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 

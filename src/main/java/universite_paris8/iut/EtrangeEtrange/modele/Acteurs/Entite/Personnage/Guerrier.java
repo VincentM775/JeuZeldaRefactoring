@@ -1,11 +1,8 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Carquois;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Fleche;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
