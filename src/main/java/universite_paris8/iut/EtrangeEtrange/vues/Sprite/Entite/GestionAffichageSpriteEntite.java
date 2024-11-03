@@ -1,22 +1,19 @@
 package universite_paris8.iut.EtrangeEtrange.vues.Sprite.Entite;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 ;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Boss.RoiSquelette;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Monstre.Slime;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Monstre.Squelette;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Marchand;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.RoiSquelette;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Slime;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Squelette;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Archer;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Guerrier;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
 import universite_paris8.iut.EtrangeEtrange.vues.Sprite.ComparePositionSprite;
 
 import java.util.ArrayList;
@@ -59,11 +56,11 @@ public class GestionAffichageSpriteEntite implements ListChangeListener<Acteur>
     public void onChanged(Change<? extends Acteur> change) {
         while(change.next()){
             for (Acteur entite : change.getAddedSubList()) {
-                if(entite instanceof Entite)
+                if(entite instanceof Entite || entite instanceof Marchand)
                     creeSprite(entite);
             }
             for(Acteur entite : change.getRemoved()) {
-                if(entite instanceof Entite)
+                if(entite instanceof Entite || entite instanceof Marchand)
                     suprimmerSprite(entite);
             }
         }
@@ -97,6 +94,9 @@ public class GestionAffichageSpriteEntite implements ListChangeListener<Acteur>
         } else {
             skin = 0;
             vitesse = 0;
+        }
+        if (entite instanceof Marchand) {
+            System.out.println("marchant num : "+skin);
         }
 
         SpriteEntite animationSprite = new SpriteEntite(entite, skin, vitesse, colorAdjust);

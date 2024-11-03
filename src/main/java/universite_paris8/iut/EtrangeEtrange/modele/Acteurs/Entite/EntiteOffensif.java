@@ -1,7 +1,6 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Arme;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Attaque;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.AttaqueSpecial;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -13,6 +12,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 public abstract class EntiteOffensif extends Entite
 {
     protected Attaque statsAttaque;
+    
     protected AttaqueSpecial statsAttaqueSpecial;
 
 
@@ -49,16 +49,11 @@ public abstract class EntiteOffensif extends Entite
      * @param numSort Le numéro du sort à lancer.
      */
     public abstract void lanceUnSort(int numSort);
-    public void setAttaqueMaximum(double attaque) {this.statsAttaque.setAttaqueMaximum(attaque);}
     public void setAttaque(double attaque) {this.statsAttaque.setAttaque(attaque);}
-    public void setAttaqueSpecialMaximum(double attaqueSpecial){this.statsAttaqueSpecial.setAttaqueSpecialMaximum(attaqueSpecial);}
-    public void setAttaqueSpecial(double attaqueSpecial){this.statsAttaqueSpecial.setAttaqueSpecial(attaqueSpecial);}
     public void augmenterAttaqueMaximum(double attaque)
     {
         this.statsAttaque.setAttaqueMaximum(getAttaque()+attaque);
     }
-    public Attaque getStatsAttaque(){return this.statsAttaque;}
-    public AttaqueSpecial getStatsAttaqueSpecial(){return this.statsAttaqueSpecial;}
     public double getAttaque(){ return this.statsAttaque.getAttaque();}
     public double getAttaqueSpecial(){ return this.statsAttaqueSpecial.getAttaqueSpecial();}
 

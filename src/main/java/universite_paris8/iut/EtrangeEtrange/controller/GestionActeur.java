@@ -6,8 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -37,11 +37,11 @@ public class GestionActeur implements ListChangeListener<Acteur>
                 {
                     if (acteur.typeActeur().equals("fleche") || acteur.typeActeur().equals("orbe")) {
                         initSpriteProjectile(acteur);
-                        gestionSon.lanceSong((Objet) acteur);
+                        gestionSon.lanceSong((ElementStockable) acteur);
                     }
 
                     else if(acteur.typeActeur().equals("epee")){
-                        gestionSon.lanceSong((Objet) acteur);
+                        gestionSon.lanceSong((ElementStockable) acteur);
                     }
                     else if(acteur.typeActeur().equals("bloc")){
                         initSpriteBloc(acteur);

@@ -1,34 +1,25 @@
-package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage;
+package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Inventaire.GestionnaireInventaire;
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.Competences;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.CreationArbre;
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.TypeCompetence;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Utilisable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementUtilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.LivreMagique;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Sortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Monnaie.Piece;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Fleche;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Carquois;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Orbe;
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Humanoide;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Arme;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Arc;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,12 +27,12 @@ import java.util.Set;
 /**
  * Représente le joueur dans le jeu.
  */
-public abstract class Joueur extends Humanoide
-{
+public abstract class Joueur extends EntiteOffensif {
     private Set<Direction> directions;
     private Competences competences;
     protected Carquois carquois;
     private boolean estEntrainDeCourir;
+    private GestionnaireInventaire gestionnaireInventaire;
 
     /**
      * Crée un nouveau joueur.
@@ -61,36 +52,43 @@ public abstract class Joueur extends Humanoide
      * @param direction      La direction vers laquelle le joueur est orienté.
      * @param hitbox         La hitbox du joueur.
      */
-    public Joueur(double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, Sac sac, Objet objetMainGauche, Objet objetMainDroite, Monde monde, double x, double y, Direction direction, Hitbox hitbox) {
-        super(monde, x, y, direction, pv,attaque,defense,attaqueSpecial,defenseSpecial,vitesse,hitbox,sac,objetMainGauche,new Epee());
+    public Joueur(double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, Sac sac, ElementStockable objetMainGauche, ElementStockable objetMainDroite, Monde monde, double x, double y, Direction direction, Hitbox hitbox) {
+        super(monde, x, y, direction, pv,attaque,defense,attaqueSpecial,defenseSpecial,vitesse,hitbox);
         this.competences = CreationArbre.arbres();
         this.estEntrainDeCourir = false;
         this.directions = new HashSet<>();
-
+        this.carquois = new Carquois();
+        this.gestionnaireInventaire = new GestionnaireInventaire(objetMainGauche,objetMainDroite,sac);
+        creerCarquois();
     }
-
-
-    public void actionMainDroite()
-    {
-        if (objetMainDroite != null)
-        {
-            if (objetMainDroite instanceof Utilisable utilisable)
-            {
-                if (objetMainDroite instanceof Arme )
-                    attaque();
-
-
-                utilisable.utilise(this);
-
-                if (objetMainDroite.durabilitee() == 0)
-                    objetMainDroite = null;
-
-            }
+    public void creerCarquois(){
+        for(int i = 0 ; i < 100 ; i++){
+            carquois.ajoutItem(new Fleche());
         }
     }
 
+    public boolean actionMainDroite()
+    {
+        boolean utilisation = false;
+        if (this.gestionnaireInventaire.getObjetMainDroite() != null)
+        {
+            if (this.gestionnaireInventaire.getObjetMainDroite() instanceof ElementUtilisable utilisable)
+            {
+                if (this.gestionnaireInventaire.getObjetMainDroite() instanceof ObjetUtilisable)
+                    attaque();
+
+                utilisation =  utilisable.utilise(this);
+
+                if (this.gestionnaireInventaire.getObjetMainDroite().durabilitee() == 0)
+                    this.gestionnaireInventaire.setObjetMainDroite(null);
+
+            }
+        }
+        return utilisation;
+    }
+
     @Override
-    public void unTour()
+    public void agir()
     {
         double coeff = 1;
         for (Direction direction1 : directions)
@@ -106,11 +104,10 @@ public abstract class Joueur extends Humanoide
     }
 
     @Override
-    public void attaque()
-    {
-        if (objetMainDroite instanceof Arc arc)
-        {
-            Fleche flecheSimple = carquois.retourneUneFleche();
+    public void attaque() {
+        Fleche flecheSimple;
+        if (this.gestionnaireInventaire.getObjetMainDroite() instanceof Arc arc) {
+            flecheSimple = carquois.retourneUneFleche();
 
             if (flecheSimple != null)
                 arc.setFleche(flecheSimple);
@@ -118,24 +115,22 @@ public abstract class Joueur extends Humanoide
     }
 
     @Override
-    public void lanceUnSort(int numSort)
-    {
-        if (objetMainDroite instanceof LivreMagique livreMagique)
-        {
+    public void lanceUnSort(int numSort) {
+        if (this.gestionnaireInventaire.getObjetMainDroite() instanceof LivreMagique livreMagique) {
             Sortilege sortilege = livreMagique.getSortilege(numSort);
-            if (sortilege != null)
-                sortilege.utilise(this);
+            if (sortilege != null) {
+                livreMagique.setSortilege(sortilege);
+                livreMagique.utilise(this);
+            }
         }
     }
     @Override
-    public void setDirection(Direction direction)
-    {
+    public void setDirection(Direction direction) {
         this.direction = direction;
         this.directions.add(direction);
     }
 
-    public void enleveDirection(Direction direction)
-    {
+    public void enleveDirection(Direction direction) {
         this.directions.remove(direction);
     }
     @Override
@@ -153,17 +148,15 @@ public abstract class Joueur extends Humanoide
     public Competences getCompetences() { return this.competences; }
     public int getPiece(){
         int totalPiece = 0;
-        for(int i = 0 ; i < sac.getTailleMax() ; i++){
-            if(sac.getEmplacement(i).nomObjet()=="pieceor")
-                totalPiece+= sac.getEmplacement(i).quantiteObjet();
+        for(int i = 0 ; i < this.gestionnaireInventaire.getSac().getTailleMax() ; i++){
+            if(this.gestionnaireInventaire.getSac().getEmplacement(i).nomObjet().equals("pieceor"))
+                totalPiece+= this.gestionnaireInventaire.getSac().getEmplacement(i).quantiteObjet();
         }
 
         return totalPiece;
     }
 
-
-
-    @Override
-    public void dropApresMort() {}
-
+    public GestionnaireInventaire getGestionnaireInventaire() {
+        return gestionnaireInventaire;
+    }
 }

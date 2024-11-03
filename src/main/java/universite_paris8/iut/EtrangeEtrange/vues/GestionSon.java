@@ -1,11 +1,7 @@
 package universite_paris8.iut.EtrangeEtrange.vues;
 
-import javafx.application.Application;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.LivreMagique;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 
 import java.io.File;
 
@@ -33,9 +29,9 @@ public class GestionSon
         musiqueFond.stop();
         musiqueGameOver.stop();
     }
-    public void lanceSong(Objet objet)
+    public void lanceSong(ElementStockable objet)
     {
-        if(objet.getNom()!=null && objet.getNom() !="livremagique" && objet.getNom() !="arc" ) {
+        if(objet.getNom()!=null && !objet.getNom().equals("livremagique") && !objet.getNom().equals("arc")  ) {
             AudioClip mediaPlayer = new AudioClip(new File("src/main/resources/universite_paris8/iut/EtrangeEtrange/sons/" + objet.getNom() + ".mp3").toURI().toString());
             mediaPlayer.play();
         }

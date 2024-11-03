@@ -1,33 +1,24 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Support;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Guerrisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Sortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesSortilege;
 
-public class SortilegeDeSoins extends Sortilege implements Guerrisable
+public class SortilegeDeSoins extends Sortilege
 {
+    public SortilegeDeSoins(long delaiUtilisation) {
+        super(delaiUtilisation);
+    }
 
     @Override
-    public void utilise(Entite entite)
+    public boolean utilise(Entite entite)
     {
-        if (peutLancerSort)
+        if (getCooldown().delaieEcoule())
         {
-            this.peutLancerSort = false;
-            entite.soigner(restoration());
-            this.derniereApelle = System.currentTimeMillis();
-            entite.getMonde().ajoutRechargeable(this);
+            entite.soigner(ConstantesSortilege.PV_RESTORER_GUERISON);
+            getCooldown().reset();
+            return true;
         }
-    }
-
-    @Override
-    public long delaie() {
-        return ConstantesSortilege.DELAIE_GUERISON;
-    }
-
-    @Override
-    public double restoration() {
-        return ConstantesSortilege.PV_RESTORER_GUERISON;
+        return false;
     }
 }

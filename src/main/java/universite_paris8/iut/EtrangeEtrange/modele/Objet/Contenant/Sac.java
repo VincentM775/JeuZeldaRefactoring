@@ -1,10 +1,9 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.ObjetConteneur;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 
-public class Sac extends ObjetConteneur<Objet>
+public class Sac extends ObjetConteneur<ElementStockable>
 {
     private static final int TAILLE = ConstanteObjet.TAILLE_SAC;
     private static final int STACK_MAX = ConstanteObjet.STACK_MAX_SAC;
@@ -14,7 +13,6 @@ public class Sac extends ObjetConteneur<Objet>
     public Sac() {
         super(TAILLE);
     }
-
     @Override
     public int stackMax() { return STACK_MAX; }
     @Override

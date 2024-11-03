@@ -5,12 +5,12 @@ import javafx.collections.ObservableList;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Bloc.Bloc;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Boss.RoiSquelette;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Interagisable.Marchand;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Monstre.Slime;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Monstre.Squelette;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Rechargeable;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.RoiSquelette;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Marchand;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Slime;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Squelette;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementIterable;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Aetoile;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -43,7 +43,7 @@ public class Monde {
      * Ici sont stocké les informations des éléments du monde traversables (ex : buissons, fleurs, hautes herbes, etc.)
      */
 
-    private ArrayList<Rechargeable> rechargeables = new ArrayList<>();
+    private ArrayList<ElementIterable> elementsIterable = new ArrayList<>();
 
 
     private Joueur joueur;
@@ -238,39 +238,29 @@ public class Monde {
         
     }
 
-
-
-
     public void ajoutActeur(Acteur acteur) {this.acteurs.add(acteur);}
 
 
 
-    public void unTour()
-    {
-        this.joueur.unTour();
+    public void unTour() {
+        this.joueur.agir();
 
         for(int i = acteurs.size()-1 ; i>=0 ; i--)
-            acteurs.get(i).unTour();
+            acteurs.get(i).agir();
 
-        for(int i = 0 ; i < acteursAsupprimer.size(); i++){
+        for (int i = 0; i < acteursAsupprimer.size(); i++) {
             enleveActeur(acteursAsupprimer.get(i));
         }
 
         this.acteursAsupprimer.clear();
 
 
-        for(int i = rechargeables.size()-1 ; i>=0 ; i--)
-        {
-            Rechargeable rechargeable = rechargeables.get(i);
+        for (int i = elementsIterable.size() - 1; i >= 0; i--) {
+            ElementIterable elementsIterable = this.elementsIterable.get(i);
 
-            if (rechargeable.cooldown())
-                this.rechargeables.remove(rechargeable);
+            if (elementsIterable.iterationsFinie())
+                this.elementsIterable.remove(elementsIterable);
         }
-    }
-
-    public void ajoutRechargeable(Rechargeable rechargeable)
-    {
-        this.rechargeables.add(rechargeable);
     }
 
 
@@ -420,14 +410,9 @@ public class Monde {
     }
 
     public void enleveActeur(Acteur acteur) {
-        acteur.dropApresMort();
+        acteur.derniereAction();
         this.acteurs.remove(acteur);
     }
-
-
-
-
-
 
 
     public Acteur interactionAvecActeur()
@@ -483,6 +468,10 @@ public class Monde {
             }
         }
         return toutesLesEntites;
+    }
+
+    public void ajoutIterable(ElementIterable elementIterables) {
+        this.elementsIterable.add(elementIterables);
     }
 }
 

@@ -72,7 +72,7 @@ public class GestionAffichageMap {
                     else{
                         tilePane.getChildren().add(new ImageView());
                     }
-                    System.out.println("h : "+h+", l : "+l);
+
                 }
             }
         }

@@ -1,11 +1,10 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Interfaces;
 
 import javafx.beans.property.IntegerProperty;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
 
 import java.util.ArrayList;
 
-public interface Conteneur<T extends Objet>
+public interface StockeurElement<T extends ElementStockable>
 {
     boolean ajoutItem(T objet);
 

@@ -2,12 +2,12 @@ package universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins;
 
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Guerrisable;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Utilisable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementUtilisable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 
-public class Potion implements Guerrisable, Objet, Utilisable
+public class Potion implements ObjetUtilisable
 {
 
     private static final int DURABILITEE = ConstanteObjet.DURABILITE_POTION;
@@ -19,19 +19,16 @@ public class Potion implements Guerrisable, Objet, Utilisable
     public Potion(){this.durabilitee = DURABILITEE;}
 
     @Override
-    public void utilise(Entite entite)
+    public boolean utilise(Entite entite)
     {
-        if (durabilitee > 0)
-        {
-            entite.soigner(restoration());
+        if (durabilitee > 0) {
+            entite.soigner(RESTORATION);
             this.durabilitee--;
+            return true;
         }
+        return false;
     }
 
-    @Override
-    public double restoration() {
-        return RESTORATION;
-    }
     @Override
     public String getNom() {
         return "potion";
@@ -42,7 +39,6 @@ public class Potion implements Guerrisable, Objet, Utilisable
     }
     @Override
     public double durabilitee() {
-        System.out.println(durabilitee);
         return durabilitee;
     }
     @Override

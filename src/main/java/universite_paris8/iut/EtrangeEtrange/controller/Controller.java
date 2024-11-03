@@ -18,12 +18,13 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.GestionPrompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Archer;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Guerrier;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
 import javafx.fxml.FXML;
@@ -195,8 +196,8 @@ public class Controller implements Initializable {
         }
         switchDonnees.setJoueur(joueur);
         monde.setJoueur(joueur);
-        joueur.getSac().ajoutItem(new Epee());
-        joueur.getSac().ajoutItem(new Potion());
+        joueur.getGestionnaireInventaire().getSac().ajoutItem(new Epee());
+        joueur.getGestionnaireInventaire().getSac().ajoutItem(new Potion());
     }
 
 
@@ -222,13 +223,15 @@ public class Controller implements Initializable {
                 joueur.setSeDeplace(true);
             }
             else if (keyCode == ConstantesClavier.recupererObjetSol)
-                joueur.ramasserObjet();
+                joueur.getGestionnaireInventaire().ramasserObjet(joueur.getMonde(),joueur.getPosition(),joueur.getDirection());
             else if (keyCode == ConstantesClavier.degattest)
                 joueur.enlevePv(10);
             else if(keyCode == ConstantesClavier.attaquer)
             {
-                joueur.actionMainDroite();
-                gestionSon.lanceSong(joueur.getObjetMainDroite());
+                ElementStockable o = joueur.getGestionnaireInventaire().getObjetMainDroite();
+                boolean actionExecute = joueur.actionMainDroite();
+                if(actionExecute)
+                    gestionSon.lanceSong(o);
             }
             else if(keyCode == ConstantesClavier.sort2){
                 joueur.lanceUnSort(1);
@@ -260,8 +263,7 @@ public class Controller implements Initializable {
     {
         KeyCode touche = keyEvent.getCode();
 
-        if (!interactionAvecPnj)
-        {
+        if (!interactionAvecPnj) {
             if(touche==ConstantesClavier.deplacementHaut) {
                 joueur.enleveDirection(Direction.HAUT);
                 joueur.setSeDeplace(false);

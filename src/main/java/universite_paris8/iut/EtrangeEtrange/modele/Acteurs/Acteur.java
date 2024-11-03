@@ -2,7 +2,8 @@ package universite_paris8.iut.EtrangeEtrange.modele.Acteurs;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementIterable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Pv;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Vitesse;
@@ -19,7 +20,6 @@ public abstract class Acteur
     protected Monde monde;
     protected Position position;
     protected Direction direction;
-
     protected Pv statsPv;
     protected Vitesse statsVitesse;
     protected Hitbox hitbox;
@@ -103,23 +103,21 @@ public abstract class Acteur
     /**
      * Méthode abstraite pour effectuer les actions de l'acteur lors de l'apelle dans la gameloop.
      */
-    public abstract void unTour();
+    public abstract void agir();
 
     /**
      * Méthode abstraite pour gérer les réactions de l'acteur lors d'une collision avec un autre acteur.
      *
      * @param acteur L'acteur avec lequel la collision s'est produite.
      */
-    public abstract void subitCollision(Acteur acteur);
-    public abstract void causeCollision(Acteur acteur);
-
-
+    public void subitCollision(Acteur acteur) {acteur.causeCollision(this);}
+    public void causeCollision(Acteur acteur) {acteur.seFaitPousser(this);}
 
     /**
      * Subit des dégâts infligés par une source dommageable.
      * @param causeDegat La source de dégâts.
      */
-    public abstract void subitAttaque(Dommageable causeDegat, EntiteOffensif entiteOffensif);
+    public abstract void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif);
 
 
 
@@ -132,21 +130,18 @@ public abstract class Acteur
         this.position.setX(x);
         this.position.setY(y);
     }
-    public abstract void dropApresMort();
+    public abstract void derniereAction();
     public void setPosition(Position pos){ this.position = new Position(pos.getX(),pos.getY());}
     public void setNewPosition(double x, double y){
         this.position = new Position(x,y);
     }
-    public void setVitesseMaximum(double statsVitesse) {this.statsVitesse.setVitesseMaximum(statsVitesse);}
     public void soigner(double pv)
     {
         this.statsPv.ajoutPv(pv);
     }
     public void setVitesse(double vitesse) {this.statsVitesse.setVitesse(vitesse);}
     public Vitesse getStatsVitesse() {return statsVitesse;}
-    public void seDeplace(boolean seDeplace) {this.seDeplace = seDeplace;}
     public Direction getDirection() {return this.direction;}
-    public boolean getSeDeplace(){return this.seDeplace;}
     public Hitbox getHitbox() {return this.hitbox;}
     public Monde getMonde() {return this.monde;}
     public Position getPosition() {return this.position;}

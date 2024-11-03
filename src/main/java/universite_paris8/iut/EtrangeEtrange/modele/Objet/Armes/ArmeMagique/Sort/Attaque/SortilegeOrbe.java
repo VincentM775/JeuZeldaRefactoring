@@ -8,30 +8,21 @@ import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesSortileg
 
 public class SortilegeOrbe extends Sortilege
 {
-    private Orbe orbe;
-
-    public SortilegeOrbe()
-    {
-        this.orbe = new Orbe();
+    public SortilegeOrbe(long delaiUtilisation) {
+        super(delaiUtilisation);
     }
 
     @Override
-    public void utilise(Entite entite)
+    public boolean utilise(Entite entite)
     {
-        this.orbe = new Orbe();
+        Orbe orbe = new Orbe(entite);
 
-        if (peutLancerSort)
+        if (getCooldown().delaieEcoule())
         {
-            this.peutLancerSort = false;
-            this.derniereApelle = System.currentTimeMillis();
-
-            entite.getMonde().ajoutRechargeable(this);
-            this.orbe.utilise(entite);
+            entite.getMonde().ajoutActeur(orbe);
+            getCooldown().reset();
+            return true;
         }
-    }
-
-    @Override
-    public long delaie() {
-        return ConstantesSortilege.DELAIE_ORBE;
+        return false;
     }
 }

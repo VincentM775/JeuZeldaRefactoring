@@ -6,7 +6,7 @@ package universite_paris8.iut.EtrangeEtrange.TestJunit;
 import org.junit.Test;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Arc;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.Emplacement;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.Inventaire;
@@ -18,11 +18,11 @@ import static org.junit.Assert.*;
 
 public class InventaireTest {
 
-    private Inventaire<Objet> inventaire;
-    private Objet objet1;
-    private Objet objet2;
-    private Objet objet3;
-    private Objet objet4;
+    private Inventaire<ElementStockable> inventaire;
+    private ElementStockable objet1;
+    private ElementStockable objet2;
+    private ElementStockable objet3;
+    private ElementStockable objet4;
 
 
     @Test
@@ -53,11 +53,11 @@ public class InventaireTest {
 
         inventaire.ajoutItem(objet1);
         inventaire.ajoutItem(objet4);
-        Emplacement<Objet> emplacement = inventaire.chercheEmplacementStackable(objet1);
+        Emplacement<ElementStockable> emplacement = inventaire.chercheEmplacementStackable(objet1);
         assertNotNull(emplacement);
 
 
-        Emplacement<Objet> emplacement2 = inventaire.chercheEmplacementStackable(objet2);
+        Emplacement<ElementStockable> emplacement2 = inventaire.chercheEmplacementStackable(objet2);
         assertNull(emplacement2);
     }
 
@@ -74,7 +74,7 @@ public class InventaireTest {
 
 
         inventaire.ajoutItem(objet1);
-        Emplacement<Objet> emplacement = inventaire.chercheEmplacementVide();
+        Emplacement<ElementStockable> emplacement = inventaire.chercheEmplacementVide();
         assertNotNull(emplacement);
         assertTrue(emplacement.estVide());
 
@@ -177,7 +177,7 @@ public class InventaireTest {
         inventaire.ajoutItem(objet4);
 
 
-        ArrayList<Objet> objets = inventaire.enleverObjet(0);
+        ArrayList<ElementStockable> objets = inventaire.enleverObjet(0);
         assertEquals(2, objets.size());
 
 
@@ -202,7 +202,7 @@ public class InventaireTest {
         inventaire.ajoutItem(objet2);
         inventaire.ajoutItem(objet4);
 
-        Objet objet = inventaire.retourneObjet(1);
+        ElementStockable objet = inventaire.retourneObjet(1);
         assertNotNull(objet);
         assertEquals(objet2.getNom(), objet.getNom());
 
@@ -223,7 +223,7 @@ public class InventaireTest {
         inventaire.ajoutItem(objet1);
         inventaire.ajoutItem(objet2);
 
-        Objet objet = inventaire.trouveObjet(Potion.class);
+        ElementStockable objet = inventaire.trouveObjet(Potion.class);
         assertNotNull(objet);
         assertEquals(objet.getNom(), objet1.getNom());
 

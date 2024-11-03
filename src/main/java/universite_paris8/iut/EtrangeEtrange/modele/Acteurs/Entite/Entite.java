@@ -1,7 +1,7 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Defense;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.DefenseSpecial;
@@ -11,8 +11,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
  * Représente un être vivant dans le monde du jeu.
  * Cette classe étend la classe abstraite Acteur
  */
-public abstract class Entite extends Acteur
-{
+public abstract class Entite extends Acteur {
     protected Defense statsDefense;
     protected DefenseSpecial statsDefenseSpecial;
 
@@ -40,13 +39,11 @@ public abstract class Entite extends Acteur
      * Subit des dégâts infligés par une source dommageable.
      * @param causeDegat La source de dégâts.
      */
-    public void subitAttaque(Dommageable causeDegat,EntiteOffensif entiteOffensif)
+    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif)
     {
         enlevePv((subitDegatPhysique(entiteOffensif.getAttaque(),causeDegat.degatPhysique()) + subitDegatSpecial(causeDegat.degatSpecial(), entiteOffensif.getAttaqueSpecial()))/2);
     }
 
-    public void subitCollision(Acteur acteur) {acteur.causeCollision(this);}
-    public void causeCollision(Acteur acteur) {acteur.seFaitPousser(this);}
 
     @Override
     public void seFaitPousser(Acteur acteur) {}
@@ -72,16 +69,6 @@ public abstract class Entite extends Acteur
     {
         return Math.abs(attaqueSpecialEntite+degatArme - statsDefenseSpecial.getDefenseSpecial());
     }
-    public void setDefenseMaximum(double statsDefense){this.statsDefense.setDefenseMaximum(statsDefense);}
-    public void setDefense(double defense){this.statsDefense.setDefense(defense);}
-    public void setDefenseSpecialMaximum(double statsDefenseSpecial) {this.statsDefenseSpecial.setDefenseSpecialMaximum(statsDefenseSpecial);}
-    public void setDefenseSpecial(double defenseSpecial) {this.statsDefenseSpecial.setDefenseSpecial(defenseSpecial);}
-    public double getDefense(){ return this.statsDefense.getDefense();}
-    public double getDefenseSpecial(){ return this.statsDefenseSpecial.getDefenseSpecial();}
-    public Defense getStatsDefense(){return this.statsDefense;}
-    public DefenseSpecial getStatsDefenseSpecial(){return this.statsDefenseSpecial;}
-
-
 
 
 }

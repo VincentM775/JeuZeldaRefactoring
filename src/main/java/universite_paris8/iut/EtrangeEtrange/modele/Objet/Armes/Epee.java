@@ -3,14 +3,14 @@ package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Rechargeable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
+import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Cooldown;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Arme;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
-public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
+public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
 {
 
     private static final int DURABILITE = ConstanteObjet.DURABILITE_EPEE;
@@ -18,30 +18,25 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
     private static final double DEGAT_SPECIAL = ConstanteObjet.DEGAT_SPECIAL_EPEE;
     private static final double VITESSE = ConstanteObjet.VITESSE_EPEE;
     private static final Hitbox HITBOX = ConstanteObjet.HITBOX_EPEE;
-    private static final long DELAIE_UTILISATION = ConstanteObjet.DELAIE_UTILISATION_EPEE;
     private final int PRIX_ACHAT = ConstanteObjet.PRIX_ACHAT_EPEE;
     private final int STACK_MAX = ConstanteObjet.STACK_MAX_EPEE;
 
-
-    private boolean peutTaper;
     private short cycle;
-    private long derniereApelle;
     private Entite utilisateur;
+    private Cooldown cooldown;
 
 
     public Epee()
     {
         super(DURABILITE, VITESSE, HITBOX);
-        this.peutTaper = true;
+        this.cooldown = new Cooldown(ConstanteObjet.DELAIE_UTILISATION_EPEE);
         this.cycle = 0;
-        this.derniereApelle = 0;
     }
 
-
     @Override
-    public void utilise(Entite entite)
+    public boolean utilise(Entite entite)
     {
-        if (peutTaper)
+        if (this.cooldown.delaieEcoule())
         {
             utilisateur = entite;
             setPosition(entite.getPosition());
@@ -51,16 +46,15 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
             setPositionAttaque();
             entite.getMonde().ajoutActeur(this);
 
-            this.derniereApelle = System.currentTimeMillis();
-            entite.getMonde().ajoutRechargeable(this);
-
-            this.peutTaper = false;
+            this.cooldown.reset();
+            return true;
         }
+        return false;
     }
 
 
     @Override
-    public void unTour()
+    public void agir()
     {
         if (cycle <= 2)
         {
@@ -76,52 +70,48 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
 
     private void setPositionAttaque()
     {
-        double x = position.getX();
-        double y = position.getY();
+        double posXJoueur = position.getX();
+        double posYJoueur = position.getY();
 
-        double posX = 0;
-        double posY = 0;
+        double decalageX = 0;
+        double decalageY = 0;
 
         switch (direction)
         {
             case HAUT:
-                x = hitbox.getPointLePlusADroite(x);
-                y = hitbox.getPointLePlusEnHaut(y);
-                posX = 0;
-                posY = -hitbox.getHauteur();
+                posXJoueur = hitbox.getPointLePlusADroite(posXJoueur);
+                posYJoueur = hitbox.getPointLePlusEnHaut(posYJoueur);
+                decalageY = -hitbox.getHauteur();
                 break;
             case BAS:
-                x = hitbox.getPointLePlusADroite(x);
-                y = hitbox.getPointLePlusEnBas(y);
-                posX = 0;
-                posY = hitbox.getHauteur();
+                posXJoueur = hitbox.getPointLePlusADroite(posXJoueur);
+                posYJoueur = hitbox.getPointLePlusEnBas(posYJoueur);
+                decalageY = hitbox.getHauteur();
                 break;
             case DROITE:
-                x = hitbox.getPointLePlusEnBas(x);
-                y = hitbox.getPointLePlusADroite(y);
-                posX = hitbox.getLargeur();
-                posY = 0;
+                posXJoueur = hitbox.getPointLePlusEnBas(posXJoueur);
+                posYJoueur = hitbox.getPointLePlusADroite(posYJoueur);
+                decalageX = hitbox.getLargeur();
                 break;
             case GAUCHE:
-                posX = -hitbox.getLargeur();
-                posY = 0;
+                posXJoueur = hitbox.getPointLePlusEnBas(posXJoueur);
+                posYJoueur = hitbox.getPointLePlusAGauche(posYJoueur);
+                decalageX = -hitbox.getLargeur();
                 break;
         }
 
-        this.position = new Position(x+posX,y+posY);
+        this.position = new Position(posXJoueur+decalageX,posYJoueur+decalageY);
     }
 
 
     @Override
-    public void seDeplace(double coeff)
+    public void seDeplace(double multiplicateur)
     {
-        double x = this.direction.getX() ;
-        double y = this.direction.getY() ;
+        double x = this.direction.getX();
+        double y = this.direction.getY();
 
-
-        position.setX(position.getX() + x * VITESSE * coeff);
-        position.setY(position.getY() + y * VITESSE * coeff);
-
+        position.setX(position.getX() + x * VITESSE * multiplicateur);
+        position.setY(position.getY() + y * VITESSE * multiplicateur);
     }
 
 
@@ -133,7 +123,9 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
     }
 
     @Override
-    public void subitAttaque(Dommageable causeDegat, EntiteOffensif entiteOffensif) {  /*  NE FAIT RIEN */ }
+    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif) {
+        //NE FAIS RIEN
+    }
 
     @Override
     public int prixAchat() {
@@ -148,31 +140,9 @@ public class Epee extends Acteur implements Dommageable,Rechargeable,Arme
     }
 
     @Override
-    public void dropApresMort() {
+    public void derniereAction() {
         
     }
-
-    @Override
-    public long delaie() {
-        return DELAIE_UTILISATION;
-    }
-
-    @Override
-    public boolean cooldown()
-    {
-        boolean actionFait = false;
-        long apelle = System.currentTimeMillis();
-
-        if (apelle - derniereApelle >= delaie())
-        {
-            this.derniereApelle = -1;
-            this.peutTaper = true;
-            actionFait = true;
-        }
-
-        return actionFait;
-    }
-
 
     @Override
     public String getNom() {

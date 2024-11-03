@@ -4,25 +4,17 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Dommageable;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Objet;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
+import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 
-public abstract class Projectile extends Acteur implements Dommageable,Objet
+public abstract class Projectile extends Acteur implements ElementDommageable, ElementStockable
 {
     private Entite utilisateur;
 
-    public Projectile(double pv,double vitesse,Hitbox hitbox)
+    public Projectile(Entite utilisateur, double pv,double vitesse,Hitbox hitbox)
     {
         super(pv,vitesse,hitbox);
-    }
-
-    @Override
-    public void unTour()
-    {
-        if(peutSeDeplacer())
-            seDeplace(1);
-        else
-            enleveToutPv();
+        this.utilisateur = utilisateur;
     }
 
     @Override
@@ -36,18 +28,29 @@ public abstract class Projectile extends Acteur implements Dommageable,Objet
     }
 
     @Override
+    public void agir()
+    {
+        if(peutSeDeplacer())
+            seDeplace(1);
+        else
+            enleveToutPv();
+    }
+
+    @Override
     public void subitCollision(Acteur acteur) {
         if (acteur != utilisateur)
             enleveToutPv();
     }
 
     @Override
-    public boolean peutSeDeplacer() {return !monde.estHorsMap(this) && !monde.collisionMap(this);}
+    public boolean peutSeDeplacer() {
+        return !monde.estHorsMap(this) && !monde.collisionMap(this);
+    }
     public void setUtilisateur(Entite entite){this.utilisateur = entite;}
     @Override
     public void seFaitPousser(Acteur acteur) {}
     @Override
-    public void subitAttaque(Dommageable causeDegat, EntiteOffensif entiteOffensif) {
+    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif) {
 
     }
 
