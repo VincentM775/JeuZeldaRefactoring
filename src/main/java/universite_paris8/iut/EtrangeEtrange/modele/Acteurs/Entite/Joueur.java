@@ -52,7 +52,7 @@ public abstract class Joueur extends EntiteOffensif {
      * @param direction      La direction vers laquelle le joueur est orienté.
      * @param hitbox         La hitbox du joueur.
      */
-    public Joueur(double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, Sac sac, ObjetUtilisable objetMainGauche, ObjetUtilisable objetMainDroite, Monde monde, double x, double y, Direction direction, Hitbox hitbox) {
+    public Joueur(double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, Sac sac, ElementStockable objetMainGauche, ElementStockable objetMainDroite, Monde monde, double x, double y, Direction direction, Hitbox hitbox) {
         super(monde, x, y, direction, pv,attaque,defense,attaqueSpecial,defenseSpecial,vitesse,hitbox);
         this.competences = CreationArbre.arbres();
         this.estEntrainDeCourir = false;
@@ -69,7 +69,6 @@ public abstract class Joueur extends EntiteOffensif {
 
     public boolean actionMainDroite()
     {
-        this.gestionnaireInventaire.getObjetMainDroite().utilise().uti
         boolean utilisation = false;
         if (this.gestionnaireInventaire.getObjetMainDroite() != null)
         {
@@ -105,11 +104,10 @@ public abstract class Joueur extends EntiteOffensif {
     }
 
     @Override
-    public void attaque()
-    {
-        if (this.gestionnaireInventaire.getObjetMainDroite() instanceof Arc arc)
-        {
-            Fleche flecheSimple = carquois.retourneUneFleche();
+    public void attaque() {
+        Fleche flecheSimple;
+        if (this.gestionnaireInventaire.getObjetMainDroite() instanceof Arc arc) {
+            flecheSimple = carquois.retourneUneFleche();
 
             if (flecheSimple != null)
                 arc.setFleche(flecheSimple);
@@ -117,10 +115,8 @@ public abstract class Joueur extends EntiteOffensif {
     }
 
     @Override
-    public void lanceUnSort(int numSort)
-    {
-        if (this.gestionnaireInventaire.getObjetMainDroite() instanceof LivreMagique livreMagique)
-        {
+    public void lanceUnSort(int numSort) {
+        if (this.gestionnaireInventaire.getObjetMainDroite() instanceof LivreMagique livreMagique) {
             Sortilege sortilege = livreMagique.getSortilege(numSort);
             if (sortilege != null) {
                 livreMagique.setSortilege(sortilege);
@@ -129,14 +125,12 @@ public abstract class Joueur extends EntiteOffensif {
         }
     }
     @Override
-    public void setDirection(Direction direction)
-    {
+    public void setDirection(Direction direction) {
         this.direction = direction;
         this.directions.add(direction);
     }
 
-    public void enleveDirection(Direction direction)
-    {
+    public void enleveDirection(Direction direction) {
         this.directions.remove(direction);
     }
     @Override

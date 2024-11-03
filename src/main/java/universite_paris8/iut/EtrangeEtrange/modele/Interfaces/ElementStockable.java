@@ -5,5 +5,4 @@ public interface ElementStockable {
     int stackMax();
     double durabilitee();
     int prixAchat();
-    abstract void agie();
 }

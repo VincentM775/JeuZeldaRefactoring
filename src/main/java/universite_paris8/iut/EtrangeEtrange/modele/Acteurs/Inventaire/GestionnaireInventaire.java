@@ -1,7 +1,6 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Inventaire;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
@@ -11,11 +10,11 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 import java.util.ArrayList;
 
 public class GestionnaireInventaire {
-    protected ObjetUtilisable objetMainGauche;
-    protected ObjetUtilisable objetMainDroite;
+    protected ElementStockable objetMainGauche;
+    protected ElementStockable objetMainDroite;
     protected Sac sac;
 
-    public GestionnaireInventaire(ObjetUtilisable objetMainGauche, ObjetUtilisable objetMainDroite, Sac sac) {
+    public GestionnaireInventaire(ElementStockable objetMainGauche, ElementStockable objetMainDroite, Sac sac) {
         this.objetMainGauche = objetMainGauche;
         this.objetMainDroite = objetMainDroite;
         this.sac = sac;
@@ -27,30 +26,30 @@ public class GestionnaireInventaire {
     }
 
 
-    public ObjetUtilisable retournerObjetMainDroite()
+    public ElementStockable retournerObjetMainDroite()
     {
-        ObjetUtilisable objet = this.objetMainDroite;
+        ElementStockable objet = this.objetMainDroite;
         this.objetMainDroite = null;
         return objet;
     }
-    public ObjetUtilisable retournerObjetMainGauche(){
-        ObjetUtilisable objet = this.objetMainGauche;
+    public ElementStockable retournerObjetMainGauche(){
+        ElementStockable objet = this.objetMainGauche;
         this.objetMainGauche=null;
         return objet;
     }
 
-    public void setObjetMainGauche(ObjetUtilisable objet){
+    public void setObjetMainGauche(ElementStockable objet) {
         this.objetMainGauche = objet;
     }
 
-    public ObjetUtilisable getObjetMainDroite(){
+    public ElementStockable getObjetMainDroite(){
         return this.objetMainDroite;
     }
-    public ObjetUtilisable getObjetMainGauche(){
+    public ElementStockable getObjetMainGauche(){
         return this.objetMainGauche;
     }
 
-    public void setObjetMainDroite(ObjetUtilisable objet){
+    public void setObjetMainDroite(ElementStockable objet){
         this.objetMainDroite = objet;
     }
 
