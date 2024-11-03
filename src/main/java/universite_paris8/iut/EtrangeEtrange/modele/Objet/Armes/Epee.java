@@ -123,6 +123,11 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
     }
 
     @Override
+    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif) {
+        //NE FAIS RIEN
+    }
+
+    @Override
     public int prixAchat() {
         return PRIX_ACHAT;
     }
@@ -138,28 +143,6 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
     public void derniereAction() {
         
     }
-
-    @Override
-    public long delaie() {
-        return DELAIE_UTILISATION;
-    }
-
-    @Override
-    public boolean cooldown()
-    {
-        boolean actionFait = false;
-        long apelle = System.currentTimeMillis();
-
-        if (apelle - derniereApelle >= delaie())
-        {
-            this.derniereApelle = -1;
-            this.peutTaper = true;
-            actionFait = true;
-        }
-
-        return actionFait;
-    }
-
 
     @Override
     public String getNom() {

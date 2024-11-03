@@ -229,7 +229,7 @@ public class Controller implements Initializable {
             else if(keyCode == ConstantesClavier.attaquer)
             {
                 ElementStockable o = joueur.getGestionnaireInventaire().getObjetMainDroite();
-                boolean actionExecute = joueur.getGestionnaireInventaire().actionMainDroite();
+                boolean actionExecute = joueur.actionMainDroite();
                 if(actionExecute)
                     gestionSon.lanceSong(o);
             }

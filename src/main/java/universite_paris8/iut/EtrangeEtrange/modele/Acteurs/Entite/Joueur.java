@@ -6,7 +6,6 @@ import universite_paris8.iut.EtrangeEtrange.modele.Compétence.Competences;
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.CreationArbre;
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.TypeCompetence;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementUtilisable;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.Utilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.LivreMagique;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Sortilege;
@@ -53,7 +52,7 @@ public abstract class Joueur extends EntiteOffensif {
      * @param direction      La direction vers laquelle le joueur est orienté.
      * @param hitbox         La hitbox du joueur.
      */
-    public Joueur(double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, Sac sac, ElementStockable objetMainGauche, ElementStockable objetMainDroite, Monde monde, double x, double y, Direction direction, Hitbox hitbox) {
+    public Joueur(double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, Sac sac, ObjetUtilisable objetMainGauche, ObjetUtilisable objetMainDroite, Monde monde, double x, double y, Direction direction, Hitbox hitbox) {
         super(monde, x, y, direction, pv,attaque,defense,attaqueSpecial,defenseSpecial,vitesse,hitbox);
         this.competences = CreationArbre.arbres();
         this.estEntrainDeCourir = false;
@@ -70,6 +69,7 @@ public abstract class Joueur extends EntiteOffensif {
 
     public boolean actionMainDroite()
     {
+        this.gestionnaireInventaire.getObjetMainDroite().utilise().uti
         boolean utilisation = false;
         if (this.gestionnaireInventaire.getObjetMainDroite() != null)
         {

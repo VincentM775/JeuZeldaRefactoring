@@ -18,14 +18,14 @@ public class Fleche extends Projectile
         super(null, PV,VITESSE,HITBOX);
     }
 
-    @Override
-    public void unTour()
-    {
-        if(peutSeDeplacer())
-            seDeplace(1);
-        else
-            enleveToutPv();
-    }
+//    @Override
+//    public void unTour()
+//    {
+//        if(peutSeDeplacer())
+//            seDeplace(1);
+//        else
+//            enleveToutPv();
+//    }
 
     @Override
     public double degatPhysique() {
@@ -39,6 +39,7 @@ public class Fleche extends Projectile
     public String getNom() {
         return "fleche";
     }
+
     @Override
     public String typeActeur(){
         return "fleche";

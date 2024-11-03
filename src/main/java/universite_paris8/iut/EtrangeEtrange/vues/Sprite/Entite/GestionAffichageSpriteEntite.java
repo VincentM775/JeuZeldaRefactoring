@@ -56,11 +56,11 @@ public class GestionAffichageSpriteEntite implements ListChangeListener<Acteur>
     public void onChanged(Change<? extends Acteur> change) {
         while(change.next()){
             for (Acteur entite : change.getAddedSubList()) {
-                if(entite instanceof Entite)
+                if(entite instanceof Entite || entite instanceof Marchand)
                     creeSprite(entite);
             }
             for(Acteur entite : change.getRemoved()) {
-                if(entite instanceof Entite)
+                if(entite instanceof Entite || entite instanceof Marchand)
                     suprimmerSprite(entite);
             }
         }

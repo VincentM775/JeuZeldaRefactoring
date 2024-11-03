@@ -15,9 +15,13 @@ import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.TypeObjet;
+import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
+import universite_paris8.iut.EtrangeEtrange.modele.Stockage.Emplacement;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
+import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Marchand extends Acteur
@@ -127,12 +131,12 @@ public class Marchand extends Acteur
         return prompt;
     }
 
-    @Override
+//    @Override
     public void drop() {
-        for (Emplacement<Objet> objets : sac.getInventaire()) {
-            ArrayList<Objet> obs = objets.enleverToutLesObjets();
+        for (Emplacement<ElementStockable> objets : sac.getInventaire()) {
+            ArrayList<ElementStockable> obs = objets.enleverToutLesObjets();
 
-            for (Objet objet : obs) {
+            for (ElementStockable objet : obs) {
                 monde.ajouterDropAuSol(new DropAuSol(objet, obs.size(), new Position(position.getX(), position.getY())));
             }
         }
