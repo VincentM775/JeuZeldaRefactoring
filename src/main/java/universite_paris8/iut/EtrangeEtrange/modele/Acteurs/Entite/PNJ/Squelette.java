@@ -19,8 +19,8 @@ public class Squelette extends EntiteOffensif {
     private long lastPathCalculationTime;
     private Epee epee ;
 
-    public Squelette(Monde monde, double x, double y, Direction direction, Hitbox hitbox, Joueur joueur, Aetoile aetoile) {
-        super(monde, x, y, direction,
+    public Squelette(double x, double y, Direction direction, Hitbox hitbox, Joueur joueur, Aetoile aetoile) {
+        super( x, y, direction,
                 ParametreMonstre.PV_SQUELETTE,
                 ParametreMonstre.ATTAQUE_SQUELETTE,
                 ParametreMonstre.DEFENSE_SQUELETTE,
@@ -99,9 +99,9 @@ public class Squelette extends EntiteOffensif {
 
     @Override
     public void agir() {
-        if (monde.estDansRayon(getPosition(), 6)){
+        if (Monde.getInstance().estDansRayon(getPosition(), 6)){
             seDeplacerVers(joueur.getPosition());
-            if (monde.estDansRayon(getPosition(), 2)){
+            if (Monde.getInstance().estDansRayon(getPosition(), 2)){
                 attaque();
             }
         }
@@ -137,7 +137,7 @@ public class Squelette extends EntiteOffensif {
     public void derniereAction() {
         double x = getPosition().getX();
         double y = getPosition().getY();
-        getMonde().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
+        Monde.getInstance().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
         System.out.println("passage");
     }
 

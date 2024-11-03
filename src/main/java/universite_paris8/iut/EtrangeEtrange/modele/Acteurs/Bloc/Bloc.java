@@ -12,7 +12,9 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
 
 public class Bloc extends Acteur {
-    public Bloc(Monde monde, double x, double y, Direction direction, double pv, double vitesse, Hitbox hitbox) { super(monde, x, y, direction, pv, vitesse, hitbox);}
+    public Bloc(double x, double y, Direction direction, double pv, double vitesse, Hitbox hitbox) {
+        super(x, y, direction, pv, vitesse, hitbox);
+    }
 
     @Override
     public void seFaitPousser(Acteur acteur)
@@ -34,7 +36,7 @@ public class Bloc extends Acteur {
     public void derniereAction() {
         double x = getPosition().getX();
         double y = getPosition().getY();
-        getMonde().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
+        Monde.getInstance().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
     }
 
     @Override

@@ -32,8 +32,8 @@ public class Marchand extends Acteur
 
     private Prompt prompt;
 
-    public Marchand(Monde monde, double x, double y, Direction direction) {
-        super(monde,x,y,direction,10,10,new Hitbox(0.5,0.5));
+    public Marchand(double x, double y, Direction direction) {
+        super(x,y,direction,10,10,new Hitbox(0.5,0.5));
         this.cycle = 0;
         this.sac = new Sac();
 
@@ -96,7 +96,7 @@ public class Marchand extends Acteur
         racine.ajoutPrompt(reponseRacine1,"J'aimerais marchander un peu avec avec vous");
         racine.ajoutPrompt(reponseRacine2,"J'aimerais parler un peu..");
 
-        Prompt reponseReponceRacine2 = new Prompt("Faite attention...   D'ailleur, attendez je vais vous soigner !",new Soigner(monde.getJoueur()));
+        Prompt reponseReponceRacine2 = new Prompt("Faite attention...   D'ailleur, attendez je vais vous soigner !",new Soigner());
         reponseRacine2.ajoutPrompt(reponseReponceRacine2,"");
 
         prompt = racine;
@@ -137,7 +137,7 @@ public class Marchand extends Acteur
             ArrayList<ElementStockable> obs = objets.enleverToutLesObjets();
 
             for (ElementStockable objet : obs) {
-                monde.ajouterDropAuSol(new DropAuSol(objet, obs.size(), new Position(position.getX(), position.getY())));
+                Monde.getInstance().ajouterDropAuSol(new DropAuSol(objet, obs.size(), new Position(position.getX(), position.getY())));
             }
         }
     }

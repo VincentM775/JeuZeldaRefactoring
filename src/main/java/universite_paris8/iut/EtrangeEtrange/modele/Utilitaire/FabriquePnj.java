@@ -9,7 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class FabriquePnj
 {
-    public static void fabriquePnj(Class<? extends Acteur> typePnj, int nombre, Monde monde, Position position)
+    public static void fabriquePnj(Class<? extends Acteur> typePnj, int nombre, Position position)
     {
         try
         {
@@ -17,8 +17,8 @@ public class FabriquePnj
 
             for (int i = 0; i < nombre; i++)
             {
-                Acteur pnj = constructor.newInstance(monde,position.getX()+(Math.random()*2+0.5),position.getY()+(Math.random()*2+0.5),Direction.BAS);
-                monde.ajoutActeur(pnj);
+                Acteur pnj = constructor.newInstance(Monde.getInstance(),position.getX()+(Math.random()*2+0.5),position.getY()+(Math.random()*2+0.5),Direction.BAS);
+                Monde.getInstance().ajoutActeur(pnj);
             }
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException e)
         {

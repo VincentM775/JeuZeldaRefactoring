@@ -12,15 +12,13 @@ import java.util.HashMap;
 
 public class GestionAffichageMap {
     private ArrayList<TilePane> TilePaneCouchesMonde;
-    private Monde monde;
     private HashMap<String , Image> imagesMap;
 
-    public GestionAffichageMap(Monde monde, TilePane sol, TilePane traversable, TilePane nontraversable){
+    public GestionAffichageMap(TilePane sol, TilePane traversable, TilePane nontraversable){
         this.TilePaneCouchesMonde = new ArrayList<>();
         this.TilePaneCouchesMonde.add(sol);
         this.TilePaneCouchesMonde.add(traversable);
         this.TilePaneCouchesMonde.add(nontraversable);
-        this.monde = monde;
         this.imagesMap = new HashMap<>();
     }
 
@@ -30,7 +28,7 @@ public class GestionAffichageMap {
      */
     public void afficherMondeJSON(){
         String[] fichiers = {"sol", "traversable", "nontraversable"};
-        ArrayList<int[][]> couchesMap = monde.getToutesLesCouches();
+        ArrayList<int[][]> couchesMap = Monde.getInstance().getToutesLesCouches();
         for(TilePane tilePaneCouchesMonde : TilePaneCouchesMonde)
             tilePaneCouchesMonde.getChildren().clear();
 

@@ -3,6 +3,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Interaction.Action;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Marchand;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.Emplacement;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class ActionVendre extends Action
 
             for (ElementStockable objet : obs)
             {
-                racine.ajoutPrompt(new Prompt("Ta fais une bonne affaire !",new ActionAchat(marchand,objet,marchand.getMonde().getJoueur(),this)),objet.getNom() +"     ["+objet.prixAchat()+"]");
+                racine.ajoutPrompt(new Prompt("Ta fais une bonne affaire !",new ActionAchat(marchand,objet, Monde.getInstance().getJoueur(),this)),objet.getNom() +"     ["+objet.prixAchat()+"]");
                 System.out.println("nv objet");
             }
         }

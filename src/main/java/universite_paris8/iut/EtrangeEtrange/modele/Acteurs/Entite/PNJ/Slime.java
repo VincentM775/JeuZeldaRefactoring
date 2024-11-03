@@ -14,7 +14,6 @@ public class Slime extends Entite {
     /**
      * Crée une nouvelle entité offensif.
      *
-     * @param monde     Le monde dans lequel l'entité existe.
      * @param x         La position horizontale de l'entité.
      * @param y         La position verticale de l'entité.
      * @param direction La direction dans laquelle l'entité est orientée.
@@ -22,8 +21,8 @@ public class Slime extends Entite {
      */
 
 
-    public Slime(Monde monde, double x, double y, Direction direction, Hitbox hitbox) {
-        super(monde, x, y, direction,
+    public Slime(double x, double y, Direction direction, Hitbox hitbox) {
+        super(x, y, direction,
                 ParametreMonstre.PV_SLIME,
                 ParametreMonstre.DEFENSE_SLIME,
                 ParametreMonstre.DEFENSE_SPECIALE_SLIME,
@@ -64,7 +63,7 @@ public class Slime extends Entite {
     public void derniereAction() {
         double x = getPosition().getX();
         double y = getPosition().getY();
-        getMonde().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
+        Monde.getInstance().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
         System.out.println("passage");
     }
 

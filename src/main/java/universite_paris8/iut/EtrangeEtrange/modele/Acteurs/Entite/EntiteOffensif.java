@@ -19,7 +19,6 @@ public abstract class EntiteOffensif extends Entite
     /**
      * Crée une nouvelle entité offensif.
      *
-     * @param monde           Le monde dans lequel l'entité existe.
      * @param x               La position horizontale de l'entité.
      * @param y               La position verticale de l'entité.
      * @param direction       La direction dans laquelle l'entité est orientée.
@@ -31,9 +30,9 @@ public abstract class EntiteOffensif extends Entite
      * @param vitesse         La vitesse de déplacement de l'entité.
      * @param hitbox          La hitbox de l'entité.
      */
-    public EntiteOffensif(Monde monde, double x, double y, Direction direction, double pv, double attaque, double defense, double attaqueSpecial , double defenseSpecial, double vitesse,Hitbox hitbox)
+    public EntiteOffensif(double x, double y, Direction direction, double pv, double attaque, double defense, double attaqueSpecial , double defenseSpecial, double vitesse,Hitbox hitbox)
     {
-        super(monde,x,y,direction,pv,defense,defenseSpecial,vitesse,hitbox);
+        super(x,y,direction,pv,defense,defenseSpecial,vitesse,hitbox);
         this.statsAttaque = new Attaque(attaque);
         this.statsAttaqueSpecial = new AttaqueSpecial(attaqueSpecial);
     }

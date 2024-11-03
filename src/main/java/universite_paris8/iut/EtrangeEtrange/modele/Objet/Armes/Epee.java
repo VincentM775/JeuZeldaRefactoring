@@ -4,6 +4,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Cooldown;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
@@ -40,11 +41,10 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
         {
             utilisateur = entite;
             setPosition(entite.getPosition());
-            setMonde(entite.getMonde());
             setDirection(entite.getDirection());
 
             setPositionAttaque();
-            entite.getMonde().ajoutActeur(this);
+            Monde.getInstance().ajoutActeur(this);
 
             this.cooldown.reset();
             return true;
@@ -63,7 +63,7 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
         }
         else
         {
-            this.getMonde().enleveActeur(this);
+            Monde.getInstance().enleveActeur(this);
             cycle = 0;
         }
     }
@@ -119,7 +119,7 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
     public void causeCollision(Acteur acteur)
     {
         acteur.subitAttaque(this,(EntiteOffensif) utilisateur);
-        monde.ajoutActeurAsupprimer(this);
+        Monde.getInstance().ajoutActeurAsupprimer(this);
     }
 
     @Override

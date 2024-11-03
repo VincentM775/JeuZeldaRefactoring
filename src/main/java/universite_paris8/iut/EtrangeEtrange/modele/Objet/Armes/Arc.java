@@ -3,6 +3,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Fleche;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Cooldown;
@@ -30,13 +31,12 @@ public class Arc implements ObjetUtilisable
         if (this.cooldown.delaieEcoule() && fleche != null)
         {
             // Définition des paramètres pour la flèche
-            this.fleche.setMonde(entite.getMonde());
             this.fleche.setNewPosition(entite.getPosition().getX(),entite.getPosition().getY());
             this.fleche.setDirection(entite.getDirection());
             this.fleche.setUtilisateur(entite);
 
             // Ajout de la flèche et l'arc dans l'environnement
-            entite.getMonde().ajoutActeur(fleche);
+            Monde.getInstance().ajoutActeur(fleche);
 
             this.fleche = null;
             this.durabilitee--;

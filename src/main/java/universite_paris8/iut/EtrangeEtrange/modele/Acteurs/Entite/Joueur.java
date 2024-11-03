@@ -46,14 +46,13 @@ public abstract class Joueur extends EntiteOffensif {
      * @param sac            Le sac à dos du joueur.
      * @param objetMainGauche   L'objet tenu dans la main gauche du joueur.
      * @param objetMainDroite L'objet tenu dans la main droite du joueur.
-     * @param monde          Le monde dans lequel évolue le joueur.
      * @param x              La position horizontale du joueur dans le monde.
      * @param y              La position verticale du joueur dans le monde.
      * @param direction      La direction vers laquelle le joueur est orienté.
      * @param hitbox         La hitbox du joueur.
      */
-    public Joueur(double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, Sac sac, ElementStockable objetMainGauche, ElementStockable objetMainDroite, Monde monde, double x, double y, Direction direction, Hitbox hitbox) {
-        super(monde, x, y, direction, pv,attaque,defense,attaqueSpecial,defenseSpecial,vitesse,hitbox);
+    public Joueur(double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, Sac sac, ElementStockable objetMainGauche, ElementStockable objetMainDroite, double x, double y, Direction direction, Hitbox hitbox) {
+        super(x, y, direction, pv,attaque,defense,attaqueSpecial,defenseSpecial,vitesse,hitbox);
         this.competences = CreationArbre.arbres();
         this.estEntrainDeCourir = false;
         this.directions = new HashSet<>();

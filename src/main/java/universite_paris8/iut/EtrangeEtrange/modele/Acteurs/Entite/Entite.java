@@ -18,7 +18,6 @@ public abstract class Entite extends Acteur {
     /**
      * Crée une nouvelle instance d'Entite avec les paramètres spécifiés.
      *
-     * @param monde            Le monde dans lequel l'entité évolue.
      * @param x                La position horizontale de l'entité dans le monde.
      * @param y                La position verticale de l'entité dans le monde.
      * @param direction        La direction initiale de l'entité.
@@ -28,9 +27,9 @@ public abstract class Entite extends Acteur {
      * @param vitesse          La vitesse de déplacement de l'entité.
      * @param hitbox           La hitbox de l'entité.
      */
-    public Entite(Monde monde,double x,double y,Direction direction,double pv,double defense,double defenseSpecial,double vitesse, Hitbox hitbox)
+    public Entite(double x,double y,Direction direction,double pv,double defense,double defenseSpecial,double vitesse, Hitbox hitbox)
     {
-        super(monde,x,y,direction,pv,vitesse,hitbox);
+        super(x,y,direction,pv,vitesse,hitbox);
         this.statsDefense = new Defense(defense);
         this.statsDefenseSpecial = new DefenseSpecial(defenseSpecial);
     }

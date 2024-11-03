@@ -53,15 +53,15 @@ public class GestionnaireInventaire {
         this.objetMainDroite = objet;
     }
 
-    public void ramasserObjet(Monde monde, Position position, Direction direction) {
-        ArrayList<DropAuSol> dropAuSols = monde.getDropAuSol();
+    public void ramasserObjet(Position position, Direction direction) {
+        ArrayList<DropAuSol> dropAuSols = Monde.getInstance().getDropAuSol();
 
         for(int i = 0 ; i < dropAuSols.size() ; i++){
             Position position1 = dropAuSols.get(i).getPosition();
             if((Math.abs(position.getX()+direction.getX()-position1.getX())<1)
                     &&(Math.abs(position.getY()+direction.getY()-position1.getY())<1)
                     &&(sac.ajoutItem(dropAuSols.get(i).getObjet()))) {
-                monde.enleverDropAuSol(dropAuSols.get(i));
+                Monde.getInstance().enleverDropAuSol(dropAuSols.get(i));
                 i++;
             }
         }

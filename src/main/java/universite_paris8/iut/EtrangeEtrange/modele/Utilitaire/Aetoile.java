@@ -7,12 +7,10 @@ import java.util.*;
 
 public class Aetoile {
     public static final int DELAIE_RECHERCHE = 1000;
-    private Monde monde;
     private Sommet[][] graphe;
     private ArrayList<Position> chemin;
 
-    public Aetoile(Monde monde) {
-        this.monde = monde;
+    public Aetoile() {
         this.chemin = new ArrayList<>();
         construireGraphe(); // Construire le graphe lors de l'initialisation
     }
@@ -26,7 +24,7 @@ public class Aetoile {
         // Initialiser les sommets
         for (int y = 0; y < hauteur; y++) {
             for (int x = 0; x < largeur; x++) {
-                boolean traversable = monde.getNontraversable()[y][x] == -1;
+                boolean traversable = Monde.getInstance().getNontraversable()[y][x] == -1;
                 graphe[y][x] = new Sommet(new Position(x, y), traversable);
             }
         }
@@ -58,7 +56,7 @@ public class Aetoile {
         // Réinitialiser les sommets
         for (int y = 0; y < graphe.length; y++) {
             for (int x = 0; x < graphe[0].length; x++) {
-                graphe[y][x].setTraversable(monde.getNontraversable()[y][x] == -1);
+                graphe[y][x].setTraversable(Monde.getInstance().getNontraversable()[y][x] == -1);
             }
         }
 

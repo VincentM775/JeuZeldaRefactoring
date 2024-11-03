@@ -3,6 +3,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementIterable;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Sortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.*;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesSortilege;
@@ -25,7 +26,7 @@ public class SortilegePluitDeFleche extends Sortilege {
             for (int i = 0; i < NOMBRE_FLECHE; i++) {
                 int delaie = i*300;
                 ElementIterable pluieDeFleches = new LanceurFlecheARetardement(utilisateur, direction, x, y, delaie);
-                utilisateur.getMonde().ajoutIterable(pluieDeFleches);
+                Monde.getInstance().ajoutIterable(pluieDeFleches);
             }
             getCooldown().reset();
             return true;

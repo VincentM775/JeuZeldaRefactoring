@@ -57,7 +57,6 @@ public class Controller implements Initializable {
 
     @FXML
     private Pane paneInteraction;
-    private Monde monde;
     private Joueur joueur;
     private Timeline gameLoop;
     private GestionSon gestionSon;
@@ -74,30 +73,29 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         switchDonnees = switchDonnees.getSwitchScene();
         switchDonnees.setControllerJeu(this);
-        initMonde();
         initJoueur();
         initVie();
         switchDonnees.setJoueur(joueur);
         initPane();
 
         gestionAffichageSpriteEntite = new GestionAffichageSpriteEntite(paneEntite);
-        monde.setListenerListeEntites(gestionAffichageSpriteEntite);
+        Monde.getInstance().setListenerListeEntites(gestionAffichageSpriteEntite);
         gestionAffichageSpriteEntite.ajouterJoueur(joueur);
 
         this.gestionSon = new GestionSon();
         switchDonnees.setGestionSon(gestionSon);
 
-        GestionActeur gestionActeur = new GestionActeur(monde,paneEntite, gestionSon);
-        monde.setListenerActeur(gestionActeur);
+        GestionActeur gestionActeur = new GestionActeur(paneEntite, gestionSon);
+        Monde.getInstance().setListenerActeur(gestionActeur);
 
-        GestionAffichageMap gestionAffichageMap = new GestionAffichageMap(monde, TilePaneSol, TilePaneTraversable, TilePaneNontraversable);
+        GestionAffichageMap gestionAffichageMap = new GestionAffichageMap(TilePaneSol, TilePaneTraversable, TilePaneNontraversable);
         gestionAffichageMap.afficherMondeJSON();
 
         GestionAffichageSpriteDropAuSol gestionAffichageDropAuSol = new GestionAffichageSpriteDropAuSol(paneEntite);
-        monde.setListenerListeDropsAuSol(gestionAffichageDropAuSol);
+        Monde.getInstance().setListenerListeDropsAuSol(gestionAffichageDropAuSol);
 
-        monde.setJoueur(joueur);
-        monde.creationMonstre("src/main/resources/universite_paris8/iut/EtrangeEtrange/TiledMap/", "mapfinal", Monde.getSizeMondeHauteur());
+        Monde.getInstance().setJoueur(joueur);
+        Monde.getInstance().creationMonstre("src/main/resources/universite_paris8/iut/EtrangeEtrange/TiledMap/", "mapfinal", Monde.getSizeMondeHauteur());
 
         initGameLoop();
         gameLoop.play();
@@ -134,7 +132,7 @@ public class Controller implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(Duration.seconds(0.005), (ev -> {
-            monde.unTour();
+            Monde.getInstance().unTour();
             gestionAffichageSpriteEntite.miseAjour();}));
         gameLoop.getKeyFrames().add(kf);
     }
@@ -177,25 +175,21 @@ public class Controller implements Initializable {
                 return -position * ConstantesAffichage.tailleTile + longueurAxe / 2.0;
         return positionInitiale;
     }
-    public void initMonde()
-    {
-        monde = new Monde("src/main/resources/universite_paris8/iut/EtrangeEtrange/TiledMap/", "mapfinal", Monde.getSizeMondeHauteur(), Monde.getSizeMondeLargeur());
-    }
 
     public void initJoueur() {
         String guerrier = switchDonnees.getClasseJoueur();
 
         if (guerrier.equals("Guerrier")) {
-            joueur = new Guerrier(monde, Monde.getxPointDeDepart(), Monde.getyPointDeDepart(), Direction.BAS);
+            joueur = new Guerrier(Monde.getxPointDeDepart(), Monde.getyPointDeDepart(), Direction.BAS);
         } else if (guerrier.equals("Archer")) {
-            joueur = new Archer(monde, Monde.getxPointDeDepart(), Monde.getyPointDeDepart(), Direction.BAS);
+            joueur = new Archer(Monde.getxPointDeDepart(), Monde.getyPointDeDepart(), Direction.BAS);
         } else if (guerrier.equals("Mage")) {
             // pas encore implementer
         } else if (guerrier.equals("Necromancier")) {
             // pas encore implementer
         }
         switchDonnees.setJoueur(joueur);
-        monde.setJoueur(joueur);
+        Monde.getInstance().setJoueur(joueur);
         joueur.getGestionnaireInventaire().getSac().ajoutItem(new Epee());
         joueur.getGestionnaireInventaire().getSac().ajoutItem(new Potion());
     }
@@ -223,7 +217,7 @@ public class Controller implements Initializable {
                 joueur.setSeDeplace(true);
             }
             else if (keyCode == ConstantesClavier.recupererObjetSol)
-                joueur.getGestionnaireInventaire().ramasserObjet(joueur.getMonde(),joueur.getPosition(),joueur.getDirection());
+                joueur.getGestionnaireInventaire().ramasserObjet(joueur.getPosition(),joueur.getDirection());
             else if (keyCode == ConstantesClavier.degattest)
                 joueur.enlevePv(10);
             else if(keyCode == ConstantesClavier.attaquer)
@@ -310,7 +304,7 @@ public class Controller implements Initializable {
 
     public void interaction()
     {
-        Acteur acteur = monde.interactionAvecActeur();
+        Acteur acteur = Monde.getInstance().interactionAvecActeur();
         System.out.println(acteur);
 
         if (acteur != null)

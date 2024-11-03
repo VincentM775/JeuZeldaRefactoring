@@ -17,12 +17,9 @@ import universite_paris8.iut.EtrangeEtrange.vues.GestionSon;
 public class GestionActeur implements ListChangeListener<Acteur>
 {
     private Pane pane;
-    private Monde monde;
     private GestionSon gestionSon;
 
-    public GestionActeur(Monde monde, Pane pane, GestionSon gestionSon)
-    {
-        this.monde = monde;
+    public GestionActeur(Pane pane, GestionSon gestionSon) {
         this.pane = pane;
         this.gestionSon = gestionSon;
     }
@@ -63,7 +60,7 @@ public class GestionActeur implements ListChangeListener<Acteur>
     {
         acteur.getStatsPv().getPvActuelleProperty().addListener((obs, old, nouv)->{
             if (Math.round(nouv.doubleValue()) == 0)
-                this.monde.ajoutActeurAsupprimer(acteur);
+                Monde.getInstance().ajoutActeurAsupprimer(acteur);
         });
     }
 
@@ -75,14 +72,14 @@ public class GestionActeur implements ListChangeListener<Acteur>
 
     private void verifCollision(Acteur acteur)
     {
-        Joueur joueur = monde.getJoueur();
+        Joueur joueur = Monde.getInstance().getJoueur();
 
-        if(acteur != joueur && monde.collisionAvecActeur(acteur,joueur))
+        if(acteur != joueur && Monde.getInstance().collisionAvecActeur(acteur,joueur))
         {
             acteur.subitCollision(joueur);
         }
 
-        monde.verifCollision(acteur);
+        Monde.getInstance().verifCollision(acteur);
     }
 
 

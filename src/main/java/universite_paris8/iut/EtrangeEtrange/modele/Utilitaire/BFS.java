@@ -10,18 +10,15 @@ import java.util.Queue;
 
 public class BFS {
     public static final int DELAIE_RECHERCHE = 300;
-    private Monde monde;
     private ArrayList<Sommet> chemins;
     private Sommet[][] graphe;
     private int xArrive, yArrive;
 
     public BFS() {
-        monde = null;
         chemins = new ArrayList<>();
     }
 
-    public void chercherChemin(Monde monde, Position positionDepart, Position positionArrive) {
-        this.monde = monde;
+    public void chercherChemin(Position positionDepart, Position positionArrive) {
         this.xArrive = (int) positionArrive.getX();
         this.yArrive = (int) positionArrive.getY();
         construireGraphe();
@@ -35,7 +32,7 @@ public class BFS {
 
         for (int y = 0; y < hauteur; y++)
             for (int x = 0; x < largeur; x++)
-                this.graphe[y][x] = new Sommet(new Position(x, y), monde.getNontraversable()[y][x] == -1);
+                this.graphe[y][x] = new Sommet(new Position(x, y), Monde.getInstance().getNontraversable()[y][x] == -1);
 
 
         for (int y = 0; y < hauteur; y++)

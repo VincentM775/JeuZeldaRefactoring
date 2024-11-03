@@ -11,8 +11,8 @@ import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesPersonna
 
 public class Guerrier extends Joueur
 {
-    public Guerrier(Monde monde, double x, double y, Direction direction) {
-        super(ConstantesPersonnages.GUERRIER_PV, ConstantesPersonnages.GUERRIER_ATTAQUE, ConstantesPersonnages.GUERRIER_DEFENSE, ConstantesPersonnages.GUERRIER_ATTAQUE_SPECIAL, ConstantesPersonnages.GUERRIER_DEFENSE_SEPCIAL, ConstantesPersonnages.GUERRIER_VITESSE, new Sac(), null, new Epee(), monde, x, y, direction, new Hitbox(0.50, 0.50));
+    public Guerrier( double x, double y, Direction direction) {
+        super(ConstantesPersonnages.GUERRIER_PV, ConstantesPersonnages.GUERRIER_ATTAQUE, ConstantesPersonnages.GUERRIER_DEFENSE, ConstantesPersonnages.GUERRIER_ATTAQUE_SPECIAL, ConstantesPersonnages.GUERRIER_DEFENSE_SEPCIAL, ConstantesPersonnages.GUERRIER_VITESSE, new Sac(), null, new Epee(), x, y, direction, new Hitbox(0.50, 0.50));
     }
 
     @Override

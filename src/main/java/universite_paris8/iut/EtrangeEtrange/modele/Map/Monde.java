@@ -53,6 +53,7 @@ public class Monde {
 
     private ObservableList<Acteur> acteurs = FXCollections.observableArrayList();
     private ArrayList<Acteur> acteursAsupprimer = new ArrayList<>();
+    private static Monde instance;
 
 
 
@@ -101,6 +102,12 @@ public class Monde {
         }
 
     }
+    public static Monde getInstance(){
+        if (instance == null) {
+            instance = new Monde("src/main/resources/universite_paris8/iut/EtrangeEtrange/TiledMap/", "mapfinal", Monde.getSizeMondeHauteur(), Monde.getSizeMondeLargeur());
+        }
+        return instance;
+    }
 
     public static void setSizeMondeLargeur(int largeurMonde) {
     }
@@ -122,15 +129,15 @@ public class Monde {
                     Acteur acteur = null;
                     if (monstre != -1) {
                         if (monstre == 4)
-                            acteur = new Marchand(this, j+0.5 ,ligneIndex+0.5, Direction.BAS);
+                            acteur = new Marchand(j+0.5 ,ligneIndex+0.5, Direction.BAS);
                         else if(monstre == 2)
-                            acteur = new Slime(this, j+0.5, ligneIndex+0.5, Direction.BAS, new Hitbox(0.25, 0.5));
+                            acteur = new Slime(j+0.5, ligneIndex+0.5, Direction.BAS, new Hitbox(0.25, 0.5));
                         else if(monstre == 3)
-                            acteur = new Squelette(this, j+0.5, ligneIndex+0.5,  Direction.BAS, new Hitbox(0.5, 0.5),joueur , new Aetoile(this));
+                            acteur = new Squelette(j+0.5, ligneIndex+0.5,  Direction.BAS, new Hitbox(0.5, 0.5),joueur , new Aetoile());
                         else if(monstre == 1)
-                            acteur = new RoiSquelette(this, j+0.5 , ligneIndex+0.5, Direction.BAS);
+                            acteur = new RoiSquelette( j+0.5 , ligneIndex+0.5, Direction.BAS);
                         else if(monstre == 0)
-                            acteur = new Bloc(this, j+0.5, ligneIndex+0.5, Direction.BAS, 1, 1, new Hitbox(1,1 ));
+                            acteur = new Bloc( j+0.5, ligneIndex+0.5, Direction.BAS, 1, 1, new Hitbox(1,1 ));
                         ajoutActeur(acteur);
                     }
                 }
@@ -472,6 +479,11 @@ public class Monde {
 
     public void ajoutIterable(ElementIterable elementIterables) {
         this.elementsIterable.add(elementIterables);
+    }
+
+    //Cette méthode ne sert que pour les testJunits
+    public void setMonde(Monde monde){
+        instance = monde;
     }
 }
 

@@ -15,13 +15,10 @@ import static org.junit.Assert.assertEquals;
 public class EntiteTest
 {
 
-    private Monde monde = new Monde("src/main/resources/universite_paris8/iut/EtrangeEtrange/TiledMap/", "maptest", Monde.getSizeMondeHauteur(), Monde.getSizeMondeLargeur());
-
-
     @Test
     public void testDeplacement()
     {
-        Entite entite = new Guerrier(monde,10,10, Direction.GAUCHE);
+        Entite entite = new Guerrier(10,10, Direction.GAUCHE);
 
         entite.seDeplace(1);
 

@@ -2,6 +2,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesSortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.*;
@@ -67,7 +68,7 @@ public class Orbe extends Projectile
     public void chercheChemin()
     {
         if(this.cooldownRechercheChemin.delaieEcoule() &&  this.acteurAsuivre != null) {
-            this.bfs.chercherChemin(this.monde, getPosition(), acteurAsuivre.getPosition());
+            this.bfs.chercherChemin(getPosition(), acteurAsuivre.getPosition());
             this.positionAsuivre = bfs.prochainePosition();
             this.cooldownRechercheChemin.reset();
         }
@@ -96,5 +97,5 @@ public class Orbe extends Projectile
     @Override
     public int prixAchat() { return PRIX_ACHAT; }
     @Override
-    public boolean peutSeDeplacer() {return !monde.estHorsMap(this);}
+    public boolean peutSeDeplacer() {return !Monde.getInstance().estHorsMap(this);}
 }
