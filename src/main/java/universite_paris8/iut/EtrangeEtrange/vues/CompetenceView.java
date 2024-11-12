@@ -80,9 +80,11 @@ public class CompetenceView {
 
         imageView.setOnMouseClicked(e ->
         {
-            competence.getCompetence().monterDeNiveau(joueur);
-            competence.getCompetence().debloquer();
-            imageView.setEffect(null);
+            if (competences.parentDebloquer(competence)) {
+                competence.getCompetence().monterDeNiveau(joueur);
+                competence.getCompetence().debloquer();
+                imageView.setEffect(null);
+            }
         });
 
         imageView.setImage(image);
