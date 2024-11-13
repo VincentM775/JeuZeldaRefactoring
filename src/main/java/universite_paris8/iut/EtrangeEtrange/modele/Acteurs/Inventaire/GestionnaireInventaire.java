@@ -1,6 +1,7 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Inventaire;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
@@ -54,14 +55,14 @@ public class GestionnaireInventaire {
     }
 
     public void ramasserObjet(Position position, Direction direction) {
-        ArrayList<DropAuSol> dropAuSols = Monde.getInstance().getDropAuSol();
+        ArrayList<DropAuSol> dropAuSols = Environnement.getInstance().getDropAuSol();
 
         for(int i = 0 ; i < dropAuSols.size() ; i++){
             Position position1 = dropAuSols.get(i).getPosition();
             if((Math.abs(position.getX()+direction.getX()-position1.getX())<1)
                     &&(Math.abs(position.getY()+direction.getY()-position1.getY())<1)
                     &&(sac.ajoutItem(dropAuSols.get(i).getObjet()))) {
-                Monde.getInstance().enleverDropAuSol(dropAuSols.get(i));
+                Environnement.getInstance().enleverDropAuSol(dropAuSols.get(i));
                 i++;
             }
         }

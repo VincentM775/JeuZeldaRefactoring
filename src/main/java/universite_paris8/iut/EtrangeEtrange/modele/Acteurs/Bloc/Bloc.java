@@ -3,6 +3,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Bloc;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Monnaie.PieceOr;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
@@ -36,7 +37,7 @@ public class Bloc extends Acteur {
     public void derniereAction() {
         double x = getPosition().getX();
         double y = getPosition().getY();
-        Monde.getInstance().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
+        Environnement.getInstance().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
     }
 
     @Override

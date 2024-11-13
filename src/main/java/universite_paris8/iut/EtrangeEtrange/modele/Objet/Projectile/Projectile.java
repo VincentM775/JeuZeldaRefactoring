@@ -3,6 +3,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
@@ -45,7 +46,7 @@ public abstract class Projectile extends Acteur implements ElementDommageable, E
 
     @Override
     public boolean peutSeDeplacer() {
-        return !Monde.getInstance().estHorsMap(this) && !Monde.getInstance().collisionMap(this);
+        return !Environnement.getInstance().getMonde().estHorsMap(this) && !Environnement.getInstance().getMonde().collisionMap(this);
     }
     public void setUtilisateur(EntiteDefensive entite){this.utilisateur = entite;}
     @Override

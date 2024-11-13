@@ -3,6 +3,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Fleche;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
@@ -36,7 +37,7 @@ public class Arc implements ObjetUtilisable
             this.fleche.setUtilisateur(entite);
 
             // Ajout de la flèche et l'arc dans l'environnement
-            Monde.getInstance().ajoutActeur(fleche);
+            Environnement.getInstance().ajoutActeur(fleche);
 
             this.fleche = null;
             this.durabilitee--;

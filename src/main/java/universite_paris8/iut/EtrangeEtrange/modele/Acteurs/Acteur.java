@@ -4,6 +4,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementIterable;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Pv;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Vitesse;
@@ -75,7 +76,7 @@ public abstract class Acteur
      * @return true si l'acteur peut se déplacer, false sinon.
      */
     public boolean peutSeDeplacer(){
-        return !Monde.getInstance().estHorsMap(this) && !Monde.getInstance().collision(this);}
+        return !Environnement.getInstance().getMonde().estHorsMap(this) && !Environnement.getInstance().collision(this);}
 
 
     /**

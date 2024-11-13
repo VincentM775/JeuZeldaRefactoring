@@ -2,6 +2,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ParametreMonstre;
@@ -99,9 +100,9 @@ public class Squelette extends EntiteOffensif {
 
     @Override
     public void agir() {
-        if (Monde.getInstance().estDansRayon(getPosition(), 6)){
+        if (Environnement.getInstance().estDansRayon(getPosition(), 6)){
             seDeplacerVers(joueur.getPosition());
-            if (Monde.getInstance().estDansRayon(getPosition(), 2)){
+            if (Environnement.getInstance().estDansRayon(getPosition(), 2)){
                 attaque();
             }
         }
@@ -137,7 +138,7 @@ public class Squelette extends EntiteOffensif {
     public void derniereAction() {
         double x = getPosition().getX();
         double y = getPosition().getY();
-        Monde.getInstance().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
+        Environnement.getInstance().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
         System.out.println("passage");
     }
 

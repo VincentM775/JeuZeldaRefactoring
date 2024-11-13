@@ -2,6 +2,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementIterable;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Cooldown;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -28,7 +29,7 @@ public class LanceurFlecheARetardement implements ElementIterable {
         flecheSimple.setDirection(this.direction);
         flecheSimple.setPosition(positionAleaAutourDe(this.position, this.direction));
         flecheSimple.setUtilisateur(this.utilisateur);
-        Monde.getInstance().ajoutActeur(flecheSimple);
+        Environnement.getInstance().ajoutActeur(flecheSimple);
         this.flecheLancee = true;
     }
 

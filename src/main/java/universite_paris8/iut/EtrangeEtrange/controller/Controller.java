@@ -19,6 +19,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.GestionPr
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Archer;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
 
@@ -79,23 +80,23 @@ public class Controller implements Initializable {
         initPane();
 
         gestionAffichageSpriteEntite = new GestionAffichageSpriteEntite(paneEntite);
-        Monde.getInstance().setListenerListeEntites(gestionAffichageSpriteEntite);
+        Environnement.getInstance().setListenerListeEntites(gestionAffichageSpriteEntite);
         gestionAffichageSpriteEntite.ajouterJoueur(joueur);
 
         this.gestionSon = new GestionSon();
         switchDonnees.setGestionSon(gestionSon);
 
         GestionActeur gestionActeur = new GestionActeur(paneEntite, gestionSon);
-        Monde.getInstance().setListenerActeur(gestionActeur);
+        Environnement.getInstance().setListenerActeur(gestionActeur);
 
         GestionAffichageMap gestionAffichageMap = new GestionAffichageMap(TilePaneSol, TilePaneTraversable, TilePaneNontraversable);
         gestionAffichageMap.afficherMondeJSON();
 
         GestionAffichageSpriteDropAuSol gestionAffichageDropAuSol = new GestionAffichageSpriteDropAuSol(paneEntite);
-        Monde.getInstance().setListenerListeDropsAuSol(gestionAffichageDropAuSol);
+        Environnement.getInstance().setListenerListeDropsAuSol(gestionAffichageDropAuSol);
 
-        Monde.getInstance().setJoueur(joueur);
-        Monde.getInstance().creationMonstre("src/main/resources/universite_paris8/iut/EtrangeEtrange/TiledMap/", "mapfinal", Monde.getSizeMondeHauteur());
+        Environnement.getInstance().setJoueur(joueur);
+        Environnement.getInstance().creationMonstre("src/main/resources/universite_paris8/iut/EtrangeEtrange/TiledMap/", "mapfinal", Monde.getSizeMondeHauteur());
 
         initGameLoop();
         gameLoop.play();
@@ -108,6 +109,8 @@ public class Controller implements Initializable {
         joueur.getStatsPv().getPvActuelleProperty().addListener((obs, old, nouv) -> {
             if (nouv.doubleValue() <= 0) {
                 try {
+                    gameLoop.stop();
+                    Environnement.getInstance().resetEnvironnement();
                     switchDonnees.gameOver();
                     gestionSon.gameOver();
                 } catch (IOException e) {
@@ -132,7 +135,8 @@ public class Controller implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(Duration.seconds(0.005), (ev -> {
-            Monde.getInstance().unTour();
+            System.out.println("tour");
+            Environnement.getInstance().unTour();
             gestionAffichageSpriteEntite.miseAjour();}));
         gameLoop.getKeyFrames().add(kf);
     }
@@ -189,7 +193,7 @@ public class Controller implements Initializable {
             // pas encore implementer
         }
         switchDonnees.setJoueur(joueur);
-        Monde.getInstance().setJoueur(joueur);
+        Environnement.getInstance().setJoueur(joueur);
         joueur.getGestionnaireInventaire().getSac().ajoutItem(new Epee());
         joueur.getGestionnaireInventaire().getSac().ajoutItem(new Potion());
     }
@@ -304,7 +308,7 @@ public class Controller implements Initializable {
 
     public void interaction()
     {
-        Acteur acteur = Monde.getInstance().interactionAvecActeur();
+        Acteur acteur = Environnement.getInstance().interactionAvecActeur();
         System.out.println(acteur);
 
         if (acteur != null)

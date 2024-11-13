@@ -2,6 +2,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesSortilege;
@@ -97,5 +98,5 @@ public class Orbe extends Projectile
     @Override
     public int prixAchat() { return PRIX_ACHAT; }
     @Override
-    public boolean peutSeDeplacer() {return !Monde.getInstance().estHorsMap(this);}
+    public boolean peutSeDeplacer() {return !Environnement.getInstance().getMonde().estHorsMap(this);}
 }

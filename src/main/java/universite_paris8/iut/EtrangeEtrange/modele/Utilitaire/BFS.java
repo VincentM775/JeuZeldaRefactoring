@@ -1,5 +1,6 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Utilitaire;
 
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
 
@@ -32,7 +33,7 @@ public class BFS {
 
         for (int y = 0; y < hauteur; y++)
             for (int x = 0; x < largeur; x++)
-                this.graphe[y][x] = new Sommet(new Position(x, y), Monde.getInstance().getNontraversable()[y][x] == -1);
+                this.graphe[y][x] = new Sommet(new Position(x, y), Environnement.getInstance().getMonde().getNontraversable()[y][x] == -1);
 
 
         for (int y = 0; y < hauteur; y++)

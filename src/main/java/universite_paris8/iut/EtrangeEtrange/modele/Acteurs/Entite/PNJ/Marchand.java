@@ -7,6 +7,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Action.ActionVend
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Action.Soigner;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.*;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
@@ -137,7 +138,7 @@ public class Marchand extends Acteur
             ArrayList<ElementStockable> obs = objets.enleverToutLesObjets();
 
             for (ElementStockable objet : obs) {
-                Monde.getInstance().ajouterDropAuSol(new DropAuSol(objet, obs.size(), new Position(position.getX(), position.getY())));
+                Environnement.getInstance().ajouterDropAuSol(new DropAuSol(objet, obs.size(), new Position(position.getX(), position.getY())));
             }
         }
     }

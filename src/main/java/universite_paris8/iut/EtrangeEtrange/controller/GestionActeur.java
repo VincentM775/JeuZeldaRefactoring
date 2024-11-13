@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -60,7 +61,7 @@ public class GestionActeur implements ListChangeListener<Acteur>
     {
         acteur.getStatsPv().getPvActuelleProperty().addListener((obs, old, nouv)->{
             if (Math.round(nouv.doubleValue()) == 0)
-                Monde.getInstance().ajoutActeurAsupprimer(acteur);
+                Environnement.getInstance().ajoutActeurAsupprimer(acteur);
         });
     }
 
@@ -72,14 +73,14 @@ public class GestionActeur implements ListChangeListener<Acteur>
 
     private void verifCollision(Acteur acteur)
     {
-        Joueur joueur = Monde.getInstance().getJoueur();
+        Joueur joueur = Environnement.getInstance().getJoueur();
 
-        if(acteur != joueur && Monde.getInstance().collisionAvecActeur(acteur,joueur))
+        if(acteur != joueur && Environnement.getInstance().collisionAvecActeur(acteur,joueur))
         {
             acteur.subitCollision(joueur);
         }
 
-        Monde.getInstance().verifCollision(acteur);
+        Environnement.getInstance().exerceCollision(acteur);
     }
 
 

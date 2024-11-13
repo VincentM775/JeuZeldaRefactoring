@@ -1,5 +1,6 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Utilitaire;
 
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 
 import java.util.*;
@@ -23,7 +24,7 @@ public class Aetoile {
         // Initialiser les sommets
         for (int y = 0; y < hauteur; y++) {
             for (int x = 0; x < largeur; x++) {
-                boolean traversable = Monde.getInstance().getNontraversable()[y][x] == -1;
+                boolean traversable = Environnement.getInstance().getMonde().getNontraversable()[y][x] == -1;
                 graphe[y][x] = new Sommet(new Position(x, y), traversable);
             }
         }
@@ -55,7 +56,7 @@ public class Aetoile {
         // Réinitialiser les sommets
         for (int y = 0; y < graphe.length; y++) {
             for (int x = 0; x < graphe[0].length; x++) {
-                graphe[y][x].setTraversable(Monde.getInstance().getNontraversable()[y][x] == -1);
+                graphe[y][x].setTraversable(Environnement.getInstance().getMonde().getNontraversable()[y][x] == -1);
             }
         }
 

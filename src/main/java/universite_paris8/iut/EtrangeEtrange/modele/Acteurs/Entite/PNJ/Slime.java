@@ -2,6 +2,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Monnaie.PieceOr;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ParametreMonstre;
@@ -63,7 +64,7 @@ public class Slime extends EntiteDefensive {
     public void derniereAction() {
         double x = getPosition().getX();
         double y = getPosition().getY();
-        Monde.getInstance().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
+        Environnement.getInstance().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
         System.out.println("passage");
     }
 

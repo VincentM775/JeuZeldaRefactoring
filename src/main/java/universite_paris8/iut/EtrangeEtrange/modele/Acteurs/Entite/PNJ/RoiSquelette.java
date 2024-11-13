@@ -3,6 +3,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.TypeCompetence;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.LivreMagique;
@@ -75,7 +76,7 @@ public class RoiSquelette extends EntiteOffensif
                 return;
             }
         }
-        if (Monde.getInstance().estDansRayon(getPosition(), 2)){
+        if (Environnement.getInstance().estDansRayon(getPosition(), 2)){
             attaque();
         }
 
@@ -113,7 +114,7 @@ public class RoiSquelette extends EntiteOffensif
 
     // Détecte si le joueur est dans un certain rayon autour du Roi Squelette
     private boolean detecteJoueurDansRayon(double rayon) {
-        Position positionJoueur = Monde.getInstance().getJoueur().getPosition();
+        Position positionJoueur = Environnement.getInstance().getJoueur().getPosition();
         double distance = Math.sqrt(Math.pow(positionJoueur.getX() - getPosition().getX(), 2) +
                 Math.pow(positionJoueur.getY() - getPosition().getY(), 2));
         return distance <= rayon;
@@ -126,10 +127,10 @@ public class RoiSquelette extends EntiteOffensif
 
         Position positionHaut = new Position(getPosition().getX(), getPosition().getY()-2);
         Position positionBas = new Position(getPosition().getX(), getPosition().getY()+2);
-        Squelette squeletteGauche = new Squelette(positionHaut.getX(), positionHaut.getY(), Direction.BAS, new Hitbox(0.5, 0.5), Monde.getInstance().getJoueur(), new Aetoile());
-        Squelette squeletteDroite = new Squelette(positionBas.getX(), positionBas.getY(), Direction.BAS, new Hitbox(0.5, 0.5), Monde.getInstance().getJoueur(), new Aetoile());
-        Monde.getInstance().ajoutActeur(squeletteGauche);
-        Monde.getInstance().ajoutActeur(squeletteDroite);
+        Squelette squeletteGauche = new Squelette(positionHaut.getX(), positionHaut.getY(), Direction.BAS, new Hitbox(0.5, 0.5), Environnement.getInstance().getJoueur(), new Aetoile());
+        Squelette squeletteDroite = new Squelette(positionBas.getX(), positionBas.getY(), Direction.BAS, new Hitbox(0.5, 0.5), Environnement.getInstance().getJoueur(), new Aetoile());
+        Environnement.getInstance().ajoutActeur(squeletteGauche);
+        Environnement.getInstance().ajoutActeur(squeletteDroite);
         new Potion().utilise(this);
         new Potion().utilise(this);
         new Potion().utilise(this);
@@ -159,7 +160,7 @@ public class RoiSquelette extends EntiteOffensif
     }
 
     @Override
-    public void derniereAction() {TypeCompetence.COURIR.getCompetence().monterDeNiveau(Monde.getInstance().getJoueur());}
+    public void derniereAction() {TypeCompetence.COURIR.getCompetence().monterDeNiveau(Environnement.getInstance().getJoueur());}
 
     @Override
     public boolean estUnEnemie() {
