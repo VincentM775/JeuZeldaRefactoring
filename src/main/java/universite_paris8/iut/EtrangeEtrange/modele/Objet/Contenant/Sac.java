@@ -3,8 +3,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 
-public class Sac extends ObjetConteneur<ElementStockable>
-{
+public class Sac extends ObjetConteneur<ElementStockable> {
     private static final int TAILLE = ConstanteObjet.TAILLE_SAC;
     private static final int STACK_MAX = ConstanteObjet.STACK_MAX_SAC;
     private static final int DURABILITEE = ConstanteObjet.DURABILITE_SAC;

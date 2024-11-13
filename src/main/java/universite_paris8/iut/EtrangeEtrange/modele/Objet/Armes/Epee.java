@@ -1,7 +1,7 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
@@ -23,7 +23,7 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
     private final int STACK_MAX = ConstanteObjet.STACK_MAX_EPEE;
 
     private short cycle;
-    private Entite utilisateur;
+    private EntiteDefensive utilisateur;
     private Cooldown cooldown;
 
 
@@ -35,7 +35,7 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
     }
 
     @Override
-    public boolean utilise(Entite entite)
+    public boolean utilise(EntiteDefensive entite)
     {
         if (this.cooldown.delaieEcoule())
         {

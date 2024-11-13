@@ -1,11 +1,9 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Attaque;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Sortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Orbe;
-import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesSortilege;
 
 public class SortilegeOrbe extends Sortilege
 {
@@ -14,7 +12,7 @@ public class SortilegeOrbe extends Sortilege
     }
 
     @Override
-    public boolean utilise(Entite entite)
+    public boolean utilise(EntiteDefensive entite)
     {
         Orbe orbe = new Orbe(entite);
 

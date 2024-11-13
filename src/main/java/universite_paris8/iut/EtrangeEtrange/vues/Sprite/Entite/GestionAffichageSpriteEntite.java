@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 ;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Marchand;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.RoiSquelette;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Slime;
@@ -56,11 +56,11 @@ public class GestionAffichageSpriteEntite implements ListChangeListener<Acteur>
     public void onChanged(Change<? extends Acteur> change) {
         while(change.next()){
             for (Acteur entite : change.getAddedSubList()) {
-                if(entite instanceof Entite || entite instanceof Marchand)
+                if(entite instanceof EntiteDefensive || entite instanceof Marchand)
                     creeSprite(entite);
             }
             for(Acteur entite : change.getRemoved()) {
-                if(entite instanceof Entite || entite instanceof Marchand)
+                if(entite instanceof EntiteDefensive || entite instanceof Marchand)
                     suprimmerSprite(entite);
             }
         }

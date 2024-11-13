@@ -1,9 +1,7 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins;
 
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementUtilisable;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 
@@ -19,7 +17,7 @@ public class Potion implements ObjetUtilisable
     public Potion(){this.durabilitee = DURABILITEE;}
 
     @Override
-    public boolean utilise(Entite entite)
+    public boolean utilise(EntiteDefensive entite)
     {
         if (durabilitee > 0) {
             entite.soigner(RESTORATION);

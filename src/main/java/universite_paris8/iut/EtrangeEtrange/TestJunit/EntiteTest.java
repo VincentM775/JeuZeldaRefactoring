@@ -2,11 +2,9 @@ package universite_paris8.iut.EtrangeEtrange.TestJunit;
 
 
 import org.junit.Test;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Guerrier;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
-import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Aetoile;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 
 import static org.junit.Assert.assertEquals;
@@ -18,7 +16,7 @@ public class EntiteTest
     @Test
     public void testDeplacement()
     {
-        Entite entite = new Guerrier(10,10, Direction.GAUCHE);
+        EntiteDefensive entite = new Guerrier(10,10, Direction.GAUCHE);
 
         entite.seDeplace(1);
 

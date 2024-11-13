@@ -1,6 +1,5 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Attaque;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.AttaqueSpecial;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -9,7 +8,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 /**
  * Représente un être-vivant dans le monde du jeu pouvant attaquer.
  */
-public abstract class EntiteOffensif extends Entite
+public abstract class EntiteOffensif extends EntiteDefensive
 {
     protected Attaque statsAttaque;
     

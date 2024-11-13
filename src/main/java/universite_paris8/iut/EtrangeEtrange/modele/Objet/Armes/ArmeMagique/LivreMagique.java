@@ -1,5 +1,5 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Sortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
@@ -33,7 +33,7 @@ public  class LivreMagique implements ObjetUtilisable
     }
 
     @Override
-    public boolean utilise(Entite entite)
+    public boolean utilise(EntiteDefensive entite)
     {
         if (this.cooldown.delaieEcoule() && this.sortilegeCourant != null)
         {

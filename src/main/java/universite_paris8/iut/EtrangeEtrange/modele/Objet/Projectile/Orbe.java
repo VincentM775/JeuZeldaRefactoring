@@ -1,7 +1,7 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesSortilege;
@@ -22,7 +22,7 @@ public class Orbe extends Projectile
     private Acteur acteurAsuivre;
     private Cooldown cooldownRechercheChemin;
 
-    public Orbe(Entite utilisateur)
+    public Orbe(EntiteDefensive utilisateur)
     {
         super(utilisateur, PV,VITESSE,HITBOX);
         this.positionAsuivre = null;

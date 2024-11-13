@@ -2,7 +2,6 @@ package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Defense;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.DefenseSpecial;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -11,7 +10,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
  * Représente un être vivant dans le monde du jeu.
  * Cette classe étend la classe abstraite Acteur
  */
-public abstract class Entite extends Acteur {
+public abstract class EntiteDefensive extends Acteur {
     protected Defense statsDefense;
     protected DefenseSpecial statsDefenseSpecial;
 
@@ -27,8 +26,7 @@ public abstract class Entite extends Acteur {
      * @param vitesse          La vitesse de déplacement de l'entité.
      * @param hitbox           La hitbox de l'entité.
      */
-    public Entite(double x,double y,Direction direction,double pv,double defense,double defenseSpecial,double vitesse, Hitbox hitbox)
-    {
+    public EntiteDefensive(double x, double y, Direction direction, double pv, double defense, double defenseSpecial, double vitesse, Hitbox hitbox) {
         super(x,y,direction,pv,vitesse,hitbox);
         this.statsDefense = new Defense(defense);
         this.statsDefenseSpecial = new DefenseSpecial(defenseSpecial);
@@ -38,8 +36,7 @@ public abstract class Entite extends Acteur {
      * Subit des dégâts infligés par une source dommageable.
      * @param causeDegat La source de dégâts.
      */
-    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif)
-    {
+    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif) {
         enlevePv((subitDegatPhysique(entiteOffensif.getAttaque(),causeDegat.degatPhysique()) + subitDegatSpecial(causeDegat.degatSpecial(), entiteOffensif.getAttaqueSpecial()))/2);
     }
 
@@ -55,7 +52,9 @@ public abstract class Entite extends Acteur {
      * @param degatArme La force de l'entité qui inflige les dégâts.
      * @return Les dégâts physiques subis.
      */
-    protected double subitDegatPhysique(double attaqueEntite,double degatArme) {return Math.abs(attaqueEntite+degatArme - statsDefense.getDefense());}
+    protected double subitDegatPhysique(double attaqueEntite,double degatArme) {
+        return Math.abs(attaqueEntite+degatArme - statsDefense.getDefense());
+    }
 
     /**
      * Calcule les dégâts spéciaux subis par l'entité.
@@ -64,8 +63,7 @@ public abstract class Entite extends Acteur {
      * @param degatArme    La force de l'entité qui inflige les dégâts spéciaux.
      * @return Les dégâts spéciaux subis.
      */
-    protected double subitDegatSpecial(double attaqueSpecialEntite,double degatArme)
-    {
+    protected double subitDegatSpecial(double attaqueSpecialEntite,double degatArme) {
         return Math.abs(attaqueSpecialEntite+degatArme - statsDefenseSpecial.getDefenseSpecial());
     }
 

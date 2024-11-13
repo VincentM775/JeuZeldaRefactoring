@@ -1,6 +1,6 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementIterable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Cooldown;
@@ -8,13 +8,13 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
 public class LanceurFlecheARetardement implements ElementIterable {
-    private final Entite utilisateur;
+    private final EntiteDefensive utilisateur;
     private final Direction direction;
     private Position position;
     private Cooldown cooldown;
     private boolean flecheLancee;
 
-    public LanceurFlecheARetardement(Entite utilisateur, Direction direction, double x, double y, int delaie) {
+    public LanceurFlecheARetardement(EntiteDefensive utilisateur, Direction direction, double x, double y, int delaie) {
         this.utilisateur = utilisateur;
         this.direction = direction;
         this.position = new Position(x, y);

@@ -1,6 +1,6 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Monnaie.PieceOr;
@@ -10,7 +10,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
-public class Slime extends Entite {
+public class Slime extends EntiteDefensive {
     /**
      * Crée une nouvelle entité offensif.
      *
