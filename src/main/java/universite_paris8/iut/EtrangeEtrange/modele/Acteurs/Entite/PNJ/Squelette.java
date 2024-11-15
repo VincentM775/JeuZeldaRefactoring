@@ -11,7 +11,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
-import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Aetoile;
+import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Algos.Aetoile;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
 
 public class Squelette extends EntiteOffensif {

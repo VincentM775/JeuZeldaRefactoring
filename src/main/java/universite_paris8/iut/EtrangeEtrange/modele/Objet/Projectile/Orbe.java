@@ -7,6 +7,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesSortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.*;
+import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Algos.BFS;
 
 public class Orbe extends Projectile
 {

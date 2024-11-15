@@ -12,7 +12,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Squelette;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementIterable;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
-import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Aetoile;
+import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Algos.Aetoile;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;

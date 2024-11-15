@@ -9,9 +9,11 @@ import java.util.*;
 
 public class Aetoile extends AlgoChemin {
 
+    public static final int DELAIE_RECHERCHE = 1000;
     private ArrayList<Position> chemin;
 
     public Aetoile() {
+        super();
         this.chemin = new ArrayList<>();
         construireGraphe(); // Construire le graphe lors de l'initialisation
     }

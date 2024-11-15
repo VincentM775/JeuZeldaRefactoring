@@ -1,5 +1,6 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Algos;
 
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
@@ -9,6 +10,10 @@ public class AlgoChemin {
 
     protected Monde monde;
     protected Sommet[][] graphe;
+
+    public AlgoChemin(){
+        this.monde = Environnement.getInstance().getMonde();
+    }
 
     protected void construireGraphe() {
         int hauteur = Monde.getSizeMondeHauteur();

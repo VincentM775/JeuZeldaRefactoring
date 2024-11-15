@@ -12,11 +12,13 @@ import java.util.Queue;
 
 public class BFS extends AlgoChemin {
 
+    public static final int DELAIE_RECHERCHE = 300;
     private ArrayList<Sommet> chemins;
     private HashMap<Sommet, Sommet> predecesseurs;
     private int xArrive, yArrive;
 
     public BFS() {
+        super();
         chemins = new ArrayList<>();
     }
 
