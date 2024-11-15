@@ -37,8 +37,4 @@ public class DefenseSpecial
     public double getDefenseSpecial() {
         return this.defenseSpecial.get();
     }
-
-    public double getDefenseSpecialMaximum() {
-        return this.defenseSpecialMaximum.get();
-    }
 }

@@ -37,8 +37,4 @@ public class AttaqueSpecial
     public double getAttaqueSpecial() {
         return this.attaqueSpecial.get();
     }
-
-    public double getAttaqueSpecialMaximum() {
-        return this.attaqueSpecialMaximum.get();
-    }
 }

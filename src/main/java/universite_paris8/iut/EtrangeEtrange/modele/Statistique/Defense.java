@@ -37,8 +37,4 @@ public class Defense
     public double getDefense() {
         return this.defense.get();
     }
-
-    public double getDefenseMaximum() {
-        return this.defenseMaximum.get();
-    }
 }
