@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
-import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Aetoile;
+import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Algos.Aetoile;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
 public class AetoileTest {

@@ -13,7 +13,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesSortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ParametreMonstre;
-import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Aetoile;
+import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Algos.Aetoile;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;

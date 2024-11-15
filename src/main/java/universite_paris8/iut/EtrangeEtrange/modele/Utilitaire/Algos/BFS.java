@@ -1,18 +1,19 @@
-package universite_paris8.iut.EtrangeEtrange.modele.Utilitaire;
+package universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Algos;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
-import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
+import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
+import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Sommet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BFS {
-    public static final int DELAIE_RECHERCHE = 300;
+public class BFS extends AlgoChemin {
+
     private ArrayList<Sommet> chemins;
-    private Sommet[][] graphe;
+    private HashMap<Sommet, Sommet> predecesseurs;
     private int xArrive, yArrive;
 
     public BFS() {
@@ -26,37 +27,9 @@ public class BFS {
         trouverChemin((int) positionDepart.getX(), (int) positionDepart.getY());
     }
 
-    private void construireGraphe() {
-        int hauteur = Monde.getSizeMondeHauteur();
-        int largeur = Monde.getSizeMondeLargeur();
-        this.graphe = new Sommet[hauteur][largeur];
-
-        for (int y = 0; y < hauteur; y++)
-            for (int x = 0; x < largeur; x++)
-                this.graphe[y][x] = new Sommet(new Position(x, y), Environnement.getInstance().getMonde().getNontraversable()[y][x] == -1);
-
-
-        for (int y = 0; y < hauteur; y++)
-            for (int x = 0; x < largeur; x++)
-                if (graphe[y][x].isTraversable())
-                    ajouterVoisins(graphe[y][x], x, y);
-    }
-
-    private void ajouterVoisins(Sommet sommet, int x, int y)
-    {
-        for (Direction dir : Direction.values())
-        {
-            int nx = x + dir.getX();
-            int ny = y + dir.getY();
-
-            if (nx >= 0 && ny >= 0 && nx < graphe[0].length && ny < graphe.length && graphe[ny][nx].isTraversable())
-                sommet.addVoisin(graphe[ny][nx]);
-        }
-    }
-
     private void trouverChemin(int x, int y) {
         Queue<Sommet> sommetsAvisite = new LinkedList<>();
-        HashMap<Sommet, Sommet> predecesseurs = new HashMap<>();
+        predecesseurs = new HashMap<>();
         boolean cheminTrouver = false;
 
         sommetsAvisite.add(graphe[y][x]);
@@ -78,14 +51,14 @@ public class BFS {
                     if (cheminTrouver(voisin.getPosition().getX(), voisin.getPosition().getY()))
                     {
                         cheminTrouver = true;
-                        construireChemin(voisin, predecesseurs);
+                        construireChemin(voisin);
                     }
                 }
             }
         }
     }
 
-    private void construireChemin(Sommet sommet, HashMap<Sommet, Sommet> predecesseurs)
+    private void construireChemin(Sommet sommet)
     {
         this.chemins.clear();
         Sommet actuel = sommet;

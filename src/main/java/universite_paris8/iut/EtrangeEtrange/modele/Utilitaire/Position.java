@@ -50,12 +50,6 @@ public class Position {
         return y;
     }
 
-    public double distance(Position other) {
-        double dx = this.getX() - other.getX();
-        double dy = this.getY() - other.getY();
-        return Math.sqrt(dx * dx + dy * dy);
-    }
-
     @Override
     public String toString()
     {
