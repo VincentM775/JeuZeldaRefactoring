@@ -111,6 +111,7 @@ public class Controller implements Initializable {
             if (nouv.doubleValue() <= 0) {
                 try {
                     gameLoop.stop();
+                    switchDonnees.resetSceneMenu();
                     Environnement.getInstance().resetEnvironnement();
                     switchDonnees.gameOver();
                     gestionSon.gameOver();

@@ -1,7 +1,10 @@
 package universite_paris8.iut.EtrangeEtrange.vues;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
@@ -13,14 +16,12 @@ import java.util.HashMap;
 
 public class GestionAffichageMap {
     private ArrayList<TilePane> TilePaneCouchesMonde;
-    private HashMap<String , Image> imagesMap;
 
     public GestionAffichageMap(TilePane sol, TilePane traversable, TilePane nontraversable){
         this.TilePaneCouchesMonde = new ArrayList<>();
         this.TilePaneCouchesMonde.add(sol);
         this.TilePaneCouchesMonde.add(traversable);
         this.TilePaneCouchesMonde.add(nontraversable);
-        this.imagesMap = new HashMap<>();
     }
 
 
@@ -28,6 +29,7 @@ public class GestionAffichageMap {
      * Permet d'afficher la map depuis les fichiers JSON des jeux de tuiles crée avec le logiciel Tiled
      */
     public void afficherMondeJSON(){
+        GestionImages gestionImages = GestionImages.getInstance();
         String[] fichiers = {"sol", "traversable", "nontraversable"};
         ArrayList<int[][]> couchesMap = Environnement.getInstance().getMonde().getToutesLesCouches();
         for(TilePane tilePaneCouchesMonde : TilePaneCouchesMonde)
@@ -55,21 +57,17 @@ public class GestionAffichageMap {
 
             // On récupère les id de tuiles avec les images associées.
             JSONArray jsonArray = new JSONArray(jsonObject.getJSONArray("tiles"));
-            TilePane tilePane = TilePaneCouchesMonde.get(i);
+            ObservableList<Node> nodes = TilePaneCouchesMonde.get(i).getChildren();
 
             for(int h = 0 ; h < Monde.getSizeMondeHauteur() ; h++){
                 for(int l = 0 ; l < Monde.getSizeMondeLargeur() ; l++){
                     if(couchesMap.get(i)[h][l]!=-1) {
                         String chemin = jsonArray.getJSONObject(couchesMap.get(i)[h][l]).getString("image");
-                        Image image = imagesMap.get(fichiers[i] + "/" + chemin);
-                        if (image == null) {
-                            image = new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/" + fichiers[i] + "/" + chemin);
-                            imagesMap.put(fichiers[i] + "/" + chemin, image);
-                        }
-                        tilePane.getChildren().add(new ImageView(image));
+                        Image image = gestionImages.getImages(fichiers[i]+"/"+chemin);
+                        nodes.add(new ImageView(image));
                     }
                     else{
-                        tilePane.getChildren().add(new ImageView());
+                        nodes.add(new ImageView());
                     }
 
                 }

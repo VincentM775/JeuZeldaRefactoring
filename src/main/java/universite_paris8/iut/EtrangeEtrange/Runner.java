@@ -6,12 +6,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import universite_paris8.iut.EtrangeEtrange.controller.SwitchScene;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
+import universite_paris8.iut.EtrangeEtrange.vues.GestionImages;
+
 import java.io.IOException;
 
 public class Runner extends Application {
     @Override
     public void start(Stage stage) throws IOException
     {
+        GestionImages.getInstance();
         SwitchScene switchScene = SwitchScene.getSwitchScene();
         switchScene.setStage(stage);
 

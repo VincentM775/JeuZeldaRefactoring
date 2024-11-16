@@ -10,6 +10,7 @@ import javafx.scene.layout.*;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
+import universite_paris8.iut.EtrangeEtrange.vues.GestionImages;
 
 public class gestionAffichageInventaire {
 
@@ -82,12 +83,12 @@ public class gestionAffichageInventaire {
      */
     public void initialisationInventaire(){
         // Ajout des textes de la page inventaire : "Inventaire", "Main droite", "Main Gauche"
-        titreInventaire.setImage(new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Inventaire/InventaireTitre.png"));
-        titreMainDroite.setImage(new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Inventaire/MainDroiteTitre.png"));
-        titreMainGauche.setImage(new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Inventaire/MainGaucheTitre.png"));
+        titreInventaire.setImage(GestionImages.getInstance().getImages("Inventaire/InventaireTitre.png"));
+        titreMainDroite.setImage(GestionImages.getInstance().getImages("Inventaire/MainDroiteTitre.png"));
+        titreMainGauche.setImage(GestionImages.getInstance().getImages("Inventaire/MainGaucheTitre.png"));
 
         // Ajout des cases de stockage pour la main droite et la main gauche et des images des objets qui y seront présents
-        Image caseStockage = new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Inventaire/caseStockage.png");
+        Image caseStockage = GestionImages.getInstance().getImages("Inventaire/caseStockage.png");
         ImageView caseStockageMainDroite = new ImageView(caseStockage);
         ImageView caseStockageMainGauche = new ImageView(caseStockage);
         conteneurObjetMainGauche.getChildren().add(caseStockageMainGauche);
@@ -142,7 +143,7 @@ public class gestionAffichageInventaire {
         objetMainDroite.setImage(null);
 
         // On affiche pour chaque case de l'inventaire la case de stockage, l'objet à l'intérieur et sa quantité
-        Image image = new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Inventaire/caseStockage.png");
+        Image image = GestionImages.getInstance().getImages("Inventaire/caseStockage.png");
         for(int i = 0 ; i < sac.getTailleMax() ; i++) {
             caseStockageInventaire.getChildren().add(new ImageView(image));
             ImageView imageView = null;
@@ -256,6 +257,6 @@ public class gestionAffichageInventaire {
     {
         String typeObjet = objet.getNom();
 
-        return new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/objet/icone/"+typeObjet+".png");
+        return GestionImages.getInstance().getImages("icone/"+typeObjet+".png");
     }
 }

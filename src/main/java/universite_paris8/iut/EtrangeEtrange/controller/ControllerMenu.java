@@ -12,6 +12,7 @@ import javafx.scene.layout.*;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
+import universite_paris8.iut.EtrangeEtrange.vues.GestionImages;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -89,7 +90,7 @@ public class ControllerMenu implements Initializable {
         initBackgroundJeu();
 
         // Placement du menu au milieu de l'écran et application de l'image de fond du menu
-        Image fondMenu = new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Inventaire/fondInventaire.png");
+        Image fondMenu = GestionImages.getInstance().getImages("Inventaire/fondInventaire.png");
         TabPane.setTranslateX(0);
         TabPane.setTranslateY(0);
         TabPane.setMaxSize(fondMenu.getWidth(), fondMenu.getHeight());

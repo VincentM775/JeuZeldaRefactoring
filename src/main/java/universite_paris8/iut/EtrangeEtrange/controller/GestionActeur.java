@@ -12,6 +12,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
+import universite_paris8.iut.EtrangeEtrange.vues.GestionImages;
 import universite_paris8.iut.EtrangeEtrange.vues.GestionSon;
 
 
@@ -99,7 +100,7 @@ public class GestionActeur implements ListChangeListener<Acteur>
         double reglagePositionX;
         double reglagePositionY;
 
-        ImageView imageView = new ImageView(new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/objet/Projectile/"+typeActeur+".png"));
+        ImageView imageView = new ImageView(GestionImages.getInstance().getImages("Projectile/"+typeActeur+".png"));
 
 
         imageView.setId(acteur.getID()+"");

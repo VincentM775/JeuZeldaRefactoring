@@ -132,6 +132,8 @@ public class SwitchScene {
         this.sceneMenu = sceneMenu;
     }
 
+    public void resetSceneMenu(){this.sceneMenu = null;}
+
     public Scene getSceneMenu() {
         return sceneMenu;
     }

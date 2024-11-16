@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import universite_paris8.iut.EtrangeEtrange.Runner;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
+import universite_paris8.iut.EtrangeEtrange.vues.GestionImages;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +25,7 @@ public class ControllerMenuDebut implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ImageView imageView = new ImageView(new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Menu Debut/fond.png"));
+        ImageView imageView = new ImageView(GestionImages.getInstance().getImages("Menu Debut/fond.png"));
         imageView.setX(0);
         imageView.setY(0);
         fondImage.getChildren().add(imageView);

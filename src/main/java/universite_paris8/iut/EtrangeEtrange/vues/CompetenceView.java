@@ -61,16 +61,17 @@ public class CompetenceView {
 
     private ImageView spriteIcon(TypeCompetence competence)
     {
-
+        GestionImages gestionImages = GestionImages.getInstance();
         Image image = null;
+        String folder = "Competences/";
         switch (competence){
-            case UP_ATTAQUE -> image = new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Competences/force.png");
-            case UP_DEFENSE -> image = new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Competences/defense.png");
-            case UP_PV, UP_PV2, UP_PV3 -> image = new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Competences/coeur.png");
-            case UP_DEFENSE_SPECIAL -> image = new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Competences/defensespeciale.png");
-            case COURIR -> image = new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Competences/sprint.png");
-            case INVOQUER -> image = new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Competences/invocation.png");
-            case UP_ATTAQUE_SPECIAL -> image = new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Competences/livremagique.png");
+            case UP_ATTAQUE -> image = gestionImages.getImages(folder+"force.png");
+            case UP_DEFENSE -> image = gestionImages.getImages(folder+"defense.png");
+            case UP_PV, UP_PV2, UP_PV3 -> image = gestionImages.getImages(folder+"coeur.png");
+            case UP_DEFENSE_SPECIAL -> image = gestionImages.getImages(folder+"defensespeciale.png");
+            case COURIR -> image = gestionImages.getImages(folder+"sprint.png");
+            case INVOQUER -> image = gestionImages.getImages(folder+"invocation.png");
+            case UP_ATTAQUE_SPECIAL -> image = gestionImages.getImages(folder+"livremagique.png");
         }
         ImageView imageView = new ImageView();
         imageView.setScaleX(1);

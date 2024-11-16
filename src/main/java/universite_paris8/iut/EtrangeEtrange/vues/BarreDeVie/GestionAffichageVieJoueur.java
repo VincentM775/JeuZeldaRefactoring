@@ -5,16 +5,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Pv;
+import universite_paris8.iut.EtrangeEtrange.vues.GestionImages;
 
 public class GestionAffichageVieJoueur {
     @FXML
     private HBox hboxCoeurs;
     private Pv pv;
-
-    // Chemins d'accès aux images
-    private final String coeurPleinPath = "/universite_paris8/iut/EtrangeEtrange/texture/BarreDeVie/0.png";
-    private final String coeurMoitiéPath = "/universite_paris8/iut/EtrangeEtrange/texture/BarreDeVie/1.png";
-    private final String coeurVidePath = "/universite_paris8/iut/EtrangeEtrange/texture/BarreDeVie/2.png";
 
     public GestionAffichageVieJoueur(Pv pv) {
         this.pv = pv;
@@ -43,13 +39,13 @@ public class GestionAffichageVieJoueur {
                 ImageView coeur;
 
                 if (pointsDeVieActuels >= 20) {
-                    coeur = new ImageView(new Image(getClass().getResourceAsStream(coeurPleinPath)));
+                    coeur = new ImageView(GestionImages.getInstance().getImages("BarreDeVie/0.png"));
                     pointsDeVieActuels -= 20;
                 } else if (pointsDeVieActuels >= 10) {
-                    coeur = new ImageView(new Image(getClass().getResourceAsStream(coeurMoitiéPath)));
+                    coeur = new ImageView(GestionImages.getInstance().getImages("BarreDeVie/1.png"));
                     pointsDeVieActuels = 0;
                 } else {
-                    coeur = new ImageView(new Image(getClass().getResourceAsStream(coeurVidePath)));
+                    coeur = new ImageView(GestionImages.getInstance().getImages("BarreDeVie/2.png"));
                 }
 
                 coeur.setFitWidth(30);

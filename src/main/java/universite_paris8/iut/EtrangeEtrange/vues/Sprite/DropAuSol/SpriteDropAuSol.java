@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.ImageView;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
+import universite_paris8.iut.EtrangeEtrange.vues.GestionImages;
 
 public class SpriteDropAuSol {
 
@@ -21,11 +22,11 @@ public class SpriteDropAuSol {
         this.dropAuSol = dropAuSol;
         this.skin = skin;
 
-        this.ombre = new ImageView("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/objet/ombre.png");
+        this.ombre = new ImageView(GestionImages.getInstance().getImages("objet/ombre.png"));
         this.ombre.setTranslateX(dropAuSol.getPosition().getX()* ConstantesAffichage.tailleTile);
         this.ombre.setTranslateY(dropAuSol.getPosition().getY()* ConstantesAffichage.tailleTile);
 
-        this.SpriteDropAuSol = new ImageView("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/objet/icone/"+skin+".png");
+        this.SpriteDropAuSol = new ImageView(GestionImages.getInstance().getImages("icone/"+skin+".png"));
         this.positionFlottement = new SimpleIntegerProperty((int)(Math.random()*tailleFlottementMax));
         this.SpriteDropAuSol.setTranslateX(dropAuSol.getPosition().getX()* ConstantesAffichage.tailleTile);
         this.positionFlottement.addListener((obs, old, nouv)->

@@ -17,6 +17,7 @@ import javafx.scene.layout.*;
 import universite_paris8.iut.EtrangeEtrange.Runner;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesPersonnages;
+import universite_paris8.iut.EtrangeEtrange.vues.GestionImages;
 
 import java.io.IOException;
 import java.net.URL;
@@ -117,28 +118,28 @@ public class ControllerChoixClasse implements Initializable
 
             if (guerrier.equals("Guerrier"))
             {
-                imageHero.setImage(new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Classes/guerrier.png"));
+                imageHero.setImage(GestionImages.getInstance().getImages("Classes/guerrier.png"));
                 this.nomClasse.setText("Guerrier");
                 changeValueProgressBar(ConstantesPersonnages.GUERRIER_PV,ConstantesPersonnages.GUERRIER_ATTAQUE,ConstantesPersonnages.GUERRIER_DEFENSE,ConstantesPersonnages.GUERRIER_ATTAQUE_SPECIAL,ConstantesPersonnages.GUERRIER_DEFENSE_SEPCIAL,ConstantesPersonnages.GUERRIER_VITESSE);
                 this.descriptionClasse.setText(ConstantesPersonnages.descriptionGuerrier().toString());
             }
             else if (guerrier.equals("Archer"))
             {
-                imageHero.setImage(new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Classes/archer.png"));
+                imageHero.setImage(GestionImages.getInstance().getImages("Classes/archer.png"));
                 this.nomClasse.setText("Archer");
                 changeValueProgressBar(ConstantesPersonnages.ARCHER_PV,ConstantesPersonnages.ARCHER_ATTAQUE,ConstantesPersonnages.ARCHER_DEFENSE,ConstantesPersonnages.ARCHER_ATTAQUE_SPECIAL,ConstantesPersonnages.ARCHER_DEFENSE_SEPCIAL,ConstantesPersonnages.ARCHER_VITESSE);
                 this.descriptionClasse.setText(ConstantesPersonnages.descriptionArcher().toString());
             }
             else if (guerrier.equals("Mage"))
             {
-                imageHero.setImage(new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Classes/mage.png"));
+                imageHero.setImage(GestionImages.getInstance().getImages("Classes/mage.png"));
                 this.nomClasse.setText("Mage");
                 changeValueProgressBar(ConstantesPersonnages.MAGE_PV,ConstantesPersonnages.MAGE_ATTAQUE,ConstantesPersonnages.MAGE_DEFENSE,ConstantesPersonnages.MAGE_ATTAQUE_SPECIAL,ConstantesPersonnages.MAGE_DEFENSE_SEPCIAL,ConstantesPersonnages.MAGE_VITESSE);
                 this.descriptionClasse.setText(ConstantesPersonnages.descriptionMage().toString());
             }
             else if (guerrier.equals("Necromancier"))
             {
-                imageHero.setImage(new Image("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture/Menus/Classes/necromancier.png"));
+                imageHero.setImage(GestionImages.getInstance().getImages("Classes/necromancier.png"));
                 this.nomClasse.setText("Necromancier");
                 changeValueProgressBar(ConstantesPersonnages.NECROMANCIER_PV,ConstantesPersonnages.NECROMANCIER_ATTAQUE,ConstantesPersonnages.NECROMANCIER_DEFENSE,ConstantesPersonnages.NECROMANCIER_ATTAQUE_SPECIAL,ConstantesPersonnages.NECROMANCIER_DEFENSE_SEPCIAL,ConstantesPersonnages.NECROMANCIER_VITESSE);
                 this.descriptionClasse.setText(ConstantesPersonnages.descriptionNecromancier().toString());
