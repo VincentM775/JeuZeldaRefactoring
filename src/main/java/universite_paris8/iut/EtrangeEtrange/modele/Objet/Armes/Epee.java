@@ -5,7 +5,6 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
-import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Cooldown;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
@@ -14,13 +13,14 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
 {
 
-    private static final int DURABILITE = ConstanteObjet.DURABILITE_EPEE;
-    private static final double DEGAT_PHYSIQUE = ConstanteObjet.DEGAT_PHYSIQUE_EPEE;
-    private static final double DEGAT_SPECIAL = ConstanteObjet.DEGAT_SPECIAL_EPEE;
-    private static final double VITESSE = ConstanteObjet.VITESSE_EPEE;
-    private static final Hitbox HITBOX = ConstanteObjet.HITBOX_EPEE;
-    private final int PRIX_ACHAT = ConstanteObjet.PRIX_ACHAT_EPEE;
-    private final int STACK_MAX = ConstanteObjet.STACK_MAX_EPEE;
+    public static final double DEGAT_PHYSIQUE_EPEE = 20;
+    public static final double DEGAT_SPECIAL_EPEE = 0;
+    public static final double VITESSE_EPEE = 0.125;
+    public static final Hitbox HITBOX_EPEE = new Hitbox(0.25,0.25);
+    public static final int DURABILITE_EPEE = 10;
+    public static final int PRIX_ACHAT_EPEE = 12;
+    public static final long DELAIE_UTILISATION_EPEE = 1000;
+    public static final int STACK_MAX_EPEE = 1;
 
     private short cycle;
     private Entite utilisateur;
@@ -29,8 +29,8 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
 
     public Epee()
     {
-        super(DURABILITE, VITESSE, HITBOX);
-        this.cooldown = new Cooldown(ConstanteObjet.DELAIE_UTILISATION_EPEE);
+        super(DURABILITE_EPEE, VITESSE_EPEE, HITBOX_EPEE);
+        this.cooldown = new Cooldown(DELAIE_UTILISATION_EPEE);
         this.cycle = 0;
     }
 
@@ -110,8 +110,8 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
         double x = this.direction.getX();
         double y = this.direction.getY();
 
-        position.setX(position.getX() + x * VITESSE * multiplicateur);
-        position.setY(position.getY() + y * VITESSE * multiplicateur);
+        position.setX(position.getX() + x * VITESSE_EPEE * multiplicateur);
+        position.setY(position.getY() + y * VITESSE_EPEE * multiplicateur);
     }
 
 
@@ -129,7 +129,7 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
 
     @Override
     public int prixAchat() {
-        return PRIX_ACHAT;
+        return PRIX_ACHAT_EPEE;
     }
     @Override
     public boolean peutSeDeplacer() { return true; }
@@ -151,7 +151,7 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
 
     @Override
     public int stackMax() {
-        return STACK_MAX;
+        return STACK_MAX_EPEE;
     }
 
     @Override
@@ -162,12 +162,12 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
 
     @Override
     public double degatPhysique() {
-        return DEGAT_PHYSIQUE;
+        return DEGAT_PHYSIQUE_EPEE;
     }
 
     @Override
     public double degatSpecial() {
-        return DEGAT_SPECIAL;
+        return DEGAT_SPECIAL_EPEE;
     }
 
     @Override

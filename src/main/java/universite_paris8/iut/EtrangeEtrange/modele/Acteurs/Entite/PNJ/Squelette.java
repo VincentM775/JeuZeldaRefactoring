@@ -4,7 +4,6 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif
 
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
-import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ParametreMonstre;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Monnaie.PieceOr;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -14,6 +13,12 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Aetoile;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
 
 public class Squelette extends EntiteOffensif {
+    public static final int PV_SQUELETTE = 100;
+    public static final int ATTAQUE_SQUELETTE = 10;
+    public static final int DEFENSE_SQUELETTE = 10;
+    public static final int ATTAQUE_SPECIALE_SQUELETTE = 1;
+    public static final int DEFENSE_SPECIALE_SQUELETTE = 10;
+    public static final double VITESSE_SQUELETTE = 0.005;
     private Joueur joueur;
     private Aetoile aetoile;
     private long lastPathCalculationTime;
@@ -21,12 +26,12 @@ public class Squelette extends EntiteOffensif {
 
     public Squelette(double x, double y, Direction direction, Hitbox hitbox, Joueur joueur, Aetoile aetoile) {
         super( x, y, direction,
-                ParametreMonstre.PV_SQUELETTE,
-                ParametreMonstre.ATTAQUE_SQUELETTE,
-                ParametreMonstre.DEFENSE_SQUELETTE,
-                ParametreMonstre.ATTAQUE_SPECIALE_SQUELETTE,
-                ParametreMonstre.DEFENSE_SPECIALE_SQUELETTE,
-                ParametreMonstre.VITESSE_SQUELETTE,
+                PV_SQUELETTE,
+                ATTAQUE_SQUELETTE,
+                DEFENSE_SQUELETTE,
+                ATTAQUE_SPECIALE_SQUELETTE,
+                DEFENSE_SPECIALE_SQUELETTE,
+                VITESSE_SQUELETTE,
                 hitbox);
         this.joueur = joueur;
         this.aetoile = aetoile;

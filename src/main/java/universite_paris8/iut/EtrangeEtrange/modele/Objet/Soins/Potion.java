@@ -2,27 +2,23 @@ package universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins;
 
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
-import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementUtilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
-import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 
 public class Potion implements ObjetUtilisable
 {
 
-    private static final int DURABILITEE = ConstanteObjet.DURABILITE_POTION;
-    private static final int PRIX_ACHAT = ConstanteObjet.PRIX_ACHAT_POTION;
-    private static final int STACK_MAX = ConstanteObjet.STACK_MAX_POTION;
-    private static final int RESTORATION = ConstanteObjet.RESTORATION;
+    public static final double PV_RESTORER_GUERISON = 20;
+
+
     private int durabilitee;
 
-    public Potion(){this.durabilitee = DURABILITEE;}
+    public Potion(){this.durabilitee = 1;}
 
     @Override
     public boolean utilise(Entite entite)
     {
         if (durabilitee > 0) {
-            entite.soigner(RESTORATION);
+            entite.soigner(PV_RESTORER_GUERISON);
             this.durabilitee--;
             return true;
         }
@@ -35,7 +31,7 @@ public class Potion implements ObjetUtilisable
     }
     @Override
     public int stackMax() {
-        return STACK_MAX;
+        return 1;
     }
     @Override
     public double durabilitee() {
@@ -43,7 +39,7 @@ public class Potion implements ObjetUtilisable
     }
     @Override
     public int prixAchat() {
-        return PRIX_ACHAT;
+        return 1;
     }
 
 }
