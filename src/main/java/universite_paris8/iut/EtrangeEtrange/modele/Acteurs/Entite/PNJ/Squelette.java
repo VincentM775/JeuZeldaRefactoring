@@ -5,6 +5,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
+import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.EpeeLourde;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ParametreMonstre;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Monnaie.PieceOr;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
@@ -32,7 +33,7 @@ public class Squelette extends EntiteOffensif {
         this.joueur = joueur;
         this.aetoile = aetoile;
         this.lastPathCalculationTime = System.currentTimeMillis();
-        epee = new Epee();
+        epee = new EpeeLourde();
     }
 
 

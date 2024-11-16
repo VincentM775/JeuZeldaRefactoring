@@ -10,6 +10,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Livre
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Attaque.SortilegePluitDeFleche;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Sortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
+import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.EpeeLegere;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesSortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ParametreMonstre;
@@ -48,13 +49,12 @@ public class RoiSquelette extends EntiteOffensif
         this.position5_2 = new Position(x-5, y);
         setPosition(x, y); // Positionnement initial du Roi Squelette
         livreMagique = new LivreMagique();
-
+        epee = new EpeeLegere();
     }
 
 
     @Override
     public void attaque() {
-        Epee epee = new Epee();
         epee.utilise(this);
     }
 

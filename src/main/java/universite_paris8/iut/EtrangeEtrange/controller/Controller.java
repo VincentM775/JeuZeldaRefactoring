@@ -21,6 +21,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Arc
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
+import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.EpeeLourde;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesAffichage;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -135,7 +136,6 @@ public class Controller implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(Duration.seconds(0.005), (ev -> {
-            System.out.println("tour");
             Environnement.getInstance().unTour();
             gestionAffichageSpriteEntite.miseAjour();}));
         gameLoop.getKeyFrames().add(kf);
@@ -194,7 +194,7 @@ public class Controller implements Initializable {
         }
         switchDonnees.setJoueur(joueur);
         Environnement.getInstance().setJoueur(joueur);
-        joueur.getGestionnaireInventaire().getSac().ajoutItem(new Epee());
+        joueur.getGestionnaireInventaire().getSac().ajoutItem(new EpeeLourde());
         joueur.getGestionnaireInventaire().getSac().ajoutItem(new Potion());
     }
 

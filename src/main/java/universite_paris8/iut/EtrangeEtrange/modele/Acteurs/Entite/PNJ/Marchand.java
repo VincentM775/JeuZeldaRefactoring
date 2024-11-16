@@ -10,8 +10,8 @@ import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.*;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Arc;
+import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.EpeeLourde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
@@ -50,7 +50,7 @@ public class Marchand extends Acteur
         if (cycle % 2000 == 0)
         {
             remplieAleatoirementMarchandise();
-            sac.ajoutItem(new Epee());
+            sac.ajoutItem(new EpeeLourde());
             sac.ajoutItem(new Arc());
             sac.ajoutItem(new Potion());
             cycle = 0;

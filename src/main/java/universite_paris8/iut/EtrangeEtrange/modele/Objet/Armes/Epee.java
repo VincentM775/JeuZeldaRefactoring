@@ -12,12 +12,10 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
-public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
+public abstract class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
 {
 
     private static final int DURABILITE = ConstanteObjet.DURABILITE_EPEE;
-    private static final double DEGAT_PHYSIQUE = ConstanteObjet.DEGAT_PHYSIQUE_EPEE;
-    private static final double DEGAT_SPECIAL = ConstanteObjet.DEGAT_SPECIAL_EPEE;
     private static final double VITESSE = ConstanteObjet.VITESSE_EPEE;
     private static final Hitbox HITBOX = ConstanteObjet.HITBOX_EPEE;
     private final int PRIX_ACHAT = ConstanteObjet.PRIX_ACHAT_EPEE;
@@ -27,11 +25,16 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
     private EntiteDefensive utilisateur;
     private Cooldown cooldown;
 
+    private final double DEGAT_PHYSIQUE;
+    private final double DEGAT_SPECIAL;
 
-    public Epee()
+
+    public Epee(long delai, double degatPhysique, double degatSpecial)
     {
         super(DURABILITE, VITESSE, HITBOX);
-        this.cooldown = new Cooldown(ConstanteObjet.DELAIE_UTILISATION_EPEE);
+        this.cooldown = new Cooldown(delai);
+        DEGAT_PHYSIQUE = degatPhysique;
+        DEGAT_SPECIAL = degatSpecial;
         this.cycle = 0;
     }
 
@@ -119,8 +122,10 @@ public class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
     @Override
     public void causeCollision(Acteur acteur)
     {
-        acteur.subitAttaque(this,(EntiteOffensif) utilisateur);
-        Environnement.getInstance().ajoutActeurAsupprimer(this);
+        if (acteur != utilisateur) {
+            acteur.subitAttaque(this, (EntiteOffensif) utilisateur);
+            Environnement.getInstance().ajoutActeurAsupprimer(this);
+        }
     }
 
     @Override

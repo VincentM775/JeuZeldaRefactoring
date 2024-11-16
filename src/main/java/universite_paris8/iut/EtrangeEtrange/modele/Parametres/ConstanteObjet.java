@@ -11,15 +11,21 @@ public class ConstanteObjet
 {
 
     //-----------------------------------------------VARIABLE EPEE----------------------------------------------------//
-    public static final double DEGAT_PHYSIQUE_EPEE = 20;
-    public static final double DEGAT_SPECIAL_EPEE = 0;
     public static final double VITESSE_EPEE = 0.125;
     public static final Hitbox HITBOX_EPEE = new Hitbox(0.25,0.25);
     public static final int DURABILITE_EPEE = 10;
     public static final int PRIX_ACHAT_EPEE = 12;
-    public static final long DELAIE_UTILISATION_EPEE = 1000;
     public static final int STACK_MAX_EPEE = 1;
 
+    //-----------------------------------------------VARIABLE EPEE LEGERE---------------------------------------------//
+    public static final long DELAIE_UTILISATION_EPEE_LEGERE = 100;
+    public static final double DEGAT_PHYSIQUE_EPEE_LEGERE = 10;
+    public static final double DEGAT_SPECIAL_EPEE_LEGERE = 0;
+
+    //-----------------------------------------------VARIABLE EPEE LOURDE---------------------------------------------//
+    public static final long DELAIE_UTILISATION_EPEE_LOURDE = 1000;
+    public static final double DEGAT_PHYSIQUE_EPEE_LOURDE = 20;
+    public static final double DEGAT_SPECIAL_EPEE_LOURDE = 0;
 
     //--------------------------------------------VARIABLE ARC--------------------------------------------------------//
 
