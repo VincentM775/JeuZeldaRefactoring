@@ -99,6 +99,10 @@ public class Controller implements Initializable {
         Environnement.getInstance().setJoueur(joueur);
         Environnement.getInstance().creationMonstre("src/main/resources/universite_paris8/iut/EtrangeEtrange/TiledMap/", "mapfinal", Monde.getSizeMondeHauteur());
 
+        try {
+            ouvrirMenu();
+        } catch (IOException ignored) {}
+
         initGameLoop();
         gameLoop.play();
 
@@ -296,7 +300,8 @@ public class Controller implements Initializable {
             switchDonnees.setSceneMenu(sceneMenu);
             switchDonnees.setControllerMenu(fxmlLoaderMenu.getController());
         }
-        switchDonnees.envoyerPanes(paneEntite, TilePaneSol, TilePaneTraversable, TilePaneNontraversable);
+        else
+            switchDonnees.envoyerPanes(paneEntite, TilePaneSol, TilePaneTraversable, TilePaneNontraversable);
         switchDonnees.getControllerMenu().recupererDonnees();
         switchDonnees.getStage().setScene(switchDonnees.getSceneMenu());
         switchDonnees.getStage().show();

@@ -70,7 +70,7 @@ public class CompetenceView {
             case UP_PV, UP_PV2, UP_PV3 -> image = gestionImages.getImages(folder+"coeur.png");
             case UP_DEFENSE_SPECIAL -> image = gestionImages.getImages(folder+"defensespeciale.png");
             case COURIR -> image = gestionImages.getImages(folder+"sprint.png");
-            case INVOQUER -> image = gestionImages.getImages(folder+"invocation.png");
+            case VITESSE -> image = gestionImages.getImages(folder+"vitesse.png");
             case UP_ATTAQUE_SPECIAL -> image = gestionImages.getImages(folder+"livremagique.png");
         }
         ImageView imageView = new ImageView();

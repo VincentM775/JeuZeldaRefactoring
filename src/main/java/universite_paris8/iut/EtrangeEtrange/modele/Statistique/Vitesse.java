@@ -6,16 +6,14 @@ import universite_paris8.iut.EtrangeEtrange.modele.Exeptions.StatistiqueInvalide
 
 public class Vitesse
 {
-    private DoubleProperty vitesseMaximum;
+    private static final int vitesseMaximum = 1;
     private DoubleProperty vitesse;
 
     public Vitesse(double vitesse)
     {
-        this.vitesseMaximum = new SimpleDoubleProperty();
         this.vitesse = new SimpleDoubleProperty();
 
         setVitesse(vitesse);
-        setVitesseMaximum(vitesse);
     }
 
     public void setVitesse(double vitesse)
@@ -23,15 +21,8 @@ public class Vitesse
         if (vitesse < 0)
             throw new StatistiqueInvalideExeption("vitesse négatif interdis");
 
-        this.vitesse.set(vitesse);
-    }
-
-    public void setVitesseMaximum(double vitesseMaximum)
-    {
-        if (vitesseMaximum < 0)
-            throw new StatistiqueInvalideExeption("VitesseMaximum négatif interdis");
-
-        this.vitesseMaximum.set(vitesseMaximum);
+        if (vitesse < vitesseMaximum)
+            this.vitesse.set(vitesse);
     }
 
     public double getVitesse() {

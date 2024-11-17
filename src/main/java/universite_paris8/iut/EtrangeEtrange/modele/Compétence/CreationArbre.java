@@ -14,7 +14,7 @@ public class CreationArbre {
         TypeCompetence attaque = TypeCompetence.UP_ATTAQUE;
         TypeCompetence pv2 = TypeCompetence.UP_PV2;
         TypeCompetence pv = TypeCompetence.UP_PV;
-        TypeCompetence invoquer = TypeCompetence.INVOQUER;
+        TypeCompetence vitesse = TypeCompetence.VITESSE;
         TypeCompetence defense = TypeCompetence.UP_DEFENSE;
         TypeCompetence defenseSpecial = TypeCompetence.UP_DEFENSE_SPECIAL;
 
@@ -38,7 +38,7 @@ public class CreationArbre {
         ArrayList<TypeCompetence> defenseEnfants = new ArrayList<>(Arrays.asList(defenseSpecial));
 
         ArrayList<TypeCompetence> defenseSpecialParents = new ArrayList<>(Arrays.asList(defense));
-        ArrayList<TypeCompetence> defenseSpecialEnfants = new ArrayList<>(Arrays.asList(invoquer));
+        ArrayList<TypeCompetence> defenseSpecialEnfants = new ArrayList<>(Arrays.asList(vitesse));
 
 
 
@@ -50,7 +50,7 @@ public class CreationArbre {
         competences.ajoutCompetence(defense, defenseParents, defenseEnfants);
         competences.ajoutCompetence(defenseSpecial, defenseSpecialParents, defenseSpecialEnfants);
         competences.ajoutCompetence(pv, pvParents, pvEnfants);
-        competences.ajoutCompetence(invoquer, new ArrayList<>(List.of(defenseSpecial)),new ArrayList<>() );
+        competences.ajoutCompetence(vitesse, new ArrayList<>(List.of(defenseSpecial)),new ArrayList<>() );
 
         // Définir la racine de l'arbre
         competences.setRoot(courir);
