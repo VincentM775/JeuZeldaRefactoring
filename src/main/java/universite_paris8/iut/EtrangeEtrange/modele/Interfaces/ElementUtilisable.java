@@ -1,7 +1,7 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Interfaces;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 
 public interface ElementUtilisable
 {
-    boolean utilise(EntiteDefensive entite);
+    boolean utilise(Entite entite);
 }

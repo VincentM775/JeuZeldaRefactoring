@@ -4,7 +4,6 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Marchand;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.Emplacement;
 
 import java.util.ArrayList;

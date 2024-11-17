@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.Competences;
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.TypeCompetence;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
 
 import java.util.ArrayList;
 

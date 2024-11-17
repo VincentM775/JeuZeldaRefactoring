@@ -1,6 +1,7 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.EntiteOffensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Defense;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.DefenseSpecial;
@@ -10,7 +11,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
  * Représente un être vivant dans le monde du jeu.
  * Cette classe étend la classe abstraite Acteur
  */
-public abstract class EntiteDefensive extends Acteur {
+public abstract class Entite extends Acteur {
     protected Defense statsDefense;
     protected DefenseSpecial statsDefenseSpecial;
 
@@ -26,7 +27,7 @@ public abstract class EntiteDefensive extends Acteur {
      * @param vitesse          La vitesse de déplacement de l'entité.
      * @param hitbox           La hitbox de l'entité.
      */
-    public EntiteDefensive(double x, double y, Direction direction, double pv, double defense, double defenseSpecial, double vitesse, Hitbox hitbox) {
+    public Entite(double x, double y, Direction direction, double pv, double defense, double defenseSpecial, double vitesse, Hitbox hitbox) {
         super(x,y,direction,pv,vitesse,hitbox);
         this.statsDefense = new Defense(defense);
         this.statsDefenseSpecial = new DefenseSpecial(defenseSpecial);
@@ -36,7 +37,7 @@ public abstract class EntiteDefensive extends Acteur {
      * Subit des dégâts infligés par une source dommageable.
      * @param causeDegat La source de dégâts.
      */
-    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif) {
+    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensive entiteOffensif) {
         enlevePv((subitDegatPhysique(entiteOffensif.getAttaque(),causeDegat.degatPhysique()) + subitDegatSpecial(causeDegat.degatSpecial(), entiteOffensif.getAttaqueSpecial()))/2);
     }
 

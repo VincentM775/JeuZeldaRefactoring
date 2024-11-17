@@ -1,10 +1,9 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Attaque;
 
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementIterable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Sortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.*;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstantesSortilege;
@@ -18,7 +17,7 @@ public class SortilegePluitDeFleche extends Sortilege {
     }
 
     @Override
-    public boolean utilise(EntiteDefensive utilisateur) {
+    public boolean utilise(Entite utilisateur) {
         if (getCooldown().delaieEcoule()) {
             double x = utilisateur.getPosition().getX();
             double y = utilisateur.getPosition().getY();
