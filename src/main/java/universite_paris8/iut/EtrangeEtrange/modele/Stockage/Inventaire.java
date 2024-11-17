@@ -9,13 +9,15 @@ import java.util.ArrayList;
 
 public class Inventaire<T extends ElementStockable> implements StockeurElement<T>
 {
+    private int tailleMax;
     private IntegerProperty taille;
     private Emplacement<T>[] inventaire;
 
-    public Inventaire(int taille)
+    public Inventaire(int tailleMax)
     {
-        this.taille = new SimpleIntegerProperty(taille);
-        this.inventaire = (Emplacement<T>[]) new Emplacement[taille];
+        this.tailleMax = tailleMax;
+        this.taille = new SimpleIntegerProperty(0);
+        this.inventaire = (Emplacement<T>[]) new Emplacement[tailleMax];
 
         for (int i = 0;i < this.inventaire.length;i++)
             this.inventaire[i] = new Emplacement<>();
@@ -36,6 +38,10 @@ public class Inventaire<T extends ElementStockable> implements StockeurElement<T
         if (emplacement != null) {
             emplacement.ajoutObjet(objet);
             ajoutReussi = true;
+        }
+
+        if (ajoutReussi){
+            taille.set(taille.get() + 1);
         }
 
         return ajoutReussi;
@@ -120,9 +126,9 @@ public class Inventaire<T extends ElementStockable> implements StockeurElement<T
 
     public int getTailleMax()
     {
-        return this.taille.get();
+        return this.tailleMax;
     }
-    public IntegerProperty getTailleMaxProperty(){
+    public IntegerProperty getTailleProperty(){
         return this.taille;
     }
 

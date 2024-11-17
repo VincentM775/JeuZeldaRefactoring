@@ -18,15 +18,6 @@ public class Competences
     }
 
 
-
-
-
-
-
-
-
-
-
     public void ajoutCompetence(TypeCompetence competence,ArrayList<TypeCompetence> parents,ArrayList<TypeCompetence> enfants)
     {
         if (!mapParent.containsKey(competence)) // verifier si competence not in parents
@@ -35,8 +26,6 @@ public class Competences
             mapEnfant.put(competence,enfants);
         }
     }
-
-
 
 
     public boolean parentDebloquer(TypeCompetence competence)

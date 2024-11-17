@@ -15,7 +15,7 @@ public interface StockeurElement<T extends ElementStockable>
     int getTailleMax();
 
 
-    IntegerProperty getTailleMaxProperty();
+    IntegerProperty getTailleProperty();
 
     T objetALemplacement(int emplacement);
 

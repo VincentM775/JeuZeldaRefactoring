@@ -124,7 +124,7 @@ public class gestionAffichageInventaire {
      * Actualise l'affichage de l'inventaire dès que celui-ci change de taille
      */
     public void listenerTailleSac(){
-        joueur.getGestionnaireInventaire().getSac().getTailleMaxProperty().addListener((obs, old ,nouv)->{
+        joueur.getGestionnaireInventaire().getSac().getTailleProperty().addListener((obs, old , nouv)->{
             affichageInventaire(joueur.getGestionnaireInventaire().getSac());
         });
     }
@@ -144,6 +144,7 @@ public class gestionAffichageInventaire {
 
         // On affiche pour chaque case de l'inventaire la case de stockage, l'objet à l'intérieur et sa quantité
         Image image = GestionImages.getInstance().getImages("Inventaire/caseStockage.png");
+        System.out.println(sac.getTailleMax());
         for(int i = 0 ; i < sac.getTailleMax() ; i++) {
             caseStockageInventaire.getChildren().add(new ImageView(image));
             ImageView imageView = null;
