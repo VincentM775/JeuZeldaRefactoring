@@ -14,7 +14,7 @@ public class CompetenceUpAttaque extends Competence
     }
 
     @Override
-    public void monterDeNiveau(){
-        Environnement.getInstance().getJoueur().augmenterAttaqueMaximum(boostAttaque[niveauCompetence]);
+    public void monterDeNiveau(Joueur joueur){
+        joueur.augmenterAttaqueMaximum(boostAttaque[niveauCompetence]);
     }
 }

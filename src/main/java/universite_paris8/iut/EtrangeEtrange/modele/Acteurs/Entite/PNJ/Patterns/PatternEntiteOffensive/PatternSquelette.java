@@ -1,4 +1,4 @@
-package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Patterns.PatternMonstre;
+package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Patterns.PatternEntiteOffensive;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.EntiteOffensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Squelette;
@@ -26,15 +26,6 @@ public class PatternSquelette implements Pattern
         this.squelette = squelette;
         initPattern();
     }
-
-
-    // SI joueur detecter
-            // voir si on peux l' attaquer
-                    // attaquer
-            // sinon
-                    // se deplacer
-    // SINON
-            // SE DEPLACER ALEATOIREMENT
 
     private void initPattern(){
 

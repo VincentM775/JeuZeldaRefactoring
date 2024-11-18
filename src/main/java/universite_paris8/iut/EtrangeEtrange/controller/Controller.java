@@ -135,7 +135,6 @@ public class Controller implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(Duration.seconds(0.005), (ev -> {
-            System.out.println("tour");
             Environnement.getInstance().unTour();
             gestionAffichageSpriteEntite.miseAjour();}));
         gameLoop.getKeyFrames().add(kf);

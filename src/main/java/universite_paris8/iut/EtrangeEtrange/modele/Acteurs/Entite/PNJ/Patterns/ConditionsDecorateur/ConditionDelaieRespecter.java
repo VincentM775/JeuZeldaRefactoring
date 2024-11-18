@@ -16,7 +16,6 @@ public class ConditionDelaieRespecter extends ConditionPatternDecorateur
     @Override
     public boolean conditionRespecter() {
         long now = System.currentTimeMillis();
-
         return derniereApelle + delaie >= now;
     }
 }

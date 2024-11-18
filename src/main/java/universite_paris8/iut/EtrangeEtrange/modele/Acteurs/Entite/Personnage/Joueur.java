@@ -16,6 +16,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Livre
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.ArmeMagique.Sort.Sortilege;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Carquois;
 
+import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Fleche;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.Attaque;
 import universite_paris8.iut.EtrangeEtrange.modele.Statistique.AttaqueSpecial;
@@ -34,13 +35,9 @@ import java.util.Set;
 /**
  * Représente le joueur dans le jeu.
  */
-public abstract class Joueur extends Entite implements Offensif {
+public abstract class Joueur extends EntiteOffensive {
 
     GestionnaireInventaire gestionnaireInventaire;
-    protected Sac sac;
-
-    private Attaque attaque;
-    private AttaqueSpecial attaqueSpecial;
 
     private Set<Direction> directions;
     private Competences competences;
@@ -63,39 +60,35 @@ public abstract class Joueur extends Entite implements Offensif {
      * @param direction      La direction vers laquelle le joueur est orienté.
      * @param hitbox         La hitbox du joueur.
      */
-    public Joueur(double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, ObjetUtilisable objetMainDroite, double x, double y, Direction direction, Hitbox hitbox) {
-        super(x, y, direction, pv,attaque,defense,attaqueSpecial,hitbox);
+    public Joueur(double pv, double attaque, double defense, double attaqueSpecial, double defenseSpecial, double vitesse, Sac sac, ObjetUtilisable objetMainDroite, double x, double y, Direction direction, Hitbox hitbox) {
+        super(x, y, direction, pv,attaque,defense,attaqueSpecial,defenseSpecial,vitesse,hitbox);
 
-        this.gestionnaireInventaire = new GestionnaireInventaire(null,objetMainDroite,this.sac);
+        this.carquois = new Carquois();
+        this.gestionnaireInventaire = new GestionnaireInventaire(null,objetMainDroite,sac);
         this.competences = CreationArbre.arbres();
         this.estEntrainDeCourir = false;
         this.directions = new HashSet<>();
-        this.attaque = new Attaque(attaque);
-        this.attaqueSpecial = new AttaqueSpecial(attaqueSpecial);
+        creerCarquois();
     }
-
-
-
-    @Override
-    public double getAttaque() {
-        return attaque.getAttaque();
+    public void creerCarquois(){
+        for(int i = 0 ; i < 100 ; i++){
+            carquois.ajoutItem(new Fleche());
+        }
     }
-
-    @Override
-    public double getAttaqueSpecial() {
-        return attaqueSpecial.getAttaqueSpecial();
-    }
-
-
 
     public boolean actionMainDroite() {
         if (this.gestionnaireInventaire.getObjetMainDroite()!= null) {
+
             if (this.gestionnaireInventaire.getObjetMainDroite() instanceof Arc arc ) {
                 arc.setFleche(carquois.retourneUneFleche());
             }
             if (this.gestionnaireInventaire.getObjetMainDroite() instanceof ElementUtilisable){
-                if (((ElementUtilisable)this.gestionnaireInventaire.getObjetMainDroite()).utilise(this))
+
+                ((ElementUtilisable)this.gestionnaireInventaire.getObjetMainDroite()).utilise(this);
+
+                if (this.gestionnaireInventaire.getObjetMainDroite().durabilitee() == 0) {
                     this.gestionnaireInventaire.setObjetMainDroite(null);
+                }
                 return true;
             }
         }
@@ -156,16 +149,16 @@ public abstract class Joueur extends Entite implements Offensif {
 
     public int getPiece(){
         int totalPiece = 0;
-        for(int i = 0 ; i < sac.getTailleMax() ; i++){
-            if(sac.getEmplacement(i).nomObjet()=="pieceor")
-                totalPiece+= sac.getEmplacement(i).quantiteObjet();
+        for(int i = 0 ; i < getGestionnaireInventaire().getSac().getTailleMax() ; i++){
+            if(getGestionnaireInventaire().getSac().getEmplacement(i).nomObjet()=="pieceor")
+                totalPiece+= getGestionnaireInventaire().getSac().getEmplacement(i).quantiteObjet();
         }
 
         return totalPiece;
     }
 
     public Sac getSac() {
-        return this.sac;
+        return getGestionnaireInventaire().getSac();
     }
 
     public void ramasserObjet() {
@@ -175,7 +168,7 @@ public abstract class Joueur extends Entite implements Offensif {
             Position position1 = dropAuSols.get(i).getPosition();
             if(Math.abs(getPosition().getX()+getDirection().getX()-position1.getX())<1)
                 if(Math.abs(getPosition().getY()+getDirection().getY()-position1.getY())<1) {
-                    if (sac.ajoutItem(dropAuSols.get(i).getObjet())) {
+                    if (getGestionnaireInventaire().getSac().ajoutItem(dropAuSols.get(i).getObjet())) {
                         Environnement.getInstance().enleverDropAuSol(dropAuSols.get(i));
                         i++;
                     }

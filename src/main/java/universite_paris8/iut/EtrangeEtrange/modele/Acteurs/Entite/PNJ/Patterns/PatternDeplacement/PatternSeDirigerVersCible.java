@@ -12,7 +12,7 @@ import java.util.List;
 public class PatternSeDirigerVersCible implements Pattern {
     private Acteur acteur, cible;
     private Aetoile aetoile;
-    private final int delai = 3000;
+    private final int delai = 100;
     private long derniereMiseAJour;
     private List<Position> chemin;
 
@@ -38,13 +38,21 @@ public class PatternSeDirigerVersCible implements Pattern {
             System.out.println("mise a jour");
             chemin = aetoile.trouverChemin(acteur.getPosition(), cible.getPosition());
             derniereMiseAJour = currentTime;
+
         }
     }
 
     private void deplacerVersProchainePosition() {
-        if (!chemin.isEmpty()) {
-            Position prochainePosition = chemin.get(0);
+        if (chemin.size() > 1) {
+            Position prochainePosition = chemin.get(1);
+
+
+
+
             Direction direction = calculerDirectionVers(prochainePosition);
+
+
+
 
             if (direction != null) {
                 acteur.setDirection(direction);
@@ -52,25 +60,19 @@ public class PatternSeDirigerVersCible implements Pattern {
                 if (acteur.peutSeDeplacer()) {
                     acteur.setSeDeplace(true);
                     acteur.seDeplace(1);
-                }
-                else
-                {
+                } else {
                     acteur.setSeDeplace(false);
                 }
 
                 if (positionAtteinte(prochainePosition)) {
-                    chemin.remove(0);
+                    chemin.remove(1);
                 }
-            }
-            else
-            {
+            } else {
                 acteur.setSeDeplace(false);
             }
         } else {
             acteur.setSeDeplace(false);
         }
-
-
     }
 
     private Direction calculerDirectionVers(Position prochainePosition) {
