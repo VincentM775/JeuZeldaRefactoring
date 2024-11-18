@@ -6,6 +6,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Patterns.P
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.TypeCompetence;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
+import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.EpeeLourde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ParametreMonstre;
@@ -30,7 +31,7 @@ public class RoiSquelette extends EntiteOffensive {
                 new Hitbox(0.5,0.5)
         );
         this.pattern = null;
-        this.epee = new Epee();
+        this.epee = new EpeeLourde();
         this.sauvegardePositionDepart = new Position(x, y);
         initInventaire();
     }

@@ -16,7 +16,7 @@ public class GestionImages {
 
     public static GestionImages getInstance() {
         if (instance == null) {
-            instance = new GestionImages("C:\\Users\\arthu\\IdeaProjects\\JeuZeldaRefactoring\\src\\main\\resources\\universite_paris8\\iut\\EtrangeEtrange\\texture");
+            instance = new GestionImages("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture");
         }
         return instance;
     }

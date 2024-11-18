@@ -17,4 +17,14 @@ public class Guerrier extends Joueur
 
     @Override
     public void derniereAction() {}
+
+    @Override
+    public void faitUneAttaque() {
+
+    }
+
+    @Override
+    protected Pattern initPattern() {
+        return null;
+    }
 }
