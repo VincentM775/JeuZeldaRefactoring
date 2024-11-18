@@ -1,11 +1,10 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.EntiteOffensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Cooldown;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
@@ -22,7 +21,7 @@ public abstract class Epee extends Acteur implements ElementDommageable, ObjetUt
     private final int STACK_MAX = ConstanteObjet.STACK_MAX_EPEE;
 
     private short cycle;
-    private EntiteDefensive utilisateur;
+    private Entite utilisateur;
     private Cooldown cooldown;
 
     private final double DEGAT_PHYSIQUE;
@@ -39,7 +38,7 @@ public abstract class Epee extends Acteur implements ElementDommageable, ObjetUt
     }
 
     @Override
-    public boolean utilise(EntiteDefensive entite)
+    public boolean utilise(Entite entite)
     {
         if (this.cooldown.delaieEcoule())
         {
@@ -123,13 +122,13 @@ public abstract class Epee extends Acteur implements ElementDommageable, ObjetUt
     public void causeCollision(Acteur acteur)
     {
         if (acteur != utilisateur) {
-            acteur.subitAttaque(this, (EntiteOffensif) utilisateur);
+            acteur.subitAttaque(this, (EntiteOffensive) utilisateur);
             Environnement.getInstance().ajoutActeurAsupprimer(this);
         }
     }
 
     @Override
-    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif) {
+    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensive entiteOffensif) {
         //NE FAIS RIEN
     }
 

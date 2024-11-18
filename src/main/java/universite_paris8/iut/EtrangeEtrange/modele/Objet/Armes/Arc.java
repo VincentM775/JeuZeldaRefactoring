@@ -1,10 +1,9 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes;
 
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Fleche;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Cooldown;
@@ -27,7 +26,7 @@ public class Arc implements ObjetUtilisable
     }
 
     @Override
-    public boolean utilise(EntiteDefensive entite)
+    public boolean utilise(Entite entite)
     {
         if (this.cooldown.delaieEcoule() && fleche != null)
         {

@@ -7,13 +7,15 @@ import javafx.scene.layout.Pane;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
+;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Marchand;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.RoiSquelette;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Boss.RoiSquelette;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Slime;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Squelette;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Archer;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Guerrier;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
 import universite_paris8.iut.EtrangeEtrange.vues.Sprite.ComparePositionSprite;
 
 import java.util.ArrayList;
@@ -56,11 +58,11 @@ public class GestionAffichageSpriteEntite implements ListChangeListener<Acteur>
     public void onChanged(Change<? extends Acteur> change) {
         while(change.next()){
             for (Acteur entite : change.getAddedSubList()) {
-                if(entite instanceof EntiteDefensive || entite instanceof Marchand)
+                if(entite instanceof Entite || entite instanceof Marchand)
                     creeSprite(entite);
             }
             for(Acteur entite : change.getRemoved()) {
-                if(entite instanceof EntiteDefensive || entite instanceof Marchand)
+                if(entite instanceof Entite || entite instanceof Marchand)
                     suprimmerSprite(entite);
             }
         }

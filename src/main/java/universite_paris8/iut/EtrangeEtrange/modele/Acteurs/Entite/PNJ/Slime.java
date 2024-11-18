@@ -1,9 +1,10 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.ESP;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Patterns.Pattern;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Patterns.PatternDeplacement.PatternDeplacementAleatoire;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Monnaie.PieceOr;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ParametreMonstre;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
@@ -11,7 +12,7 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
-public class Slime extends EntiteDefensive {
+public class Slime extends ESP {
     /**
      * Crée une nouvelle entité offensif.
      *
@@ -23,7 +24,7 @@ public class Slime extends EntiteDefensive {
 
 
     public Slime(double x, double y, Direction direction, Hitbox hitbox) {
-        super(x, y, direction,
+        super( x, y, direction,
                 ParametreMonstre.PV_SLIME,
                 ParametreMonstre.DEFENSE_SLIME,
                 ParametreMonstre.DEFENSE_SPECIALE_SLIME,
@@ -31,29 +32,12 @@ public class Slime extends EntiteDefensive {
                 hitbox);
     }
 
+
     @Override
-    public void agir()
-    {
-        deplacementAleatoire();
+    protected Pattern initPattern() {
+        return new PatternDeplacementAleatoire(this);
     }
 
-    public void deplacementAleatoire(){
-        if (peutSeDeplacer()) {
-            if(Math.random()>0.95){
-                setSeDeplace(false);
-            }
-            else {
-                seDeplace(1);
-            }
-        }
-        else if(Math.random()>0.95)
-            setSeDeplace(true);
-
-        if(Math.random()>0.95)
-            setDirection(Direction.randomDirection());
-
-
-    }
 
     @Override
     public String typeActeur() {
@@ -61,11 +45,10 @@ public class Slime extends EntiteDefensive {
     }
 
     @Override
-    public void derniereAction() {
+    public void derniereAction () {
         double x = getPosition().getX();
         double y = getPosition().getY();
         Environnement.getInstance().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
-        System.out.println("passage");
     }
 
     @Override
@@ -76,7 +59,7 @@ public class Slime extends EntiteDefensive {
     @Override
     public Prompt getPrompt()
     {
-       return  null;
+        return  null;
     }
 
 }

@@ -2,7 +2,8 @@ package universite_paris8.iut.EtrangeEtrange.modele.Compétence.TypeCompetences.
 
 
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.TypeCompetences.Competence;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
+import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 
 public class CompetenceUpAttaque extends Competence
 {
@@ -13,8 +14,7 @@ public class CompetenceUpAttaque extends Competence
     }
 
     @Override
-    public void monterDeNiveau(Joueur joueur)
-    {
+    public void monterDeNiveau(Joueur joueur){
         joueur.augmenterAttaqueMaximum(boostAttaque[niveauCompetence]);
     }
 }

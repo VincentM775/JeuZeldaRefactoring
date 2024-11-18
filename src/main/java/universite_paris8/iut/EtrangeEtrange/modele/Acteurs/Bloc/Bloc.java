@@ -1,10 +1,9 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Bloc;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.EntiteOffensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Monnaie.PieceOr;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -49,7 +48,7 @@ public class Bloc extends Acteur {
     public void causeCollision(Acteur acteur) {/*ne réagit pas à la cause de la collision*/}
 
     @Override
-    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif) {enleveToutPv();}
+    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensive entiteOffensif) {enleveToutPv();}
 //    @Override
 //    public void drop() {monde.ajouterDropAuSol(new DropAuSol(new Arc(), 1, new Position(position.getX(), position.getY()))); }
 

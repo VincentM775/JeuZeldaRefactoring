@@ -2,7 +2,7 @@ package universite_paris8.iut.EtrangeEtrange.modele.Compétence.TypeCompetences.
 
 
 import universite_paris8.iut.EtrangeEtrange.modele.Compétence.TypeCompetences.Competence;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
 
 public class CompetenceUpVitesse extends Competence {
     private final double[] vitesseParNiveau = new double[]{0.001,0.002,0.002};

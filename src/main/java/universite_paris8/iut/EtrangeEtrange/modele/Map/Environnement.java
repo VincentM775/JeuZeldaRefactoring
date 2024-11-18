@@ -5,11 +5,11 @@ import javafx.collections.ObservableList;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Bloc.Bloc;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.RoiSquelette;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Boss.RoiSquelette;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Marchand;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Slime;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Squelette;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Personnage.Joueur;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementIterable;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Algos.Aetoile;
@@ -79,7 +79,7 @@ public class Environnement {
                         else if(monstre == 2)
                             acteur = new Slime(j+0.5, ligneIndex+0.5, Direction.BAS, new Hitbox(0.25, 0.5));
                         else if(monstre == 3)
-                            acteur = new Squelette(j+0.5, ligneIndex+0.5,  Direction.BAS, new Hitbox(0.5, 0.5),joueur , new Aetoile());
+                            acteur = new Squelette(j+0.5, ligneIndex+0.5,  Direction.BAS, new Hitbox(0.5, 0.5));
                         else if(monstre == 1)
                             acteur = new RoiSquelette( j+0.5 , ligneIndex+0.5, Direction.BAS);
                         else if(monstre == 0)

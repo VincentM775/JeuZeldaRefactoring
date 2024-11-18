@@ -40,6 +40,22 @@ public enum  Direction
         return BAS;
     }
 
+    public static Direction calculerDirection(double deltaX, double deltaY) {
+        double tolerance = 0.3;
+
+
+
+        if (Math.abs(deltaX) > tolerance) {
+            return deltaX < 0 ? GAUCHE : DROITE;
+        }
+
+        if (Math.abs(deltaY) > tolerance) {
+            return deltaY < 0 ? HAUT : BAS;
+        }
+
+        return null;
+    }
+
 
 
 

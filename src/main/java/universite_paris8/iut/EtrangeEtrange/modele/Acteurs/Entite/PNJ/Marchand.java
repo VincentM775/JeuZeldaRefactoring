@@ -1,21 +1,22 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Patterns.ConditionsDecorateur.ConditionDelaieRespecter;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Patterns.Pattern;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Action.ActionVendre;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Action.Soigner;
 import universite_paris8.iut.EtrangeEtrange.modele.Interaction.Prompte.Prompt;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.*;
+
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 
+import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Arc;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.EpeeLourde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
-import universite_paris8.iut.EtrangeEtrange.modele.Objet.TypeObjet;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.Emplacement;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -23,9 +24,8 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-public class Marchand extends Acteur
+public class Marchand extends ESP implements Dropable
 {
 
     private int cycle;
@@ -34,7 +34,7 @@ public class Marchand extends Acteur
     private Prompt prompt;
 
     public Marchand(double x, double y, Direction direction) {
-        super(x,y,direction,10,10,new Hitbox(0.5,0.5));
+        super(x, y, direction, 10, 10 , 10, 0.5, new Hitbox(0.5,0.5));
         this.cycle = 0;
         this.sac = new Sac();
 
@@ -42,24 +42,17 @@ public class Marchand extends Acteur
 
     }
 
-    @Override
-    public void agir()
-    {
-        cycle++;
 
-        if (cycle % 2000 == 0)
-        {
-            remplieAleatoirementMarchandise();
-            sac.ajoutItem(new EpeeLourde());
-            sac.ajoutItem(new Arc());
-            sac.ajoutItem(new Potion());
-            cycle = 0;
-        }
+    public void genereMarchandises()
+    {
+        sac.ajoutItem(new EpeeLourde());
+        sac.ajoutItem(new Arc());
+        sac.ajoutItem(new Potion());
     }
 
     @Override
-    public void subitCollision(Acteur acteur) {
-
+    protected Pattern initPattern() {
+        return new ConditionDelaieRespecter(this::genereMarchandises,5000);
     }
 
     @Override
@@ -69,19 +62,16 @@ public class Marchand extends Acteur
 
     @Override
     public void derniereAction() {
-        drop();
-    }
 
-    @Override
-    public void seFaitPousser(Acteur acteur) {
-        //Se fait pas pousser
     }
 
     @Override
     public boolean estUnEnemie() {return false;}
 
     @Override
-    public  void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif){}
+    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensive entiteOffensif){
+
+    }
 
     private void initPrompt()
     {
@@ -103,23 +93,15 @@ public class Marchand extends Acteur
         prompt = racine;
     }
 
-    private void remplieAleatoirementMarchandise() {
-        Random rdm = new Random();
-        TypeObjet[] typeObjets = TypeObjet.values();
-        TypeObjet typeObjet;
-        ElementStockable objet;
 
-        for (int i = 0;i<5;i++) {
-            typeObjet = typeObjets[rdm.nextInt(typeObjets.length)];
-            objet = TypeObjet.nouvelleInstance(typeObjet);
+    public void drop() {
+        for (Emplacement<ElementStockable> objets : sac.getInventaire())
+        {
+            ArrayList<ElementStockable> obs = objets.enleverToutLesObjets();
 
-            this.sac.ajoutItem(objet);
-
-            if(objet.stackMax() > 3) {
-                for (int j = 0; j < rdm.nextInt(objet.stackMax()/2);j++)
-                    this.sac.ajoutItem(TypeObjet.nouvelleInstance(typeObjet));
+            for (ElementStockable objet : obs) {
+                Environnement.getInstance().ajouterDropAuSol(new DropAuSol(objet, obs.size(), new Position(position.getX(), position.getY())));
             }
-
         }
     }
 
@@ -132,14 +114,5 @@ public class Marchand extends Acteur
         return prompt;
     }
 
-//    @Override
-    public void drop() {
-        for (Emplacement<ElementStockable> objets : sac.getInventaire()) {
-            ArrayList<ElementStockable> obs = objets.enleverToutLesObjets();
 
-            for (ElementStockable objet : obs) {
-                Environnement.getInstance().ajouterDropAuSol(new DropAuSol(objet, obs.size(), new Position(position.getX(), position.getY())));
-            }
-        }
-    }
 }

@@ -1,9 +1,8 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ;
 
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
-
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Patterns.Pattern;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Patterns.PatternEntiteOffensive.PatternSquelette;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.EpeeLourde;
 import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ParametreMonstre;
@@ -12,16 +11,11 @@ import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
-import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Algos.Aetoile;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Joueur;
 
-public class Squelette extends EntiteOffensif {
-    private Joueur joueur;
-    private Aetoile aetoile;
-    private long lastPathCalculationTime;
+public class Squelette extends EntiteOffensive {
     private Epee epee ;
 
-    public Squelette(double x, double y, Direction direction, Hitbox hitbox, Joueur joueur, Aetoile aetoile) {
+    public Squelette(double x, double y, Direction direction, Hitbox hitbox) {
         super( x, y, direction,
                 ParametreMonstre.PV_SQUELETTE,
                 ParametreMonstre.ATTAQUE_SQUELETTE,
@@ -30,105 +24,14 @@ public class Squelette extends EntiteOffensif {
                 ParametreMonstre.DEFENSE_SPECIALE_SQUELETTE,
                 ParametreMonstre.VITESSE_SQUELETTE,
                 hitbox);
-        this.joueur = joueur;
-        this.aetoile = aetoile;
-        this.lastPathCalculationTime = System.currentTimeMillis();
         epee = new EpeeLourde();
     }
 
-
-
-
-
-    public void seDeplacerVers(Position joueurPosition) {
-        if (aetoile == null) {
-            return;
-        }
-
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - lastPathCalculationTime >= 3000 || aetoile.getChemin().isEmpty()) {
-            aetoile.trouverChemin(getPosition(), joueurPosition);
-            lastPathCalculationTime = currentTime;
-            if (aetoile.getChemin().isEmpty()) {
-
-                return;
-            }
-        }
-
-        // Obtenir la prochaine position dans le chemin
-        Position prochainePosition = aetoile.getChemin().get(0);
-
-        // Calculer la direction vers la prochaine position
-        double deltaX = prochainePosition.getX() - getPosition().getX();
-        double deltaY = prochainePosition.getY() - getPosition().getY();
-
-        if (Math.abs(deltaX) > Math.abs(deltaY)) {
-            setDirection(deltaX > 0 ? Direction.DROITE : Direction.GAUCHE);
-        } else {
-            setDirection(deltaY > 0 ? Direction.BAS : Direction.HAUT);
-        }
-
-        // Déplacer l'entité si elle peut se déplacer
-        if (peutSeDeplacer()) {
-            setSeDeplace(true);
-            seDeplace(1);
-        }
-
-        // Vérifier si l'entité a atteint la prochaine position
-        if (positionAtteinte(prochainePosition)) {
-            aetoile.getChemin().remove(0); // Supprimer la position atteinte du chemin
-            // Ajuster la position à des coordonnées arrondies au dixième
-            setPosition(Math.round(getPosition().getX() * 10) / 10.0, Math.round(getPosition().getY() * 10) / 10.0);
-        }
-
-
-    }
-
-    private boolean positionAtteinte(Position position) {
-        return Math.abs(getPosition().getX() - position.getX()) < 0.1 && Math.abs(getPosition().getY() - position.getY()) < 0.1;
-    }
-
     @Override
-    public void attaque() {
-        epee.utilise(this);
+    protected Pattern initPattern() {
+        return new PatternSquelette(this);
 
     }
-
-    @Override
-    public void lanceUnSort(int numSort) {
-
-    }
-
-    @Override
-    public void agir() {
-        if (Environnement.getInstance().estDansRayon(getPosition(), 6)){
-            seDeplacerVers(joueur.getPosition());
-            if (Environnement.getInstance().estDansRayon(getPosition(), 2)){
-                attaque();
-            }
-        }
-        else {
-            seDeplaceAleatoire();
-        }
-    }
-
-    public void seDeplaceAleatoire(){
-        if (peutSeDeplacer()) {
-            if(Math.random()>0.95){
-                setSeDeplace(false);
-            }
-            else {
-                seDeplace(1);
-            }
-        }
-        else if(Math.random()>0.95)
-            setSeDeplace(true);
-
-        if(Math.random()>0.95)
-            setDirection(Direction.randomDirection());
-    }
-
-
 
     @Override
     public String typeActeur() {
@@ -140,11 +43,15 @@ public class Squelette extends EntiteOffensif {
         double x = getPosition().getX();
         double y = getPosition().getY();
         Environnement.getInstance().ajouterDropAuSol(new DropAuSol(new PieceOr(), 1, new Position(x, y)));
-        System.out.println("passage");
     }
 
     @Override
     public boolean estUnEnemie() {
         return true;
+    }
+
+    @Override
+    public void faitUneAttaque() {
+        epee.utilise(this);
     }
 }

@@ -1,19 +1,18 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Acteur;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteDefensive;
-import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.EntiteOffensif;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
+import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.EntiteOffensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
-import universite_paris8.iut.EtrangeEtrange.modele.Map.Monde;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
 
 public abstract class Projectile extends Acteur implements ElementDommageable, ElementStockable
 {
-    private EntiteDefensive utilisateur;
+    private Entite utilisateur;
 
-    public Projectile(EntiteDefensive utilisateur, double pv, double vitesse, Hitbox hitbox)
+    public Projectile(Entite utilisateur, double pv, double vitesse, Hitbox hitbox)
     {
         super(pv,vitesse,hitbox);
         this.utilisateur = utilisateur;
@@ -24,7 +23,7 @@ public abstract class Projectile extends Acteur implements ElementDommageable, E
     {
         if (acteur != utilisateur)
         {
-            acteur.subitAttaque(this,(EntiteOffensif) utilisateur);
+            acteur.subitAttaque(this,(EntiteOffensive) utilisateur);
             enleveToutPv();
         }
     }
@@ -48,11 +47,11 @@ public abstract class Projectile extends Acteur implements ElementDommageable, E
     public boolean peutSeDeplacer() {
         return !Environnement.getInstance().getMonde().estHorsMap(this) && !Environnement.getInstance().getMonde().collisionMap(this);
     }
-    public void setUtilisateur(EntiteDefensive entite){this.utilisateur = entite;}
+    public void setUtilisateur(Entite entite){this.utilisateur = entite;}
     @Override
     public void seFaitPousser(Acteur acteur) {}
     @Override
-    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensif entiteOffensif) {
+    public void subitAttaque(ElementDommageable causeDegat, EntiteOffensive entiteOffensif) {
 
     }
 
