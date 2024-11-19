@@ -3,6 +3,7 @@ package universite_paris8.iut.EtrangeEtrange.vues;
 import javafx.scene.image.Image;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class GestionImages {
@@ -16,7 +17,9 @@ public class GestionImages {
 
     public static GestionImages getInstance() {
         if (instance == null) {
-            instance = new GestionImages("file:src/main/resources/universite_paris8/iut/EtrangeEtrange/texture");
+            try {
+                instance = new GestionImages(new File(".").getCanonicalPath()+"/src/main/resources/universite_paris8/iut/EtrangeEtrange/texture");
+            } catch (IOException ignored) {}
         }
         return instance;
     }
