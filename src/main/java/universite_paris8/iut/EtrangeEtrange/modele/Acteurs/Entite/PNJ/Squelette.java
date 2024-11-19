@@ -5,7 +5,6 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.Patterns.P
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.EpeeLourde;
-import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ParametreMonstre;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Monnaie.PieceOr;
 import universite_paris8.iut.EtrangeEtrange.modele.Stockage.DropAuSol;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
@@ -14,15 +13,21 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
 public class Squelette extends EntiteOffensive {
     private Epee epee ;
+    public static final int PV_SQUELETTE = 100;
+    public static final int ATTAQUE_SQUELETTE = 10;
+    public static final int DEFENSE_SQUELETTE = 10;
+    public static final int ATTAQUE_SPECIALE_SQUELETTE = 1;
+    public static final int DEFENSE_SPECIALE_SQUELETTE = 10;
+    public static final double VITESSE_SQUELETTE = 0.005;
 
     public Squelette(double x, double y, Direction direction, Hitbox hitbox) {
         super( x, y, direction,
-                ParametreMonstre.PV_SQUELETTE,
-                ParametreMonstre.ATTAQUE_SQUELETTE,
-                ParametreMonstre.DEFENSE_SQUELETTE,
-                ParametreMonstre.ATTAQUE_SPECIALE_SQUELETTE,
-                ParametreMonstre.DEFENSE_SPECIALE_SQUELETTE,
-                ParametreMonstre.VITESSE_SQUELETTE,
+                PV_SQUELETTE,
+                ATTAQUE_SQUELETTE,
+                DEFENSE_SQUELETTE,
+                ATTAQUE_SPECIALE_SQUELETTE,
+                DEFENSE_SPECIALE_SQUELETTE,
+                VITESSE_SQUELETTE,
                 hitbox);
         epee = new EpeeLourde();
     }

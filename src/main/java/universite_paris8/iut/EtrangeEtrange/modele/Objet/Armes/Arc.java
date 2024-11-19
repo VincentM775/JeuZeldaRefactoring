@@ -5,14 +5,14 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Fleche;
-import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Cooldown;
 
 public class Arc implements ObjetUtilisable
 {
-    private final static int DURABILITE = ConstanteObjet.DURABILITE_ARC;
-    private final static int PRIX_ACHAT = ConstanteObjet.PRIX_ACHAT_ARC;
-    private final static int STACK_MAX = ConstanteObjet.STACK_MAX_ARC;
+    public static final int DURABILITE_ARC = 25;
+    public static final int PRIX_ACHAT_ARC = 12;
+    public static final long DELAIE_UTILISATION_ARC = 1000;
+    public static final int STACK_MAX_ARC = 1;
 
     private int durabilitee;
     private Fleche fleche;
@@ -20,8 +20,8 @@ public class Arc implements ObjetUtilisable
 
     public Arc()
     {
-        this.cooldown = new Cooldown(ConstanteObjet.DELAIE_UTILISATION_ARC);
-        this.durabilitee = DURABILITE;
+        this.cooldown = new Cooldown(DELAIE_UTILISATION_ARC);
+        this.durabilitee = DURABILITE_ARC;
         this.fleche = null;
     }
 
@@ -54,7 +54,7 @@ public class Arc implements ObjetUtilisable
     }
     @Override
     public int stackMax() {
-        return STACK_MAX;
+        return STACK_MAX_ARC;
     }
     @Override
     public double durabilitee() {
@@ -62,7 +62,7 @@ public class Arc implements ObjetUtilisable
     }
     @Override
     public int prixAchat() {
-        return PRIX_ACHAT;
+        return PRIX_ACHAT_ARC;
     }
 
 }

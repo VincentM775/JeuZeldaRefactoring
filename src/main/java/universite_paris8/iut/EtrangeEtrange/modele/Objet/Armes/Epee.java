@@ -5,7 +5,6 @@ import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.PNJ.EntiteOffensive;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementDommageable;
 import universite_paris8.iut.EtrangeEtrange.modele.Map.Environnement;
-import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Cooldown;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
@@ -14,11 +13,11 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 public abstract class Epee extends Acteur implements ElementDommageable, ObjetUtilisable
 {
 
-    private static final int DURABILITE = ConstanteObjet.DURABILITE_EPEE;
-    private static final double VITESSE = ConstanteObjet.VITESSE_EPEE;
-    private static final Hitbox HITBOX = ConstanteObjet.HITBOX_EPEE;
-    private final int PRIX_ACHAT = ConstanteObjet.PRIX_ACHAT_EPEE;
-    private final int STACK_MAX = ConstanteObjet.STACK_MAX_EPEE;
+    public static final double VITESSE_EPEE = 0.125;
+    public static final Hitbox HITBOX_EPEE = new Hitbox(0.25,0.25);
+    public static final int DURABILITE_EPEE = 10;
+    public static final int PRIX_ACHAT_EPEE = 12;
+    public static final int STACK_MAX_EPEE = 1;
 
     private short cycle;
     private Entite utilisateur;
@@ -30,7 +29,7 @@ public abstract class Epee extends Acteur implements ElementDommageable, ObjetUt
 
     public Epee(long delai, double degatPhysique, double degatSpecial)
     {
-        super(DURABILITE, VITESSE, HITBOX);
+        super(DURABILITE_EPEE, VITESSE_EPEE, HITBOX_EPEE);
         this.cooldown = new Cooldown(delai);
         DEGAT_PHYSIQUE = degatPhysique;
         DEGAT_SPECIAL = degatSpecial;
@@ -113,8 +112,8 @@ public abstract class Epee extends Acteur implements ElementDommageable, ObjetUt
         double x = this.direction.getX();
         double y = this.direction.getY();
 
-        position.setX(position.getX() + x * VITESSE * multiplicateur);
-        position.setY(position.getY() + y * VITESSE * multiplicateur);
+        position.setX(position.getX() + x * VITESSE_EPEE * multiplicateur);
+        position.setY(position.getY() + y * VITESSE_EPEE * multiplicateur);
     }
 
 
@@ -134,7 +133,7 @@ public abstract class Epee extends Acteur implements ElementDommageable, ObjetUt
 
     @Override
     public int prixAchat() {
-        return PRIX_ACHAT;
+        return PRIX_ACHAT_EPEE;
     }
     @Override
     public boolean peutSeDeplacer() { return true; }
@@ -156,7 +155,7 @@ public abstract class Epee extends Acteur implements ElementDommageable, ObjetUt
 
     @Override
     public int stackMax() {
-        return STACK_MAX;
+        return STACK_MAX_EPEE;
     }
 
     @Override

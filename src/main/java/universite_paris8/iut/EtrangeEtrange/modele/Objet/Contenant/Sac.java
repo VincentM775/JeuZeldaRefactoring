@@ -1,30 +1,29 @@
 package universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ElementStockable;
-import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 
 public class Sac extends ObjetConteneur<ElementStockable> {
-    private static final int TAILLE = ConstanteObjet.TAILLE_SAC;
-    private static final int STACK_MAX = ConstanteObjet.STACK_MAX_SAC;
-    private static final int DURABILITEE = ConstanteObjet.DURABILITE_SAC;
-    private static final int PRIX_ACHAT = ConstanteObjet.PRIX_ACHAT_SAC;
+    public static final int TAILLE_SAC = 15;
+    public static final int DURABILITE_SAC = -1;
+    public static final int PRIX_ACHAT_SAC = 50;
+    public static final int STACK_MAX_SAC = 1;
 
     public Sac() {
-        super(TAILLE);
+        super(TAILLE_SAC);
     }
     @Override
-    public int stackMax() { return STACK_MAX; }
+    public int stackMax() { return STACK_MAX_SAC; }
     @Override
     public String getNom() {
         return "sac";
     }
     @Override
     public double durabilitee() {
-        return DURABILITEE;
+        return DURABILITE_SAC;
     }
     @Override
     public int prixAchat() {
-        return PRIX_ACHAT;
+        return PRIX_ACHAT_SAC;
     }
 
 }

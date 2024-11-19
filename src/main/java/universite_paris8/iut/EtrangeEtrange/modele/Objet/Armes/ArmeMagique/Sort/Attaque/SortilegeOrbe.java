@@ -7,8 +7,10 @@ import universite_paris8.iut.EtrangeEtrange.modele.Objet.Projectile.Orbe;
 
 public class SortilegeOrbe extends Sortilege
 {
-    public SortilegeOrbe(long delaiUtilisation) {
-        super(delaiUtilisation);
+    public static final long DELAIE_ORBE = 600;
+
+    public SortilegeOrbe() {
+        super(DELAIE_ORBE);
     }
 
     @Override

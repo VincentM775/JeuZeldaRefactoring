@@ -9,7 +9,6 @@ import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.Epee;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Armes.EpeeLourde;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Contenant.Sac;
 import universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins.Potion;
-import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ParametreMonstre;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Hitbox;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
@@ -22,12 +21,18 @@ public class RoiSquelette extends EntiteOffensive {
     private Sac sac;
     private Pattern pattern;
 
+    public static final int PV_ROI_SQUELETTE = 1000;
+    public static final int ATTAQUE_ROI_SQUELETTE = 20;
+    public static final int DEFENSE_ROI_SQUELETTE = 20;
+    public static final int ATTAQUE_SPECIALE_ROI_SQUELETTE = 20;
+    public static final int DEFENSE_SPECIALE_ROI_SQUELETTE = 20;
+    public static final double VITESSE_ROI_SQUELETTE = 0.3;
 
     public RoiSquelette(double x, double y, Direction direction) {
         super(  x,y,direction,
-                ParametreMonstre.PV_ROI_SQUELETTE,ParametreMonstre.ATTAQUE_ROI_SQUELETTE,
-                ParametreMonstre.DEFENSE_ROI_SQUELETTE,ParametreMonstre.ATTAQUE_SPECIALE_ROI_SQUELETTE,
-                ParametreMonstre.DEFENSE_SPECIALE_ROI_SQUELETTE, ParametreMonstre.VITESSE_ROI_SQUELETTE,
+                PV_ROI_SQUELETTE,ATTAQUE_ROI_SQUELETTE,
+                DEFENSE_ROI_SQUELETTE,ATTAQUE_SPECIALE_ROI_SQUELETTE,
+                DEFENSE_SPECIALE_ROI_SQUELETTE, VITESSE_ROI_SQUELETTE,
                 new Hitbox(0.5,0.5)
         );
         this.pattern = null;

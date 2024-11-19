@@ -13,10 +13,6 @@ public class ConstantesPersonnages
     public static final double GUERRIER_VITESSE = 0.015;
     public static final double GUERRIER_HITBOX = 0.50;
 
-
-
-
-
     public static final double ARCHER_PV = 50;
     public static final double ARCHER_ATTAQUE = 50;
     public static final double ARCHER_DEFENSE = 40;
@@ -26,7 +22,6 @@ public class ConstantesPersonnages
     public static final double ARCHER_HITBOX_HAUTEUR = 0.35;
     public static final double ARCHER_HITBOX_LARGEUR = 0.50;
 
-
     public static final double MAGE_PV = 40;
     public static final double MAGE_ATTAQUE = 20;
     public static final double MAGE_DEFENSE = 30;
@@ -35,8 +30,6 @@ public class ConstantesPersonnages
     public static final double MAGE_VITESSE = 0.06;
     public static final double MAGE_HITBOX = 0.50;
 
-
-
     public static final double NECROMANCIER_PV = 60;
     public static final double NECROMANCIER_ATTAQUE = 10;
     public static final double NECROMANCIER_DEFENSE = 30;
@@ -44,9 +37,6 @@ public class ConstantesPersonnages
     public static final double NECROMANCIER_DEFENSE_SEPCIAL = 50;
     public static final double NECROMANCIER_VITESSE = 0.04;
     public static final double NECROMANCIER_HITBOX = 0.50;
-
-
-
 
     public static final double pvPlusHaut()
     {
@@ -72,7 +62,6 @@ public class ConstantesPersonnages
     public static final double vitessePlusHaute() {
         return maximum(GUERRIER_VITESSE, ARCHER_VITESSE,MAGE_VITESSE,NECROMANCIER_VITESSE);
     }
-
 
     private static double maximum(double... stat) {
         double max = stat[0];

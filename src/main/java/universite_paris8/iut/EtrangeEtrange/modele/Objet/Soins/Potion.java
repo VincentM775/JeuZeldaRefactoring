@@ -3,18 +3,17 @@ package universite_paris8.iut.EtrangeEtrange.modele.Objet.Soins;
 
 import universite_paris8.iut.EtrangeEtrange.modele.Acteurs.Entite.Entite;
 import universite_paris8.iut.EtrangeEtrange.modele.Interfaces.ObjetUtilisable;
-import universite_paris8.iut.EtrangeEtrange.modele.Parametres.ConstanteObjet;
 
 public class Potion implements ObjetUtilisable
 {
 
-    private static final int DURABILITEE = ConstanteObjet.DURABILITE_POTION;
-    private static final int PRIX_ACHAT = ConstanteObjet.PRIX_ACHAT_POTION;
-    private static final int STACK_MAX = ConstanteObjet.STACK_MAX_POTION;
-    private static final int RESTORATION = ConstanteObjet.RESTORATION;
+    public static final int DURABILITE_POTION = 2;
+    public static final int PRIX_ACHAT_POTION = 12;
+    public static final int STACK_MAX_POTION = 5;
+    public static final int RESTORATION = 20;
     private int durabilitee;
 
-    public Potion(){this.durabilitee = DURABILITEE;}
+    public Potion(){this.durabilitee = DURABILITE_POTION;}
 
     @Override
     public boolean utilise(Entite entite)
@@ -33,7 +32,7 @@ public class Potion implements ObjetUtilisable
     }
     @Override
     public int stackMax() {
-        return STACK_MAX;
+        return STACK_MAX_POTION;
     }
     @Override
     public double durabilitee() {
@@ -41,7 +40,7 @@ public class Potion implements ObjetUtilisable
     }
     @Override
     public int prixAchat() {
-        return PRIX_ACHAT;
+        return PRIX_ACHAT_POTION;
     }
 
 }

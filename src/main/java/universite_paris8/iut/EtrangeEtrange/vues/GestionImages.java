@@ -25,6 +25,7 @@ public class GestionImages {
     }
 
     private void generateImages(String path) {
+        System.out.println(path);
         File folder = new File(path);
         File[] listOfFiles = folder.listFiles();
         if(listOfFiles != null) {

@@ -8,17 +8,18 @@ import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Direction;
 import universite_paris8.iut.EtrangeEtrange.modele.Utilitaire.Position;
 
 public class LanceurFlecheARetardement implements ElementIterable {
+    public static final long DELAIE_PLUIT_DE_FLECHES = 200;
     private final Entite utilisateur;
     private final Direction direction;
     private Position position;
     private Cooldown cooldown;
     private boolean flecheLancee;
 
-    public LanceurFlecheARetardement(Entite utilisateur, Direction direction, double x, double y, int delaie) {
+    public LanceurFlecheARetardement(Entite utilisateur, Direction direction, double x, double y) {
         this.utilisateur = utilisateur;
         this.direction = direction;
         this.position = new Position(x, y);
-        this.cooldown = new Cooldown(delaie);
+        this.cooldown = new Cooldown(DELAIE_PLUIT_DE_FLECHES);
         this.cooldown.reset();
         this.flecheLancee = false;
     }
