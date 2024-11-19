@@ -238,15 +238,12 @@ public class Controller implements Initializable {
             }
             else if(keyCode == ConstantesClavier.sort2){
                 joueur.lanceUnSort(1);
-                System.out.println("sort1");
             }
             else if(keyCode == ConstantesClavier.sort3){
                 joueur.lanceUnSort(0);
-                System.out.println("sort2");
             }
             else if(keyCode == ConstantesClavier.sort1){
                 joueur.lanceUnSort(2);
-                System.out.println("sort3");
             }
             else if (keyCode == ConstantesClavier.parlerPnj)
                 interaction();
@@ -262,8 +259,7 @@ public class Controller implements Initializable {
         }
     }
 
-    public void onKeyReleased(KeyEvent keyEvent)
-    {
+    public void onKeyReleased(KeyEvent keyEvent) {
         KeyCode touche = keyEvent.getCode();
 
         if (!interactionAvecPnj) {
@@ -312,18 +308,11 @@ public class Controller implements Initializable {
         switchDonnees.recupererPane(paneEntite, TilePaneSol, TilePaneTraversable, TilePaneNontraversable);
     }
 
-    public void interaction()
-    {
+    public void interaction() {
         Acteur acteur = Environnement.getInstance().interactionAvecActeur();
-        System.out.println(acteur);
-
-        if (acteur != null)
-        {
+        if (acteur != null) {
             Prompt prompt = acteur.getPrompt();
-
-
-            if (prompt != null)
-            {
+            if (prompt != null) {
                 this.interactionAvecPnj = true;
 
                 this.afficheBulleConversation = new AfficheBulleConversation(joueur,acteur,paneInteraction);
@@ -332,7 +321,6 @@ public class Controller implements Initializable {
 
                 this.gestionPrompt = new GestionPrompt(prompt);
                 this.afficheBulleConversation.affichePrompt(gestionPrompt.getPrompt());
-
             }
         }
     }
@@ -365,13 +353,11 @@ public class Controller implements Initializable {
     }
 
     //  Permet de changer le choix de réponse
-    private void defile(int scroll)
-    {
+    private void defile(int scroll) {
         int index = listProposition.getSelectionModel().getSelectedIndex();
         int indexSuivant = index + scroll;
 
-        if (indexSuivant >= 0 && indexSuivant < listProposition.getItems().size())
-        {
+        if (indexSuivant >= 0 && indexSuivant < listProposition.getItems().size()) {
             listProposition.getSelectionModel().select(indexSuivant);
             listProposition.scrollTo(indexSuivant);
         }

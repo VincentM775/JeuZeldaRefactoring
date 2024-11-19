@@ -18,9 +18,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ControllerMenu implements Initializable {
-
-    @FXML
-    private Tab Inventaire;
     @FXML
     private TabPane TabPane;
 
@@ -83,7 +80,6 @@ public class ControllerMenu implements Initializable {
                 TabPane.getSelectionModel().getSelectedItem().getContent().requestFocus()
         );
 
-
         // Effet sombre sur le jeu en arrière-plan
         ombreArrierePlan = new ColorAdjust();
         ombreArrierePlan.setBrightness(-0.5);
@@ -128,7 +124,6 @@ public class ControllerMenu implements Initializable {
 
     public void onKeyPressed(KeyEvent keyEvent){
         if(keyEvent.getCode()== KeyCode.RIGHT || keyEvent.getCode()== KeyCode.LEFT){
-            System.out.println("Page Changé");
             if(TabPane.getSelectionModel().getSelectedIndex()==0) // page inventaire
                 switchScene.getControlleurInventaire().requestFocus();
             else if(TabPane.getSelectionModel().getSelectedIndex()==1)

@@ -144,7 +144,6 @@ public class gestionAffichageInventaire {
 
         // On affiche pour chaque case de l'inventaire la case de stockage, l'objet à l'intérieur et sa quantité
         Image image = GestionImages.getInstance().getImages("Inventaire/caseStockage.png");
-        System.out.println(sac.getTailleMax());
         for(int i = 0 ; i < sac.getTailleMax() ; i++) {
             caseStockageInventaire.getChildren().add(new ImageView(image));
             ImageView imageView = null;
@@ -221,7 +220,6 @@ public class gestionAffichageInventaire {
     public void listenerCaseSurvole(IntegerProperty integerProperty){
         integerProperty.addListener((obs, old, nouv)-> {
             int survole = integerProperty.get();
-            System.out.println(survole);
             int tailleInventaire = caseStockageInventaire.getChildren().size();
             ColorAdjust reset = new ColorAdjust();
             for (int i = 0; i < tailleInventaire; i++)
@@ -254,10 +252,7 @@ public class gestionAffichageInventaire {
      * @param objet
      * @return
      */
-    public Image getImageObjet(ElementStockable objet)
-    {
-        String typeObjet = objet.getNom();
-
-        return GestionImages.getInstance().getImages("icone/"+typeObjet+".png");
+    public Image getImageObjet(ElementStockable objet) {
+        return GestionImages.getInstance().getImages("icone/"+objet.getNom()+".png");
     }
 }

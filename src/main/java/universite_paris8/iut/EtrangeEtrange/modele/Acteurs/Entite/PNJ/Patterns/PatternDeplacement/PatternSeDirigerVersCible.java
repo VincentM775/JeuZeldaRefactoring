@@ -35,7 +35,6 @@ public class PatternSeDirigerVersCible implements Pattern {
         long currentTime = System.currentTimeMillis();
 
         if (currentTime - derniereMiseAJour >= delai || chemin.isEmpty()) {
-            System.out.println("mise a jour");
             chemin = aetoile.trouverChemin(acteur.getPosition(), cible.getPosition());
             derniereMiseAJour = currentTime;
 

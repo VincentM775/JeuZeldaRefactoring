@@ -36,7 +36,6 @@ public class GestionAffichageMap {
             tilePaneCouchesMonde.getChildren().clear();
 
         for(int i = 0 ; i < 3 ; i++){
-            System.out.println(i);
             // Lecture du fichier JSON
             StringBuilder json = new StringBuilder();
             try {

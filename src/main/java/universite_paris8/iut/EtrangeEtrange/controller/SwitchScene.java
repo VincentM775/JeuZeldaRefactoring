@@ -105,10 +105,8 @@ public class SwitchScene {
 
     public void setJoueur(Joueur joueur){
         this.joueur = joueur;
-        System.out.println("modification : " +this.joueur);
     }
     public Joueur getJoueur(){
-        System.out.println("joueur actuel : "+this.joueur);
         return this.joueur;
     }
 
@@ -166,12 +164,9 @@ public class SwitchScene {
     }
 
     public void gameOver() throws IOException, IOException {
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/universite_paris8/iut/EtrangeEtrange/gameOver.fxml"));
         Scene gameOverScene = new Scene(fxmlLoader.load(), ConstantesAffichage.largeurEcran, ConstantesAffichage.hauteurEcran);
         stage.setScene(gameOverScene);
         stage.show();
-
     }
-
 }

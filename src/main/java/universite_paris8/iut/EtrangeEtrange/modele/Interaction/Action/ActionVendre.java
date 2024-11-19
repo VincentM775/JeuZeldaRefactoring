@@ -29,7 +29,6 @@ public class ActionVendre extends Action
             for (ElementStockable objet : obs)
             {
                 racine.ajoutPrompt(new Prompt("Ta fais une bonne affaire !",new ActionAchat(marchand,objet, Environnement.getInstance().getJoueur(),this)),objet.getNom() +"     ["+objet.prixAchat()+"]");
-                System.out.println("nv objet");
             }
         }
 

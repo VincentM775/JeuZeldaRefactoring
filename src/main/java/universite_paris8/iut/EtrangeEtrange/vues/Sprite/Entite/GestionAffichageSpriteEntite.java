@@ -96,9 +96,6 @@ public class GestionAffichageSpriteEntite implements ListChangeListener<Acteur>
             skin = 0;
             vitesse = 0;
         }
-        if (entite instanceof Marchand) {
-            System.out.println("marchant num : "+skin);
-        }
 
         SpriteEntite animationSprite = new SpriteEntite(entite, skin, vitesse, colorAdjust);
 
