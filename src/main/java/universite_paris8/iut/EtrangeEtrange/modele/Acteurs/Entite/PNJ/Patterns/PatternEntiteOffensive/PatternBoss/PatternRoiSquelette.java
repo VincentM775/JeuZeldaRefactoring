@@ -58,7 +58,6 @@ public class PatternRoiSquelette implements Pattern {
 
         patterns2.add(new PatternSeDirigerVersCible(roiSquelette,Environnement.getInstance().getJoueur()));
         patterns2.add(patternInvocation::invoqueSquelette);
-        //patterns2.add(()->roiSquelette.retourPositionDuDepart());
         patterns2.add(() -> patternAct = pattern1);
 
         this.pattern2 = new PatternCompositeStrategie(
